@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>991</width>
-    <height>547</height>
+    <width>998</width>
+    <height>563</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,16 +18,35 @@
     <bool>true</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">        background-image: url(:/Pokemom/Resources/background.jpg); </string>
+    <string notr="true"/>
    </property>
+   <widget class="QPushButton" name="pb_test_case">
+    <property name="geometry">
+     <rect>
+      <x>431</x>
+      <y>273</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Test Case</string>
+    </property>
+   </widget>
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>60</y>
-      <width>641</width>
-      <height>281</height>
+      <x>190</x>
+      <y>20</y>
+      <width>631</width>
+      <height>221</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
@@ -36,22 +55,158 @@
      <string notr="true"> background-image: url(:/Pokemom/Resources/pokemon-logo.png);
     background-repeat: no-repeat;
     background-position: center;
+background-attachment: fixed;
     background-size: cover;</string>
     </property>
     <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
+     <enum>QFrame::NoFrame</enum>
     </property>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
    </widget>
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1001</width>
+      <height>511</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/Pokemom/Resources/background.jpg); 
+background-repeat: no-repeat; 
+background-position: center; 
+background-attachment: fixed; 
+background-size: cover;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_pokemom">
+    <property name="geometry">
+     <rect>
+      <x>431</x>
+      <y>313</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Pokemon</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_move">
+    <property name="geometry">
+     <rect>
+      <x>431</x>
+      <y>353</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Move</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_game">
+    <property name="geometry">
+     <rect>
+      <x>431</x>
+      <y>393</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Game</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_battle">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>431</x>
+      <y>433</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Battle</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>276</y>
+      <width>47</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>318</y>
+      <width>47</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>360</y>
+      <width>47</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>402</y>
+      <width>47</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <zorder>graphicsView</zorder>
+   <zorder>pb_test_case</zorder>
+   <zorder>frame</zorder>
+   <zorder>pb_pokemom</zorder>
+   <zorder>pb_move</zorder>
+   <zorder>pb_game</zorder>
+   <zorder>pb_battle</zorder>
+   <zorder>label</zorder>
+   <zorder>label_2</zorder>
+   <zorder>label_3</zorder>
+   <zorder>label_5</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>991</width>
+     <width>998</width>
      <height>21</height>
     </rect>
    </property>
