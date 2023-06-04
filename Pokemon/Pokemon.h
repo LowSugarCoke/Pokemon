@@ -5,7 +5,8 @@
 #include <QtWidgets/QMainWindow>
 
 #include "ui_Pokemon.h"
-#include "PokemonController.h"
+#include "mainController.h"
+#include "battleController.h"
 
 class Pokemon : public QMainWindow
 {
@@ -16,5 +17,6 @@ public:
 
 private:
 	Ui::PokemonClass ui;
-	std::unique_ptr<PokemonController> mpPokemonController;
+	std::unique_ptr<MainController> mpMainController;
+	std::unique_ptr<BattleController> mpBattleController;
 };

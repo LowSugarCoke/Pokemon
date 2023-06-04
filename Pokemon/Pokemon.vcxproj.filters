@@ -31,7 +31,10 @@
     <ClCompile Include="Pokemon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PokemonController.cpp">
+    <ClCompile Include="mainController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="battleController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,7 +42,10 @@
     <QtMoc Include="Pokemon.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="PokemonController.h">
+    <QtMoc Include="mainController.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="battleController.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

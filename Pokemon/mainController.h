@@ -7,17 +7,17 @@
 
 #include "ui_Pokemon.h"
 
-class PokemonControllerPrivate;
-class PokemonController : public QObject
+class MainControllerPrivate;
+class MainController : public QObject
 {
     Q_OBJECT
 
 public: 
-    PokemonController(Ui::PokemonClass* ui, QObject* parent = nullptr);
+    MainController(Ui::PokemonClass* ui, QObject* parent = nullptr);
 
 private:
     Ui::PokemonClass* ui;
-    std::unique_ptr< PokemonControllerPrivate> mpPrivate;
+    std::unique_ptr< MainControllerPrivate> mpPrivate;
     void connection();
     
 
