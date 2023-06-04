@@ -1,0 +1,16 @@
+﻿PokemonLib.txt
+MoveLib.txt
+GameData.txt
+Test
+Battle
+VineWhip
+AquaTail
+Battle
+PoisonPowder
+WaterPulse
+Status
+Bag
+SuperPotion
+Venusaur
+AquaTail
+Status
