@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>PokemomClass</class>
- <widget class="QMainWindow" name="PokemomClass">
+ <class>PokemonClass</class>
+ <widget class="QMainWindow" name="PokemonClass">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Pokemom</string>
+   <string>Pokemon</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="autoFillBackground">
@@ -137,7 +137,7 @@ background-size: cover;</string>
      <string>Battle</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="lbl_test_case">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -147,10 +147,10 @@ background-size: cover;</string>
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="lbl_pokemon">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -160,10 +160,10 @@ background-size: cover;</string>
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="lbl_move">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -173,10 +173,10 @@ background-size: cover;</string>
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="lbl_game">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -186,7 +186,7 @@ background-size: cover;</string>
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
    <zorder>graphicsView</zorder>
@@ -196,10 +196,10 @@ background-size: cover;</string>
    <zorder>pb_move</zorder>
    <zorder>pb_game</zorder>
    <zorder>pb_battle</zorder>
-   <zorder>label</zorder>
-   <zorder>label_2</zorder>
-   <zorder>label_3</zorder>
-   <zorder>label_5</zorder>
+   <zorder>lbl_test_case</zorder>
+   <zorder>lbl_pokemon</zorder>
+   <zorder>lbl_move</zorder>
+   <zorder>lbl_game</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -223,7 +223,7 @@ background-size: cover;</string>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="Pokemom.qrc"/>
+  <include location="Pokemon.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -15,6 +15,7 @@
     <Keyword>QtVS_v302</Keyword>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <ProjectName>Pokemon</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -81,16 +82,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Pokemom.cpp" />
+    <ClCompile Include="Pokemon.cpp" />
+    <ClCompile Include="PokemonController.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Pokemom.h" />
+    <QtMoc Include="Pokemon.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="Pokemom.ui" />
+    <QtUic Include="Pokemon.ui" />
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="Pokemom.qrc" />
+    <QtRcc Include="Pokemon.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="PokemonController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
