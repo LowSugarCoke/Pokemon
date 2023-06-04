@@ -1,10 +1,10 @@
-#include "Pokemom.h"
+#include "Pokemon.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	Pokemom w;
+	Pokemon w;
 	w.show();
 	return a.exec();
 }

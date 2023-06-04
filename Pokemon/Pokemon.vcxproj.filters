@@ -28,22 +28,28 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Pokemom.cpp">
+    <ClCompile Include="Pokemon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Pokemom.h">
+    <QtMoc Include="Pokemon.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="PokemonController.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="Pokemom.ui">
+    <QtUic Include="Pokemon.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="Pokemom.qrc">
+    <QtRcc Include="Pokemon.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
   </ItemGroup>
