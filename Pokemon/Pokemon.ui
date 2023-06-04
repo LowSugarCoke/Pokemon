@@ -52,7 +52,7 @@ background-image: none;
 </string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page_main">
      <widget class="QLabel" name="lbl_game">
@@ -317,9 +317,15 @@ background-color:white;</string>
        <rect>
         <x>40</x>
         <y>80</y>
-        <width>361</width>
+        <width>471</width>
         <height>121</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none; 
+background-color: transparent;
+color:white;
+size:20px;</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pb_battle_back">
