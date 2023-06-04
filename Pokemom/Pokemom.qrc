@@ -1,4 +1,6 @@
 <RCC>
-    <qresource prefix="Pokemom">
-    </qresource>
+  <qresource prefix="Pokemom">
+    <file>Resources/background.jpg</file>
+    <file>Resources/pokemon-logo.png</file>
+  </qresource>
 </RCC>
