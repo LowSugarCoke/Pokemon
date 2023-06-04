@@ -81,9 +81,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="battleController.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pokemon.cpp" />
-    <ClCompile Include="PokemonController.cpp" />
+    <ClCompile Include="mainController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Pokemon.h" />
@@ -95,7 +96,10 @@
     <QtRcc Include="Pokemon.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="PokemonController.h" />
+    <QtMoc Include="mainController.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="battleController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

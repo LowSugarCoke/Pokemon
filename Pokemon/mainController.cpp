@@ -1,8 +1,8 @@
-#include "PokemonController.h"
+#include "mainController.h"
 
-class PokemonControllerPrivate :QObject {
+class MainControllerPrivate :QObject {
 public:
-	PokemonControllerPrivate(Ui::PokemonClass* ui);
+	MainControllerPrivate(Ui::PokemonClass* ui);
 	QString getOpenFileName();
 	void updateBattleButtonState();
 	
@@ -10,19 +10,19 @@ public:
 	Ui::PokemonClass* ui;
 };
 
-PokemonControllerPrivate::PokemonControllerPrivate(Ui::PokemonClass* ui)
+MainControllerPrivate::MainControllerPrivate(Ui::PokemonClass* ui)
 :ui(ui)
 {
 
 }
 
-QString PokemonControllerPrivate::getOpenFileName() {
+QString MainControllerPrivate::getOpenFileName() {
 	return QFileDialog::getOpenFileName(nullptr,
 		tr("Open File"), "",
 		tr("All Files (*)"));
 }
 
-void PokemonControllerPrivate::updateBattleButtonState() {
+void MainControllerPrivate::updateBattleButtonState() {
 	bool allLabelsHaveContent = !(ui->lbl_pokemon->text().isEmpty() ||
 		ui->lbl_move->text().isEmpty() ||
 		ui->lbl_game->text().isEmpty());
@@ -30,22 +30,23 @@ void PokemonControllerPrivate::updateBattleButtonState() {
 	ui->pb_battle->setEnabled(allLabelsHaveContent);
 }
 
-PokemonController::PokemonController(Ui::PokemonClass* ui, QObject* parent)
+MainController::MainController(Ui::PokemonClass* ui, QObject* parent)
 	: QObject(parent)
 	, ui(ui)
-	, mpPrivate(std::make_unique<PokemonControllerPrivate>(ui))
+	, mpPrivate(std::make_unique<MainControllerPrivate>(ui))
 {
 	connection();
 }
 
-void PokemonController::connection() {
-	connect(ui->pb_test_case, &QPushButton::clicked, this, &PokemonController::on_pb_test_case_clicked);
-	connect(ui->pb_pokemom, &QPushButton::clicked, this, &PokemonController::on_pb_pokemon_clicked);
-	connect(ui->pb_move, &QPushButton::clicked, this, &PokemonController::on_pb_move_clicked);
-	connect(ui->pb_game, &QPushButton::clicked, this, &PokemonController::on_pb_game_clicked);
+void MainController::connection() {
+	connect(ui->pb_test_case, &QPushButton::clicked, this, &MainController::on_pb_test_case_clicked);
+	connect(ui->pb_pokemon, &QPushButton::clicked, this, &MainController::on_pb_pokemon_clicked);
+	connect(ui->pb_move, &QPushButton::clicked, this, &MainController::on_pb_move_clicked);
+	connect(ui->pb_game, &QPushButton::clicked, this, &MainController::on_pb_game_clicked);
+	connect(ui->pb_battle, &QPushButton::clicked, this, &MainController::on_pb_battle_case_clicked);
 }
 
-void PokemonController::on_pb_test_case_clicked()
+void MainController::on_pb_test_case_clicked()
 {
 	auto fileName = mpPrivate->getOpenFileName();
 
@@ -55,7 +56,7 @@ void PokemonController::on_pb_test_case_clicked()
 	}
 }
 
-void PokemonController::on_pb_pokemon_clicked() {
+void MainController::on_pb_pokemon_clicked() {
 	auto fileName = mpPrivate->getOpenFileName();
 
 	if (!fileName.isEmpty()) {
@@ -64,7 +65,7 @@ void PokemonController::on_pb_pokemon_clicked() {
 	}
 	mpPrivate->updateBattleButtonState();
 }
-void PokemonController::on_pb_move_clicked() {
+void MainController::on_pb_move_clicked() {
 	auto fileName = mpPrivate->getOpenFileName();
 
 	if (!fileName.isEmpty()) {
@@ -73,7 +74,7 @@ void PokemonController::on_pb_move_clicked() {
 	}
 	mpPrivate->updateBattleButtonState();
 }
-void PokemonController::on_pb_game_clicked() {
+void MainController::on_pb_game_clicked() {
 	auto fileName = mpPrivate->getOpenFileName();
 
 	if (!fileName.isEmpty()) {
@@ -82,8 +83,8 @@ void PokemonController::on_pb_game_clicked() {
 	}
 	mpPrivate->updateBattleButtonState();
 }
-void PokemonController::on_pb_battle_case_clicked() {
-	// TODO: Move to the battle scene
+void MainController::on_pb_battle_case_clicked() {
+	ui->stackedWidget->setCurrentWidget(ui->page_battle);
 }
 
 
