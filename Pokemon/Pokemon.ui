@@ -575,6 +575,146 @@ background-color:white;</string>
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QPushButton" name="pb_battle_move_1">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>811</x>
+        <y>341</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:none;
+background-color:white;</string>
+      </property>
+      <property name="text">
+       <string>Move1</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pb_battle_move_2">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>811</x>
+        <y>374</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:none;
+background-color:white;</string>
+      </property>
+      <property name="text">
+       <string>Move2</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pb_battle_move_4">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>810</x>
+        <y>440</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:none;
+background-color:white;</string>
+      </property>
+      <property name="text">
+       <string>Move4</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pb_battle_move_3">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>811</x>
+        <y>407</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:none;
+background-color:white;</string>
+      </property>
+      <property name="text">
+       <string>Move3</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tb_battle_select_pokemon_1">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>80</y>
+        <width>251</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QToolButton { background-color : white; }
+QToolButton:hover { background-color : gray; }
+</string>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tb_battle_select_bag_1">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>80</y>
+        <width>251</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QToolButton { background-color : white; }
+QToolButton:hover { background-color : gray; }
+</string>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+     </widget>
+     <zorder>text_edit_battle_content</zorder>
+     <zorder>pb_battle_back</zorder>
+     <zorder>lbl_battle_player_pokemon</zorder>
+     <zorder>lbl_battle_opposite_pokemon</zorder>
+     <zorder>lbl_battle_player_pokemon_blood</zorder>
+     <zorder>lbl_battle_opposite_pokemon_blood</zorder>
+     <zorder>lbl_battle_player_pokemon_name</zorder>
+     <zorder>lbl_battle_opposite_pokemon_name</zorder>
+     <zorder>lbl_battle_ball</zorder>
+     <zorder>lbl_battle_ball_2</zorder>
+     <zorder>lbl_battle_ball_3</zorder>
+     <zorder>lbl_battle_ball_4</zorder>
+     <zorder>lbl_battle_ball_5</zorder>
+     <zorder>lbl_battle_ball_6</zorder>
+     <zorder>pb_battle_move_1</zorder>
+     <zorder>pb_battle_move_2</zorder>
+     <zorder>pb_battle_move_4</zorder>
+     <zorder>pb_battle_move_3</zorder>
+     <zorder>pb_battle_battle</zorder>
+     <zorder>pb_battle_bag</zorder>
+     <zorder>pb_battle_pokemon</zorder>
+     <zorder>pb_battle_run</zorder>
+     <zorder>tb_battle_select_pokemon_1</zorder>
+     <zorder>tb_battle_select_bag_1</zorder>
     </widget>
    </widget>
   </widget>
