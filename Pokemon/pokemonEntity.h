@@ -40,6 +40,21 @@ public:
     PokemonEntity(const std::string& kName, const std::vector<TYPE>& kTypeVec, const PokemonStats& kStats);
 
     /**
+     * Intent : Copy constructor for PokemonEntity
+     * Pre: A valid PokemonEntity instance is provided
+     * Post: A new instance of PokemonEntity is created as a copy of the provided instance
+     * \param kPokemonEntity The PokemonEntity instance to be copied
+     */
+    PokemonEntity(const PokemonEntity& kPokemonEntity);
+
+    /**
+     * Intent : Destructs the PokemonEntity object and cleans up any resources associated with it.
+     * Pre: None. The destructor is automatically invoked when the object goes out of scope or is explicitly deleted.
+     * Post: The PokemonEntity object is destroyed and any associated resources are freed.
+     */
+    ~PokemonEntity();
+
+    /**
      * Intent : Set the name of the Pokemon
      * Pre: kName is the desired name
      * Post: The name of the Pokemon is set to kName
