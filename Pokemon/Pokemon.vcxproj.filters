@@ -50,6 +50,12 @@
     <Filter Include="Source Files\dataParser">
       <UniqueIdentifier>{5439033d-744f-40e4-ae4a-eb41c228570b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\dao">
+      <UniqueIdentifier>{833f3016-f8d8-437b-8c01-924164609ef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dao">
+      <UniqueIdentifier>{586584af-38ac-4cac-8f12-bed9bea1ac23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -84,6 +90,15 @@
     </ClCompile>
     <ClCompile Include="gameDataParser.cpp">
       <Filter>Source Files\dataParser</Filter>
+    </ClCompile>
+    <ClCompile Include="moveDao.cpp">
+      <Filter>Source Files\dao</Filter>
+    </ClCompile>
+    <ClCompile Include="pokemonDao.cpp">
+      <Filter>Source Files\dao</Filter>
+    </ClCompile>
+    <ClCompile Include="gameDao.cpp">
+      <Filter>Source Files\dao</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +158,15 @@
     </ClInclude>
     <ClInclude Include="gameDataParser.h">
       <Filter>Header Files\dataParser</Filter>
+    </ClInclude>
+    <ClInclude Include="moveDao.h">
+      <Filter>Header Files\dao</Filter>
+    </ClInclude>
+    <ClInclude Include="pokemonDao.h">
+      <Filter>Header Files\dao</Filter>
+    </ClInclude>
+    <ClInclude Include="gameDao.h">
+      <Filter>Header Files\dao</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
