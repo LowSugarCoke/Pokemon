@@ -1,11 +1,10 @@
 #pragma once
 
-#include "moveEntity.h"
+#include <vector>
+#include <string>
 
-class MoveDatabaseParser {
+class MoveEntity;
+class MoveDataParser {
 public:
-
-    MoveEntity readData();
-
-
+    std::vector<MoveEntity> parser(const std::string& kContent) const;
 };

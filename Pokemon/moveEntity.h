@@ -43,6 +43,23 @@ public:
      */
     MoveEntity(const std::string& kName, const TYPE& kType, const DAMAGE_TYPE& kDamageType, const MoveStats& kMoveStats, const ADDITIONAL_EFFECT_TYPE& kAdditionalEffectType);
 
+
+    /**
+     * Intent : Copy constructor for MoveEntity
+     * Pre: A valid MoveEntity instance is provided
+     * Post: A new instance of MoveEntity is created as a copy of the provided instance
+     * \param kMoveEntity The MoveEntity instance to be copied
+     */
+    MoveEntity(const MoveEntity& kMoveEntity);
+
+    /**
+     * Intent : Destructs the MoveEntity object and cleans up any resources associated with it.
+     * Pre: None. The destructor is automatically invoked when the object goes out of scope or is explicitly deleted.
+     * Post: The MoveEntity object is destroyed and any associated resources are freed.
+     */
+    ~MoveEntity();
+
+
     /**
      * Intent : Sets the name of the Move
      * Pre: A valid string for name is provided

@@ -28,6 +28,15 @@ public:
     GameEntity();
 
     /**
+     * Intent : Copy constructor for GameEntity
+     * Pre: A valid GameEntity instance is provided
+     * Post: A new instance of GameEntity is created as a copy of the provided instance
+     * \param kGameEntity The GameEntity instance to be copied
+     */
+    GameEntity(const GameEntity& kGameEntity);
+
+
+    /**
      * Intent : Overloaded constructor for the GameEntity class
      * Pre: kName is the desired name, kMovesVec contains the desired moves
      * Post: A GameEntity object is initialized with the given name and moves
@@ -35,6 +44,16 @@ public:
      * \param kMovesVec
      */
     GameEntity(const std::string& kName, const std::vector<std::string>& kMovesVec);
+
+
+    /**
+     * Intent : Destructs the GameEntity object and cleans up any resources associated with it.
+     * Pre: None. The destructor is automatically invoked when the object goes out of scope or is explicitly deleted.
+     * Post: The GameEntity object is destroyed and any associated resources are freed.
+     */
+    ~GameEntity();
+
+
 
     /**
      * Intent : Set the name of the GameEntity

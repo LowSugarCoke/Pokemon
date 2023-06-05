@@ -31,6 +31,16 @@ MoveEntity::MoveEntity(const std::string& kName, const TYPE& kType,
     setAdditionalEffectType(kAdditionalEffectType); // Set additional effect of the Move
 }
 
+MoveEntity::MoveEntity(const MoveEntity& kMoveEntity)
+    : mpPrivate(std::make_unique<MoveEntityPrivate>(*kMoveEntity.mpPrivate))
+{
+}
+
+
+MoveEntity::~MoveEntity() {
+
+}
+
 void MoveEntity::setName(const std::string& kName) {
     mpPrivate->mName = kName;
 }

@@ -44,6 +44,12 @@
     <Filter Include="Source Files\utils">
       <UniqueIdentifier>{e67dbfeb-05be-4bea-a159-d27eb20c0051}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\dataParser">
+      <UniqueIdentifier>{0fb65ebd-25ef-43eb-a500-ba8988eb6da8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dataParser">
+      <UniqueIdentifier>{5439033d-744f-40e4-ae4a-eb41c228570b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,6 +75,15 @@
     </ClCompile>
     <ClCompile Include="fileReader.cpp">
       <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="moveDataParser.cpp">
+      <Filter>Source Files\dataParser</Filter>
+    </ClCompile>
+    <ClCompile Include="pokemonDataParser.cpp">
+      <Filter>Source Files\dataParser</Filter>
+    </ClCompile>
+    <ClCompile Include="gameDataParser.cpp">
+      <Filter>Source Files\dataParser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +134,15 @@
     </ClInclude>
     <ClInclude Include="fileReader.h">
       <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="moveDataParser.h">
+      <Filter>Header Files\dataParser</Filter>
+    </ClInclude>
+    <ClInclude Include="pokemonDataParser.h">
+      <Filter>Header Files\dataParser</Filter>
+    </ClInclude>
+    <ClInclude Include="gameDataParser.h">
+      <Filter>Header Files\dataParser</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

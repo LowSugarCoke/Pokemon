@@ -18,6 +18,15 @@ GameEntity::GameEntity(const std::string& kName, const std::vector<std::string>&
     mpPrivate->mMovesVec = kMovesVec;
 }
 
+GameEntity::GameEntity(const GameEntity& kGameEntity)
+    : mpPrivate(std::make_unique<GameEntityPrivate>(*kGameEntity.mpPrivate)) {
+
+}
+
+GameEntity::~GameEntity() {
+
+}
+
 void GameEntity::setName(const std::string& kName) {
     mpPrivate->mName;
 }

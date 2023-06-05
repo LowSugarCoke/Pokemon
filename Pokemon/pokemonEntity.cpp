@@ -26,6 +26,16 @@ PokemonEntity::PokemonEntity(const std::string& kName, const std::vector<TYPE>& 
     setStats(kStats);
 }
 
+PokemonEntity::PokemonEntity(const PokemonEntity& kPokemonEntity)
+    :mpPrivate(std::make_unique<PokemonEntityPrivate>(*kPokemonEntity.mpPrivate))
+{
+
+}
+
+PokemonEntity::~PokemonEntity() {
+
+}
+
 void PokemonEntity::setName(const std::string& kName) {
     mpPrivate->mName = kName;
 }
