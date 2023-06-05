@@ -21,5 +21,9 @@ private:
 
 
 private slots:
+    void on_pb_battle_battle_clicked();
+    void on_pb_battle_back_clicked();
+    void on_pb_battle_pokemon_clicked();
+    void on_pb_battle_bag_clicked();
 
 };
