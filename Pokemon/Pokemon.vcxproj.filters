@@ -23,6 +23,18 @@
       <Extensions>qrc;*</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
+    <Filter Include="Header Files\entity">
+      <UniqueIdentifier>{0dfe37aa-84cb-40da-a791-fc56a6a18d88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entity">
+      <UniqueIdentifier>{80e57509-638c-4867-a923-efb4113a6c4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\controller">
+      <UniqueIdentifier>{6278217a-d125-47b0-8abe-be37624f6391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\controller">
+      <UniqueIdentifier>{82d0ddce-f1d7-49dd-a833-4fd62d80e2af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -31,22 +43,25 @@
     <ClCompile Include="Pokemon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mainController.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="moveEntity.cpp">
+      <Filter>Source Files\entity</Filter>
     </ClCompile>
     <ClCompile Include="battleController.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\controller</Filter>
+    </ClCompile>
+    <ClCompile Include="mainController.cpp">
+      <Filter>Source Files\controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Pokemon.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="mainController.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="battleController.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\controller</Filter>
+    </QtMoc>
+    <QtMoc Include="mainController.h">
+      <Filter>Header Files\controller</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -58,5 +73,19 @@
     <QtRcc Include="Pokemon.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="moveEntity.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="type.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="damageType.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="additionalEffectType.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
