@@ -82,10 +82,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="battleController.cpp" />
+    <ClCompile Include="fileReader.cpp" />
+    <ClCompile Include="gameEntity.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pokemon.cpp" />
     <ClCompile Include="mainController.cpp" />
     <ClCompile Include="moveEntity.cpp" />
+    <ClCompile Include="pokemonEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Pokemon.h" />
@@ -105,7 +108,12 @@
   <ItemGroup>
     <ClInclude Include="additionalEffectType.h" />
     <ClInclude Include="damageType.h" />
+    <ClInclude Include="fileReader.h" />
+    <ClInclude Include="gameEntity.h" />
     <ClInclude Include="moveEntity.h" />
+    <ClInclude Include="moveStats.h" />
+    <ClInclude Include="pokemonEntity.h" />
+    <ClInclude Include="pokemonStats.h" />
     <ClInclude Include="type.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
