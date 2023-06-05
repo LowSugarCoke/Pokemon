@@ -1,0 +1,73 @@
+/**************************************************************
+ * File : gameEntity.h
+ * Author: ´å¶Ç´¼ B11130034
+ * Create Date: 2023-06-06
+ * Editor : ´å¶Ç´¼ B11130034
+ * Update Date: 2023-06-06
+ * Description: The GameEntity class defines the data and behavior of an entity in the game. This includes
+ * its name and the moves it can perform.
+ *************************************************************/
+
+#pragma once
+
+#include <memory>
+#include <string>
+#include <vector>
+
+ // Forward declaration of the private implementation class
+class GameEntityPrivate;
+
+class GameEntity {
+public:
+
+    /**
+     * Intent : Default constructor for the GameEntity class
+     * Pre: None
+     * Post: A GameEntity object is initialized with default values
+     */
+    GameEntity();
+
+    /**
+     * Intent : Overloaded constructor for the GameEntity class
+     * Pre: kName is the desired name, kMovesVec contains the desired moves
+     * Post: A GameEntity object is initialized with the given name and moves
+     * \param kName
+     * \param kMovesVec
+     */
+    GameEntity(const std::string& kName, const std::vector<std::string>& kMovesVec);
+
+    /**
+     * Intent : Set the name of the GameEntity
+     * Pre: kName is the desired name
+     * Post: The name of the GameEntity is set to kName
+     * \param kName
+     */
+    void setName(const std::string& kName);
+
+    /**
+     * Intent : Get the name of the GameEntity
+     * Pre: None
+     * Post: The name of the GameEntity is returned
+     * \return
+     */
+    std::string getName() const;
+
+    /**
+     * Intent : Add a move to the GameEntity
+     * Pre: kMove is the move to add
+     * Post: The move kMove is added to the GameEntity's moves
+     * \param kMove
+     */
+    void addMove(const std::string& kMove);
+
+    /**
+     * Intent : Get the moves of the GameEntity
+     * Pre: None
+     * Post: A vector containing the GameEntity's moves is returned
+     * \return
+     */
+    std::vector<std::string> getMoves() const;
+
+private:
+    std::unique_ptr<GameEntityPrivate> mpPrivate;
+};

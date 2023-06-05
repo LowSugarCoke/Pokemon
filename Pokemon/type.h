@@ -1,0 +1,22 @@
+#pragma once
+
+enum TYPE {
+	NORMAL = 0,
+	FIRE,
+	WATER,
+	ELECTRIC,
+	GRASS,
+	ICE,
+	FIGHTING,
+	POISON,
+	GROUND,
+	FLYING,
+	PSYCHIC,
+	BUG,
+	ROCK,
+	GHOST,
+	DRAGON,
+	DARK,
+	STEEL,
+	FAIRY
+};
