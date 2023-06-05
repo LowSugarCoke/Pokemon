@@ -35,6 +35,15 @@
     <Filter Include="Source Files\controller">
       <UniqueIdentifier>{82d0ddce-f1d7-49dd-a833-4fd62d80e2af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\global">
+      <UniqueIdentifier>{8c869702-ad75-4136-92aa-8fc0a03d9ede}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{cefc02d8-3994-4ddf-8f7c-3eed0c3082aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{e67dbfeb-05be-4bea-a159-d27eb20c0051}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,6 +60,15 @@
     </ClCompile>
     <ClCompile Include="mainController.cpp">
       <Filter>Source Files\controller</Filter>
+    </ClCompile>
+    <ClCompile Include="pokemonEntity.cpp">
+      <Filter>Source Files\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="gameEntity.cpp">
+      <Filter>Source Files\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="fileReader.cpp">
+      <Filter>Source Files\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -78,14 +96,29 @@
     <ClInclude Include="moveEntity.h">
       <Filter>Header Files\entity</Filter>
     </ClInclude>
-    <ClInclude Include="type.h">
+    <ClInclude Include="pokemonEntity.h">
       <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="type.h">
+      <Filter>Header Files\global</Filter>
+    </ClInclude>
+    <ClInclude Include="pokemonStats.h">
+      <Filter>Header Files\global</Filter>
     </ClInclude>
     <ClInclude Include="damageType.h">
-      <Filter>Header Files\entity</Filter>
+      <Filter>Header Files\global</Filter>
     </ClInclude>
     <ClInclude Include="additionalEffectType.h">
+      <Filter>Header Files\global</Filter>
+    </ClInclude>
+    <ClInclude Include="moveStats.h">
+      <Filter>Header Files\global</Filter>
+    </ClInclude>
+    <ClInclude Include="gameEntity.h">
       <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="fileReader.h">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
