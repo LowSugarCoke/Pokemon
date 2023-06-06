@@ -68,6 +68,12 @@
     <Filter Include="Header Files\service">
       <UniqueIdentifier>{d87952f3-9f12-4923-9484-f3fe740bd4c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\mode">
+      <UniqueIdentifier>{4fcdbd0f-ad20-4137-8bc5-5bb1ea83ad75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mode">
+      <UniqueIdentifier>{589f08ec-0266-49cc-a6d4-9b5fc3a09e80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -115,8 +121,14 @@
     <ClCompile Include="pokemonService.cpp">
       <Filter>Source Files\service</Filter>
     </ClCompile>
-    <ClCompile Include="pokemonStatsBo.cpp">
+    <ClCompile Include="pokemonBo.cpp">
       <Filter>Source Files\bo</Filter>
+    </ClCompile>
+    <ClCompile Include="pokemonMode.cpp">
+      <Filter>Source Files\mode</Filter>
+    </ClCompile>
+    <ClCompile Include="damageSystem.cpp">
+      <Filter>Source Files\mode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,8 +201,14 @@
     <ClInclude Include="pokemonService.h">
       <Filter>Header Files\service</Filter>
     </ClInclude>
-    <ClInclude Include="pokemonStatsBo.h">
+    <ClInclude Include="pokemonBo.h">
       <Filter>Header Files\bo</Filter>
+    </ClInclude>
+    <ClInclude Include="pokemonMode.h">
+      <Filter>Header Files\mode</Filter>
+    </ClInclude>
+    <ClInclude Include="damageSystem.h">
+      <Filter>Header Files\mode</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
