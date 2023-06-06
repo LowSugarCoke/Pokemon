@@ -8,6 +8,14 @@
 #include "damageType.h"
 #include "additionalEffectType.h"
 
+struct MoveBo {
+    std::string name;   // Name of the Move
+    TYPE type;          // Type of the Move
+    DAMAGE_TYPE damageType; // Damage type of the Move
+    MoveStats stats; // Statistical attributes of the Move
+    ADDITIONAL_EFFECT_TYPE additionalEffectType; // Additional effect of the Move
+};
+
 class MoveEntity;
 class PokemonEntity;
 class PokemonBoPrivate;
@@ -28,8 +36,17 @@ public:
 
     PokemonStats getPokemonStats() const;
 
+    MoveBo findMoveBoByName(const std::string kMoveName);
+    std::vector<MoveBo> getMoveBos() const;
+
+    std::vector<TYPE> getPokemonTypes() const;
+
     bool isFainting();
 
+    int getMaxHp() const;
+
+    void setPokemonAdditionalEffectType(const ADDITIONAL_EFFECT_TYPE& kAdditionalEffectType);
+    ADDITIONAL_EFFECT_TYPE getPokemonAdditionalEffectType() const;
 private:
     std::unique_ptr<PokemonBoPrivate> mpPrivate;
 };

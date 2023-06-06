@@ -5,13 +5,7 @@
 #include "moveEntity.h"
 #include "pokemonEntity.h"
 
-struct MoveBo {
-    std::string mName;   // Name of the Move
-    TYPE mType;          // Type of the Move
-    DAMAGE_TYPE mDamageType; // Damage type of the Move
-    MoveStats mStats; // Statistical attributes of the Move
-    ADDITIONAL_EFFECT_TYPE mAdditionalEffectType; // Additional effect of the Move
-};
+
 
 class PokemonBoPrivate {
 public:
@@ -20,7 +14,7 @@ public:
     std::string mPokemonName;
     std::vector<TYPE> mPokemonTypeVec;
     PokemonStats mPokemonStats;
-
+    ADDITIONAL_EFFECT_TYPE mPokemonAdditionEffectType;
     int mMaxHp;
 };
 
@@ -49,11 +43,11 @@ void PokemonBo::setPokemonElements(const std::string& kName, const PokemonStats&
 void PokemonBo::addMoveElements(const std::string& kName, const MoveStats& kMoveStats, const TYPE& kType, const DAMAGE_TYPE& kDamageType
     , const ADDITIONAL_EFFECT_TYPE& kAdditionalEffectType) {
     MoveBo moveBo;
-    moveBo.mName = kName;
-    moveBo.mStats = kMoveStats;
-    moveBo.mType = kType;
-    moveBo.mDamageType = kDamageType;
-    moveBo.mAdditionalEffectType = kAdditionalEffectType;
+    moveBo.name = kName;
+    moveBo.stats = kMoveStats;
+    moveBo.type = kType;
+    moveBo.damageType = kDamageType;
+    moveBo.additionalEffectType = kAdditionalEffectType;
 
     mpPrivate->mMoveBoVec.push_back(moveBo);
 }
@@ -78,4 +72,36 @@ bool PokemonBo::isFainting() {
 
 PokemonStats PokemonBo::getPokemonStats() const {
     return mpPrivate->mPokemonStats;
+}
+
+
+MoveBo PokemonBo::findMoveBoByName(const std::string kMoveName) {
+
+    for (int i = 0; i < mpPrivate->mMoveBoVec.size(); i++) {
+        if (mpPrivate->mMoveBoVec[i].name == kMoveName) {
+            return mpPrivate->mMoveBoVec[i];
+        }
+    }
+    return {};
+}
+
+std::vector<TYPE> PokemonBo::getPokemonTypes() const {
+    return mpPrivate->mPokemonTypeVec;
+}
+
+
+std::vector<MoveBo> PokemonBo::getMoveBos() const {
+    return mpPrivate->mMoveBoVec;
+}
+
+
+int PokemonBo::getMaxHp() const {
+    return mpPrivate->mMaxHp;
+}
+
+void PokemonBo::setPokemonAdditionalEffectType(const ADDITIONAL_EFFECT_TYPE& kAdditionalEffectType) {
+    mpPrivate->mPokemonAdditionEffectType = kAdditionalEffectType;
+}
+ADDITIONAL_EFFECT_TYPE PokemonBo::getPokemonAdditionalEffectType() const {
+    return mpPrivate->mPokemonAdditionEffectType;
 }
