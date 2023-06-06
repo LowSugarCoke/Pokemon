@@ -1,6 +1,7 @@
 #include "pokemonBo.h"
 
 #include <vector>
+#include <set>
 
 #include "moveEntity.h"
 #include "pokemonEntity.h"
@@ -14,7 +15,7 @@ public:
     std::string mPokemonName;
     std::vector<TYPE> mPokemonTypeVec;
     PokemonStats mPokemonStats;
-    ADDITIONAL_EFFECT_TYPE mPokemonAdditionEffectType;
+    std::set<ADDITIONAL_EFFECT_TYPE> mPokemonAdditionEffectTypeSet;
     int mMaxHp;
 };
 
@@ -100,8 +101,12 @@ int PokemonBo::getMaxHp() const {
 }
 
 void PokemonBo::setPokemonAdditionalEffectType(const ADDITIONAL_EFFECT_TYPE& kAdditionalEffectType) {
-    mpPrivate->mPokemonAdditionEffectType = kAdditionalEffectType;
+    mpPrivate->mPokemonAdditionEffectTypeSet.insert(kAdditionalEffectType);
 }
-ADDITIONAL_EFFECT_TYPE PokemonBo::getPokemonAdditionalEffectType() const {
-    return mpPrivate->mPokemonAdditionEffectType;
+std::set<ADDITIONAL_EFFECT_TYPE> PokemonBo::getPokemonAdditionalEffectType() const {
+    return mpPrivate->mPokemonAdditionEffectTypeSet;
+}
+
+std::string PokemonBo::getName() const {
+    return mpPrivate->mPokemonName;
 }

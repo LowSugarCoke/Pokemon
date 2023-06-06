@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <set>
 
 #include "pokemonStats.h"
 #include "type.h"
@@ -44,9 +45,12 @@ public:
     bool isFainting();
 
     int getMaxHp() const;
+    int getHp() const;
 
     void setPokemonAdditionalEffectType(const ADDITIONAL_EFFECT_TYPE& kAdditionalEffectType);
-    ADDITIONAL_EFFECT_TYPE getPokemonAdditionalEffectType() const;
+    std::set<ADDITIONAL_EFFECT_TYPE> getPokemonAdditionalEffectType() const;
+
+    std::string getName() const;
 private:
     std::unique_ptr<PokemonBoPrivate> mpPrivate;
 };

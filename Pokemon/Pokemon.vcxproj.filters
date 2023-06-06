@@ -130,6 +130,9 @@
     <ClCompile Include="damageSystem.cpp">
       <Filter>Source Files\mode</Filter>
     </ClCompile>
+    <ClCompile Include="playerMode.cpp">
+      <Filter>Source Files\mode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Pokemon.h">
@@ -212,6 +215,9 @@
     </ClInclude>
     <ClInclude Include="pokemonTypeChart.h">
       <Filter>Header Files\global</Filter>
+    </ClInclude>
+    <ClInclude Include="playerMode.h">
+      <Filter>Header Files\mode</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

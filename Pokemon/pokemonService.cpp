@@ -7,34 +7,44 @@
 #include "gameDao.h"
 #include "pokemonDao.h"
 #include "pokemonBo.h"
+#include "playerMode.h"
+#include "pokemonMode.h"
 
 class PokemonServicePrivate {
 public:
-    PokemonServicePrivate(const std::shared_ptr<MoveDao>& kMoveDao, const std::shared_ptr<GameDao>& kGameDao, const std::shared_ptr<PokemonDao>& kPokemonDao);
+    PokemonServicePrivate(const std::shared_ptr<MoveDao>& kMoveDao, const std::shared_ptr<GameDao>& kGameDao
+        , const std::shared_ptr<PokemonDao>& kPokemonDao, const std::shared_ptr<PlayerMode>& kPlayerMode);
 
     std::shared_ptr<MoveDao> mpMoveDao;
     std::shared_ptr<GameDao> mpGameDao;
     std::shared_ptr<PokemonDao> mpPokemonDao;
+    std::shared_ptr<PlayerMode> mpPlayerMode;
 };
 
-PokemonServicePrivate::PokemonServicePrivate(const std::shared_ptr<MoveDao>& kMoveDao, const std::shared_ptr<GameDao>& kGameDao, const std::shared_ptr<PokemonDao>& kPokemonDao)
+PokemonServicePrivate::PokemonServicePrivate(const std::shared_ptr<MoveDao>& kMoveDao, const std::shared_ptr<GameDao>& kGameDao
+    , const std::shared_ptr<PokemonDao>& kPokemonDao, const std::shared_ptr<PlayerMode>& kPlayerMode)
     :mpMoveDao(kMoveDao)
     , mpGameDao(kGameDao)
     , mpPokemonDao(kPokemonDao)
+    , mpPlayerMode(kPlayerMode)
 {}
 
 
-PokemonService::PokemonService(const std::shared_ptr<MoveDao>& kMoveDao, const std::shared_ptr<GameDao>& kGameDao, const std::shared_ptr<PokemonDao>& kPokemonDao)
-    : mpPrivate(std::make_unique<PokemonServicePrivate>(kMoveDao, kGameDao, kPokemonDao))
+PokemonService::PokemonService(const std::shared_ptr<MoveDao>& kMoveDao, const std::shared_ptr<GameDao>& kGameDao
+    , const std::shared_ptr<PokemonDao>& kPokemonDao, const std::shared_ptr<PlayerMode>& kPlayerMode)
+    : mpPrivate(std::make_unique<PokemonServicePrivate>(kMoveDao, kGameDao, kPokemonDao, kPlayerMode))
 {}
 
-std::vector<std::shared_ptr<PokemonBo>> PokemonService::getPokemonBos(const std::string& kMoveFilePath, const std::string& kPokemonFilePath, const std::string& kGameFilePath) {
+bool PokemonService::loadData(const std::string& kMoveFilePath, const std::string& kPokemonFilePath, const std::string& kGameFilePath) {
     std::vector<std::shared_ptr<PokemonBo>> pokemonBoVec;
 
     auto moveEntityVec = mpPrivate->mpMoveDao->getData(kMoveFilePath);
     auto pokemonEntityVec = mpPrivate->mpPokemonDao->getData(kPokemonFilePath);
     auto gameEntityVec = mpPrivate->mpGameDao->getData(kGameFilePath);
 
+    if (moveEntityVec.empty() || pokemonEntityVec.empty() || gameEntityVec.empty()) {
+        return false;
+    }
 
     for (int i = 0; i < gameEntityVec.size(); i++) {
         std::shared_ptr<PokemonBo> pPokemonBo = std::make_shared<PokemonBo>();
@@ -59,6 +69,22 @@ std::vector<std::shared_ptr<PokemonBo>> PokemonService::getPokemonBos(const std:
         pokemonBoVec.push_back(pPokemonBo);
     }
 
+    mpPrivate->mpPlayerMode->setPokemonBo(pokemonBoVec);
+    return true;
+}
 
-    return pokemonBoVec;
+std::vector<std::string> PokemonService::getPokemonsName() const {
+    return mpPrivate->mpPlayerMode->getPokemonsName();
+}
+
+std::vector<std::pair<int, int>> PokemonService::getPokemonsHp() const {
+    return mpPrivate->mpPlayerMode->getPokemonsHp();
+}
+
+std::set<std::string> PokemonService::getCurrentPokemonAdditionalEffect() const {
+    return mpPrivate->mpPlayerMode->getCurrentPokemonAdditionalEffect();
+}
+
+std::string PokemonService::getBattleDailog() const {
+    return "";
 }
