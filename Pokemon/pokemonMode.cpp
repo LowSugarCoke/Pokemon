@@ -85,3 +85,11 @@ void PokemonMode::nextRound(const std::string& kMoveName) {
     mpPrivate->statusDamage(mpPrivate->mpPokemonBo);
     mpPrivate->statusDamage(mpPrivate->mpOppositingPokemonBo);
 }
+
+
+void PokemonMode::nextRoundWithoutAttack() {
+    auto oppositingMoveName = mpPrivate->getRandomMoveBo(mpPrivate->mpOppositingPokemonBo).name;
+    mpPrivate->damage(mpPrivate->mpOppositingPokemonBo, mpPrivate->mpPokemonBo, oppositingMoveName);
+    mpPrivate->statusDamage(mpPrivate->mpPokemonBo);
+    mpPrivate->statusDamage(mpPrivate->mpOppositingPokemonBo);
+}

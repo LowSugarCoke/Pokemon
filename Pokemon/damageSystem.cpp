@@ -102,9 +102,6 @@ int DamageSystem::damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::
 
     auto moveBo = pMyPokemonBo->findMoveBoByName(kMoveName);
     if (moveBo.damageType == DAMAGE_TYPE::STATUS) {
-        if (pTargetPokemonBo->getPokemonAdditionalEffectType() == ADDITIONAL_EFFECT_TYPE::NRML) {
-            pTargetPokemonBo->setPokemonAdditionalEffectType(moveBo.additionalEffectType);
-        }
 
         return 0.0;
     }
@@ -124,8 +121,10 @@ int DamageSystem::damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::
 }
 
 int DamageSystem::statusDamageCalculate(std::shared_ptr<PokemonBo> pTargetPokemonBo) {
+
+    return 0;
     float damage = 0.0;
-    if (pTargetPokemonBo->getPokemonAdditionalEffectType() != ADDITIONAL_EFFECT_TYPE::NRML) {
+    if (pTargetPokemonBo->getPokemonAdditionalEffectType().size() != 0) {
         damage = mpPrivate->getStatusHurt(pTargetPokemonBo);
     }
     return static_cast<int>(damage);

@@ -17,7 +17,7 @@ public:
 
     void nextRound(const std::string& kMoveName);
 
-
+    void nextRoundWithoutAttack();
 
 private:
     std::unique_ptr<PokemonModePrivate> mpPrivate;
