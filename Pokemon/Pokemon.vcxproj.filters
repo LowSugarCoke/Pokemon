@@ -56,6 +56,18 @@
     <Filter Include="Source Files\dao">
       <UniqueIdentifier>{586584af-38ac-4cac-8f12-bed9bea1ac23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\bo">
+      <UniqueIdentifier>{952d40cc-653d-4d4e-80ee-c7e93048e2b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\bo">
+      <UniqueIdentifier>{a431c533-20a1-4233-8c1d-2a45d503c451}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\service">
+      <UniqueIdentifier>{4fc02359-dbcd-4d0f-939c-195d4ed49c94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\service">
+      <UniqueIdentifier>{d87952f3-9f12-4923-9484-f3fe740bd4c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -99,6 +111,12 @@
     </ClCompile>
     <ClCompile Include="gameDao.cpp">
       <Filter>Source Files\dao</Filter>
+    </ClCompile>
+    <ClCompile Include="pokemonService.cpp">
+      <Filter>Source Files\service</Filter>
+    </ClCompile>
+    <ClCompile Include="pokemonStatsBo.cpp">
+      <Filter>Source Files\bo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +185,12 @@
     </ClInclude>
     <ClInclude Include="gameDao.h">
       <Filter>Header Files\dao</Filter>
+    </ClInclude>
+    <ClInclude Include="pokemonService.h">
+      <Filter>Header Files\service</Filter>
+    </ClInclude>
+    <ClInclude Include="pokemonStatsBo.h">
+      <Filter>Header Files\bo</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
