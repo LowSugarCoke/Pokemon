@@ -57,3 +57,14 @@ void PokemonEntity::setStats(const PokemonStats& kStats) {
 PokemonStats PokemonEntity::getStats() const {
     return mpPrivate->mStats;
 }
+
+PokemonEntity& PokemonEntity::operator=(const PokemonEntity& kPokemonEntity) {
+    if (&kPokemonEntity == this)
+        return *this;
+
+    // Assuming that PokemonEntityPrivate has a copy constructor, 
+    // you create a new instance of PokemonEntityPrivate based on 'other'.
+    mpPrivate = std::make_unique<PokemonEntityPrivate>(*kPokemonEntity.mpPrivate);
+
+    return *this;
+}

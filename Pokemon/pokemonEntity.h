@@ -102,6 +102,9 @@ public:
      */
     PokemonStats getStats() const;
 
+    PokemonEntity& operator=(const PokemonEntity& kPokemonEntity);
+
+
 private:
     std::unique_ptr<PokemonEntityPrivate> mpPrivate;
 
