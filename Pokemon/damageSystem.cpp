@@ -102,7 +102,6 @@ int DamageSystem::damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::
 
     auto moveBo = pMyPokemonBo->findMoveBoByName(kMoveName);
     if (moveBo.damageType == DAMAGE_TYPE::STATUS) {
-
         return 0.0;
     }
 
@@ -115,22 +114,11 @@ int DamageSystem::damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::
 
     damage = (((2 * kLevel + 10) / 250) * power * (atack / defence) + 2) * critical * STAB * type;
 
-
-
     return static_cast<int>(damage);
 }
 
-int DamageSystem::statusDamageCalculate(std::shared_ptr<PokemonBo> pTargetPokemonBo) {
 
-    return 0;
-    float damage = 0.0;
-    if (pTargetPokemonBo->getPokemonAdditionalEffectType().size() != 0) {
-        damage = mpPrivate->getStatusHurt(pTargetPokemonBo);
-    }
-    return static_cast<int>(damage);
-}
-
-bool DamageSystem::isMiss(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const std::string& kMoveName) {
+bool DamageSystem::isMissing(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const std::string& kMoveName) {
     auto accuracy = pMyPokemonBo->findMoveBoByName(kMoveName).stats.accuracy;
     auto targetSpeed = pTargetPokemonBo->getPokemonStats().speed;
 

@@ -3,12 +3,14 @@
 #include <unordered_map>
 
 enum class ADDITIONAL_EFFECT_TYPE {
+    NRM,
     PRL,
     BRN,
     PSN
 };
 
 static std::unordered_map<std::string, ADDITIONAL_EFFECT_TYPE> additionalEffectMap = {
+    {"",    ADDITIONAL_EFFECT_TYPE::NRM},
     {"PRL", ADDITIONAL_EFFECT_TYPE::PRL},
     {"BRN", ADDITIONAL_EFFECT_TYPE::BRN},
     {"PSN", ADDITIONAL_EFFECT_TYPE::PSN}

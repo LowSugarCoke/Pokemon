@@ -4,38 +4,43 @@
 
 #include "pokemonBo.h"
 #include "damageSystem.h"
+#include "additionalEffectMode.h"
 
 class PokemonModePrivate {
 public:
-    PokemonModePrivate(std::shared_ptr<DamageSystem> pDamageSystem);
+    PokemonModePrivate(std::shared_ptr<DamageSystem> pDamageSystem, std::shared_ptr<AdditionalEffectMode> pAdditionalEffectMode);
 
     void damage(std::shared_ptr<PokemonBo> pAPokemonBo, std::shared_ptr<PokemonBo> pBPokemonBo, const std::string& kMoveName);
-    void statusDamage(std::shared_ptr<PokemonBo> pPokemonBo);
     MoveBo getRandomMoveBo(std::shared_ptr<PokemonBo> pOppositingPokemonBo);
 
     std::shared_ptr<PokemonBo> mpPokemonBo;
     std::shared_ptr<PokemonBo> mpOppositingPokemonBo;
     std::shared_ptr<DamageSystem> mpDamageSystem;
+    std::shared_ptr<AdditionalEffectMode> mpAdditionalEffectMode;
 };
 
-PokemonModePrivate::PokemonModePrivate(std::shared_ptr<DamageSystem> pDamageSystem)
+PokemonModePrivate::PokemonModePrivate(std::shared_ptr<DamageSystem> pDamageSystem, std::shared_ptr<AdditionalEffectMode> pAdditionalEffectMode)
     :mpDamageSystem(pDamageSystem)
+    , mpAdditionalEffectMode(pAdditionalEffectMode)
 {
 
 }
 
 void PokemonModePrivate::damage(std::shared_ptr<PokemonBo> pAPokemonBo, std::shared_ptr<PokemonBo> pBPokemonBo, const std::string& kMoveName) {
-    if (mpDamageSystem->isMiss(pAPokemonBo, pBPokemonBo, kMoveName)) {
+    if (mpDamageSystem->isMissing(pAPokemonBo, pBPokemonBo, kMoveName)) {
+        return;
+    }
+
+    if (mpAdditionalEffectMode->unableToMove(pAPokemonBo)) {
         return;
     }
     int damage = mpDamageSystem->damageCalculate(pAPokemonBo, pBPokemonBo, kMoveName);
     pBPokemonBo->minusHp(damage);
+
+    MoveBo moveBo = pAPokemonBo->findMoveBoByName(kMoveName);
+    mpAdditionalEffectMode->addIfMoveHasAdditionalEffect(pBPokemonBo, moveBo);
 }
 
-void PokemonModePrivate::statusDamage(std::shared_ptr<PokemonBo> pPokemonBo) {
-    int damage = mpDamageSystem->statusDamageCalculate(pPokemonBo);
-    pPokemonBo->minusHp(damage);
-}
 
 MoveBo PokemonModePrivate::getRandomMoveBo(std::shared_ptr<PokemonBo> pOppositingPokemonBo) {
     auto moveBos = pOppositingPokemonBo->getMoveBos();
@@ -50,8 +55,8 @@ MoveBo PokemonModePrivate::getRandomMoveBo(std::shared_ptr<PokemonBo> pOppositin
 }
 
 
-PokemonMode::PokemonMode(std::shared_ptr<DamageSystem> pDamageSystem)
-    :mpPrivate(std::make_unique<PokemonModePrivate>(pDamageSystem))
+PokemonMode::PokemonMode(std::shared_ptr<DamageSystem> pDamageSystem, std::shared_ptr<AdditionalEffectMode> pAdditionalEffectMode)
+    :mpPrivate(std::make_unique<PokemonModePrivate>(pDamageSystem, pAdditionalEffectMode))
 {
 
 }
@@ -82,14 +87,14 @@ void PokemonMode::nextRound(const std::string& kMoveName) {
         mpPrivate->damage(mpPrivate->mpOppositingPokemonBo, mpPrivate->mpPokemonBo, oppositingMoveName);
         mpPrivate->damage(mpPrivate->mpPokemonBo, mpPrivate->mpOppositingPokemonBo, kMoveName);
     }
-    mpPrivate->statusDamage(mpPrivate->mpPokemonBo);
-    mpPrivate->statusDamage(mpPrivate->mpOppositingPokemonBo);
+    mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpPokemonBo);
+    mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpOppositingPokemonBo);
 }
 
 
 void PokemonMode::nextRoundWithoutAttack() {
     auto oppositingMoveName = mpPrivate->getRandomMoveBo(mpPrivate->mpOppositingPokemonBo).name;
     mpPrivate->damage(mpPrivate->mpOppositingPokemonBo, mpPrivate->mpPokemonBo, oppositingMoveName);
-    mpPrivate->statusDamage(mpPrivate->mpPokemonBo);
-    mpPrivate->statusDamage(mpPrivate->mpOppositingPokemonBo);
+    mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpPokemonBo);
+    mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpOppositingPokemonBo);
 }

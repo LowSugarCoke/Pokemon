@@ -81,6 +81,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="additionalEffectMode.cpp" />
     <ClCompile Include="battleController.cpp" />
     <ClCompile Include="damageSystem.cpp" />
     <ClCompile Include="playerMode.cpp" />
@@ -117,6 +118,7 @@
     <QtMoc Include="battleController.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="additionalEffectMode.h" />
     <ClInclude Include="additionalEffectType.h" />
     <ClInclude Include="damageSystem.h" />
     <ClInclude Include="damageType.h" />

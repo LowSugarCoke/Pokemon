@@ -4,11 +4,12 @@
 #include <string>
 
 class PokemonBo;
+class AdditionalEffectMode;
 class DamageSystem;
 class PokemonModePrivate;
 class PokemonMode {
 public:
-    PokemonMode(std::shared_ptr<DamageSystem> pDamageSystem);
+    PokemonMode(std::shared_ptr<DamageSystem> pDamageSystem, std::shared_ptr<AdditionalEffectMode> pAdditionalEffectMode);
     PokemonMode(const PokemonMode& kPokemonMode);
     ~PokemonMode();
 
