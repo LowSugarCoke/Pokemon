@@ -134,6 +134,7 @@
     <ClInclude Include="pokemonDataParser.h" />
     <ClInclude Include="pokemonEntity.h" />
     <ClInclude Include="pokemonStats.h" />
+    <ClInclude Include="pokemonTypeChart.h" />
     <ClInclude Include="type.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

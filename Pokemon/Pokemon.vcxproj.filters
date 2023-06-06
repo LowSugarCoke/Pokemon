@@ -210,5 +210,8 @@
     <ClInclude Include="damageSystem.h">
       <Filter>Header Files\mode</Filter>
     </ClInclude>
+    <ClInclude Include="pokemonTypeChart.h">
+      <Filter>Header Files\global</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
