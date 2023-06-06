@@ -6,7 +6,7 @@
 #include "moveDao.h"
 #include "gameDao.h"
 #include "pokemonDao.h"
-#include "pokemonStatsBo.h"
+#include "pokemonBo.h"
 
 class PokemonServicePrivate {
 public:
@@ -28,8 +28,8 @@ PokemonService::PokemonService(const std::shared_ptr<MoveDao>& kMoveDao, const s
     : mpPrivate(std::make_unique<PokemonServicePrivate>(kMoveDao, kGameDao, kPokemonDao))
 {}
 
-std::vector<PokemonStatsBo> PokemonService::getPokemonBos(const std::string& kMoveFilePath, const std::string& kPokemonFilePath, const std::string& kGameFilePath) {
-    std::vector<PokemonStatsBo> pokemonBo;
+std::vector<std::shared_ptr<PokemonBo>> PokemonService::getPokemonBos(const std::string& kMoveFilePath, const std::string& kPokemonFilePath, const std::string& kGameFilePath) {
+    std::vector<std::shared_ptr<PokemonBo>> pokemonBoVec;
 
     auto moveEntityVec = mpPrivate->mpMoveDao->getData(kMoveFilePath);
     auto pokemonEntityVec = mpPrivate->mpPokemonDao->getData(kPokemonFilePath);
@@ -37,10 +37,11 @@ std::vector<PokemonStatsBo> PokemonService::getPokemonBos(const std::string& kMo
 
 
     for (int i = 0; i < gameEntityVec.size(); i++) {
-        PokemonStatsBo pokemonBoTmp;
+        std::shared_ptr<PokemonBo> pPokemonBo = std::make_shared<PokemonBo>();
         for (int j = 0; j < pokemonEntityVec.size(); j++) {
             if (gameEntityVec[i].getName() == pokemonEntityVec[j].getName()) {
-                pokemonBoTmp.setPokemonEntity(pokemonEntityVec[j]);
+                auto pokemonEntity = pokemonEntityVec[j];
+                pPokemonBo->setPokemonElements(pokemonEntity.getName(), pokemonEntity.getStats(), pokemonEntity.getTypes());
                 break;
             }
         }
@@ -49,14 +50,15 @@ std::vector<PokemonStatsBo> PokemonService::getPokemonBos(const std::string& kMo
         for (int j = 0; j < gameMoves.size(); j++) {
             for (int k = 0; k < moveEntityVec.size(); k++) {
                 if (gameMoves[j] == moveEntityVec[k].getName()) {
-                    pokemonBoTmp.addMoveEntity(moveEntityVec[k]);
+                    auto moveEntity = moveEntityVec[k];
+                    pPokemonBo->addMoveElements(moveEntity.getName(), moveEntity.getMoveStats(), moveEntity.getType(),
+                        moveEntity.getDamageType(), moveEntity.getAdditionalEffectType());
                 }
             }
         }
-
-        pokemonBo.push_back(pokemonBoTmp);
+        pokemonBoVec.push_back(pPokemonBo);
     }
 
 
-    return pokemonBo;
+    return pokemonBoVec;
 }

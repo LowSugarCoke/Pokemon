@@ -82,6 +82,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="battleController.cpp" />
+    <ClCompile Include="damageSystem.cpp" />
+    <ClCompile Include="pokemonMode.cpp" />
     <ClCompile Include="pokemonService.cpp" />
     <ClCompile Include="fileReader.cpp" />
     <ClCompile Include="gameDao.cpp" />
@@ -96,7 +98,7 @@
     <ClCompile Include="pokemonDao.cpp" />
     <ClCompile Include="pokemonEntity.cpp" />
     <ClCompile Include="pokemonDataParser.cpp" />
-    <ClCompile Include="pokemonStatsBo.cpp" />
+    <ClCompile Include="pokemonBo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Pokemon.h" />
@@ -115,7 +117,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="additionalEffectType.h" />
+    <ClInclude Include="damageSystem.h" />
     <ClInclude Include="damageType.h" />
+    <ClInclude Include="pokemonMode.h" />
     <ClInclude Include="pokemonService.h" />
     <ClInclude Include="fileReader.h" />
     <ClInclude Include="gameDao.h" />
@@ -125,7 +129,7 @@
     <ClInclude Include="moveDataParser.h" />
     <ClInclude Include="moveEntity.h" />
     <ClInclude Include="moveStats.h" />
-    <ClInclude Include="pokemonStatsBo.h" />
+    <ClInclude Include="pokemonBo.h" />
     <ClInclude Include="pokemonDao.h" />
     <ClInclude Include="pokemonDataParser.h" />
     <ClInclude Include="pokemonEntity.h" />
