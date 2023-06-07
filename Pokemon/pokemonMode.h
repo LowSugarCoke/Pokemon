@@ -6,10 +6,11 @@
 class PokemonBo;
 class AdditionalEffectMode;
 class DamageMode;
+class PotionMode;
 class PokemonModePrivate;
 class PokemonMode {
 public:
-    PokemonMode(std::shared_ptr<DamageMode> pDamageMode, std::shared_ptr<AdditionalEffectMode> pAdditionalEffectMode);
+    PokemonMode(std::shared_ptr<DamageMode> pDamageMode, std::shared_ptr<AdditionalEffectMode> pAdditionalEffectMode, std::shared_ptr<PotionMode> pPotionMode);
     PokemonMode(const PokemonMode& kPokemonMode);
     ~PokemonMode();
 

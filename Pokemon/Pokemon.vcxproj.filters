@@ -139,6 +139,9 @@
     <ClCompile Include="pokemonLogger.cpp">
       <Filter>Source Files\mode</Filter>
     </ClCompile>
+    <ClCompile Include="potionMode.cpp">
+      <Filter>Source Files\mode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Pokemon.h">
@@ -229,6 +232,9 @@
       <Filter>Header Files\mode</Filter>
     </ClInclude>
     <ClInclude Include="pokemonLogger.h">
+      <Filter>Header Files\mode</Filter>
+    </ClInclude>
+    <ClInclude Include="potionMode.h">
       <Filter>Header Files\mode</Filter>
     </ClInclude>
   </ItemGroup>
