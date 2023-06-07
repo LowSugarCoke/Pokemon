@@ -2,8 +2,9 @@
 
 #include <memory>
 #include <string>
+#include "pokemonBo.h"
 
-class PokemonBo;
+
 class DamageModePrivate;
 class DamageMode {
 public:
@@ -11,8 +12,8 @@ public:
     DamageMode(const DamageMode& kDamageMode);
     ~DamageMode();
 
-    bool isMissing(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const std::string& kMoveName);
-    int damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const std::string& kMoveName);
+    bool isMissing(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const MoveBo& kMoveBo);
+    int damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const MoveBo& kMoveBo);
 
 private:
     std::unique_ptr<DamageModePrivate> mpPrivate;

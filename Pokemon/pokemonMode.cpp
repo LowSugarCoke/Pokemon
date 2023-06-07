@@ -5,40 +5,78 @@
 #include "pokemonBo.h"
 #include "damageMode.h"
 #include "additionalEffectMode.h"
+#include "pokemonLogger.h"
 
 class PokemonModePrivate {
 public:
     PokemonModePrivate(std::shared_ptr<DamageMode> pDamageMode, std::shared_ptr<AdditionalEffectMode> pAdditionalEffectMode);
 
-    void damage(std::shared_ptr<PokemonBo> pAPokemonBo, std::shared_ptr<PokemonBo> pBPokemonBo, const std::string& kMoveName);
+    void damage(std::shared_ptr<PokemonBo> pAPokemonBo, std::shared_ptr<PokemonBo> pBPokemonBo, const MoveBo& kMoveBo);
     MoveBo getRandomMoveBo(std::shared_ptr<PokemonBo> pOppositingPokemonBo);
+
+    void myAttackLog(const MoveBo& kMoveBo);
+    void oppositingAttackLog(const MoveBo& kMoveBo);
+    void missingLog(std::shared_ptr<PokemonBo> mpOppositingPokemonBo);
+    void paralyzedLog(std::shared_ptr<PokemonBo> pPokemonBo);
 
     std::shared_ptr<PokemonBo> mpPokemonBo;
     std::shared_ptr<PokemonBo> mpOppositingPokemonBo;
     std::shared_ptr<DamageMode> mpDamageMode;
     std::shared_ptr<AdditionalEffectMode> mpAdditionalEffectMode;
+    PokemonLogger& mLogger;
 };
 
 PokemonModePrivate::PokemonModePrivate(std::shared_ptr<DamageMode> pDamageMode, std::shared_ptr<AdditionalEffectMode> pAdditionalEffectMode)
     :mpDamageMode(pDamageMode)
     , mpAdditionalEffectMode(pAdditionalEffectMode)
+    , mLogger(PokemonLogger::getInstance())
 {
 
 }
 
-void PokemonModePrivate::damage(std::shared_ptr<PokemonBo> pAPokemonBo, std::shared_ptr<PokemonBo> pBPokemonBo, const std::string& kMoveName) {
-    if (mpDamageMode->isMissing(pAPokemonBo, pBPokemonBo, kMoveName)) {
+
+void PokemonModePrivate::myAttackLog(const MoveBo& kMoveBo) {
+    auto name = mpPokemonBo->getName();
+    mLogger.log(name + " used " + kMoveBo.name + "!");
+}
+void PokemonModePrivate::oppositingAttackLog(const MoveBo& kMoveBo) {
+    auto name = mpOppositingPokemonBo->getName();
+    mLogger.log("The opposing " + name + " used " + kMoveBo.name + "!");
+}
+
+void PokemonModePrivate::missingLog(std::shared_ptr<PokemonBo> mpOppositingPokemonBo) {
+    auto name = mpOppositingPokemonBo->getName();
+    mLogger.log(name + " avoided the attack!");
+}
+
+void PokemonModePrivate::paralyzedLog(std::shared_ptr<PokemonBo> pPokemonBo) {
+    auto name = pPokemonBo->getName();
+    mLogger.log(name + "is paralyzed!");
+    mLogger.log("It can't move!");
+}
+
+
+void PokemonModePrivate::damage(std::shared_ptr<PokemonBo> pAPokemonBo, std::shared_ptr<PokemonBo> pBPokemonBo, const MoveBo& kMoveBo) {
+    if (mpDamageMode->isMissing(pAPokemonBo, pBPokemonBo, kMoveBo)) {
+        missingLog(pBPokemonBo);
         return;
     }
 
     if (mpAdditionalEffectMode->unableToMove(pAPokemonBo)) {
         return;
     }
-    int damage = mpDamageMode->damageCalculate(pAPokemonBo, pBPokemonBo, kMoveName);
+
+    if (pAPokemonBo->isMyPokemon()) {
+        myAttackLog(kMoveBo);
+    }
+    else {
+        oppositingAttackLog(kMoveBo);
+    }
+
+    int damage = mpDamageMode->damageCalculate(pAPokemonBo, pBPokemonBo, kMoveBo);
     pBPokemonBo->minusHp(damage);
 
-    MoveBo moveBo = pAPokemonBo->findMoveBoByName(kMoveName);
-    mpAdditionalEffectMode->addIfMoveHasAdditionalEffect(pBPokemonBo, moveBo);
+    mpAdditionalEffectMode->addIfMoveHasAdditionalEffect(pBPokemonBo, kMoveBo);
 }
 
 
@@ -77,15 +115,17 @@ void PokemonMode::setOppositingPokemon(std::shared_ptr<PokemonBo> pOppositingPok
     mpPrivate->mpOppositingPokemonBo = pOppositingPokemon;
 }
 
-void PokemonMode::nextRound(const std::string& kMoveName) {
-    auto oppositingMoveName = mpPrivate->getRandomMoveBo(mpPrivate->mpOppositingPokemonBo).name;
+void PokemonMode::nextRound(const int& kMoveIndex) {
+    auto oppositingMove = mpPrivate->getRandomMoveBo(mpPrivate->mpOppositingPokemonBo);
+    auto moveBo = mpPrivate->mpPokemonBo->findMoveBoByIndex(kMoveIndex);
+
     if (mpPrivate->mpPokemonBo->getPokemonStats().speed > mpPrivate->mpOppositingPokemonBo->getPokemonStats().speed) {
-        mpPrivate->damage(mpPrivate->mpPokemonBo, mpPrivate->mpOppositingPokemonBo, kMoveName);
-        mpPrivate->damage(mpPrivate->mpOppositingPokemonBo, mpPrivate->mpPokemonBo, oppositingMoveName);
+        mpPrivate->damage(mpPrivate->mpPokemonBo, mpPrivate->mpOppositingPokemonBo, moveBo);
+        mpPrivate->damage(mpPrivate->mpOppositingPokemonBo, mpPrivate->mpPokemonBo, oppositingMove);
     }
     else {
-        mpPrivate->damage(mpPrivate->mpOppositingPokemonBo, mpPrivate->mpPokemonBo, oppositingMoveName);
-        mpPrivate->damage(mpPrivate->mpPokemonBo, mpPrivate->mpOppositingPokemonBo, kMoveName);
+        mpPrivate->damage(mpPrivate->mpOppositingPokemonBo, mpPrivate->mpPokemonBo, oppositingMove);
+        mpPrivate->damage(mpPrivate->mpPokemonBo, mpPrivate->mpOppositingPokemonBo, moveBo);
     }
     mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpPokemonBo);
     mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpOppositingPokemonBo);
@@ -93,8 +133,8 @@ void PokemonMode::nextRound(const std::string& kMoveName) {
 
 
 void PokemonMode::nextRoundWithoutAttack() {
-    auto oppositingMoveName = mpPrivate->getRandomMoveBo(mpPrivate->mpOppositingPokemonBo).name;
-    mpPrivate->damage(mpPrivate->mpOppositingPokemonBo, mpPrivate->mpPokemonBo, oppositingMoveName);
+    auto oppositingMove = mpPrivate->getRandomMoveBo(mpPrivate->mpOppositingPokemonBo);
+    mpPrivate->damage(mpPrivate->mpOppositingPokemonBo, mpPrivate->mpPokemonBo, oppositingMove);
     mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpPokemonBo);
     mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpOppositingPokemonBo);
 }

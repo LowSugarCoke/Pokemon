@@ -37,6 +37,8 @@ void PlayerModePrivate::swapAfterLog() {
     mLogger.log("Go! " + name + "!");
 }
 
+
+
 PlayerMode::PlayerMode(std::shared_ptr<PokemonMode> pPokemonMode)
     : mpPrivate(std::make_unique<PlayerModePrivate>(pPokemonMode))
 {
@@ -60,6 +62,7 @@ void PlayerMode::setPokemonBo(std::vector<std::shared_ptr<PokemonBo>> pPokemonBo
 
 void PlayerMode::setOppositingPokemonBo(std::vector<std::shared_ptr<PokemonBo>> pOppositingPokemonBoVec) {
     mpPrivate->mpOppositingPokemonBoVec = pOppositingPokemonBoVec;
+    mpPrivate->mpPokemonMode->setOppositingPokemon(mpPrivate->mpOppositingPokemonBoVec[0]);
 }
 
 bool PlayerMode::swapPokemon(const int& kPokemonIndex) {
@@ -121,4 +124,8 @@ std::set<std::string> PlayerMode::getCurrentPokemonAdditionalEffect() const {
         data.insert(effectTypeToString(additionalEffect));
     }
     return data;
+}
+
+void PlayerMode::battle(const int& kMoveIndex) {
+    mpPrivate->mpPokemonMode->nextRound(kMoveIndex);
 }

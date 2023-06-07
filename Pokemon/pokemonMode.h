@@ -16,7 +16,7 @@ public:
     void setMyPokemon(std::shared_ptr<PokemonBo> pMyPokemon);
     void setOppositingPokemon(std::shared_ptr<PokemonBo> pOppositingPokemon);
 
-    void nextRound(const std::string& kMoveName);
+    void nextRound(const int& kMoveIndex);
 
     void nextRoundWithoutAttack();
 

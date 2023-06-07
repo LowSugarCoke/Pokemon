@@ -38,6 +38,7 @@ public:
     PokemonStats getPokemonStats() const;
 
     MoveBo findMoveBoByName(const std::string kMoveName);
+    MoveBo findMoveBoByIndex(const int& kMonitorIndex);
     std::vector<MoveBo> getMoveBos() const;
 
     std::vector<TYPE> getPokemonTypes() const;
@@ -53,6 +54,8 @@ public:
     std::string getName() const;
 
     void reduceHalfSpeed();
+    void checkToMyPokemon(const bool& kMyPokemon);
+    bool isMyPokemon() const;
 private:
     std::unique_ptr<PokemonBoPrivate> mpPrivate;
 };

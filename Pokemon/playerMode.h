@@ -22,6 +22,9 @@ public:
 
     bool isWin();
 
+    void battle(const int& kMoveIndex);
+
+
     std::vector<std::string> getPokemonsName() const;
 
     std::vector<std::pair<int, int>> getPokemonsHp() const;

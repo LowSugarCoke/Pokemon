@@ -26,6 +26,7 @@ public:
     std::set<std::string> getCurrentPokemonAdditionalEffect() const;
     std::string getBattleDailog() const;
     void swapPokemon(const int& kIndex);
+    void battle(const int& kMoveIndex);
 
 private:
     std::unique_ptr<PokemonServicePrivate> mpPrivate;
