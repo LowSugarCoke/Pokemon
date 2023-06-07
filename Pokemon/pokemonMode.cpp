@@ -6,10 +6,12 @@
 #include "damageMode.h"
 #include "additionalEffectMode.h"
 #include "pokemonLogger.h"
+#include "potionMode.h"
 
 class PokemonModePrivate {
 public:
-    PokemonModePrivate(std::shared_ptr<DamageMode> pDamageMode, std::shared_ptr<AdditionalEffectMode> pAdditionalEffectMode);
+    PokemonModePrivate(std::shared_ptr<DamageMode> pDamageMode, std::shared_ptr<AdditionalEffectMode> pAdditionalEffectMode,
+        std::shared_ptr<PotionMode> pPotionMode);
 
     void damage(std::shared_ptr<PokemonBo> pAPokemonBo, std::shared_ptr<PokemonBo> pBPokemonBo, const MoveBo& kMoveBo);
     MoveBo getRandomMoveBo(std::shared_ptr<PokemonBo> pOppositingPokemonBo);
@@ -23,12 +25,16 @@ public:
     std::shared_ptr<PokemonBo> mpOppositingPokemonBo;
     std::shared_ptr<DamageMode> mpDamageMode;
     std::shared_ptr<AdditionalEffectMode> mpAdditionalEffectMode;
+    std::shared_ptr<PotionMode> mpPotionMode;
     PokemonLogger& mLogger;
 };
 
-PokemonModePrivate::PokemonModePrivate(std::shared_ptr<DamageMode> pDamageMode, std::shared_ptr<AdditionalEffectMode> pAdditionalEffectMode)
+PokemonModePrivate::PokemonModePrivate(std::shared_ptr<DamageMode> pDamageMode,
+    std::shared_ptr<AdditionalEffectMode> pAdditionalEffectMode
+    , std::shared_ptr<PotionMode> pPotionMode)
     :mpDamageMode(pDamageMode)
     , mpAdditionalEffectMode(pAdditionalEffectMode)
+    , mpPotionMode(pPotionMode)
     , mLogger(PokemonLogger::getInstance())
 {
 
@@ -93,8 +99,11 @@ MoveBo PokemonModePrivate::getRandomMoveBo(std::shared_ptr<PokemonBo> pOppositin
 }
 
 
-PokemonMode::PokemonMode(std::shared_ptr<DamageMode> pDamageMode, std::shared_ptr<AdditionalEffectMode> pAdditionalEffectMode)
-    :mpPrivate(std::make_unique<PokemonModePrivate>(pDamageMode, pAdditionalEffectMode))
+PokemonMode::PokemonMode(std::shared_ptr<DamageMode> pDamageMode
+    , std::shared_ptr<AdditionalEffectMode> pAdditionalEffectMode
+    , std::shared_ptr<PotionMode> pPotionMode
+)
+    :mpPrivate(std::make_unique<PokemonModePrivate>(pDamageMode, pAdditionalEffectMode, pPotionMode))
 {
 
 }
@@ -110,6 +119,9 @@ PokemonMode::~PokemonMode() {
 
 void PokemonMode::setMyPokemon(std::shared_ptr<PokemonBo> pMyPokemon) {
     mpPrivate->mpPokemonBo = pMyPokemon;
+    mpPrivate->mpPotionMode->setAddHPCallBack([&](const int& kHp) {
+        mpPrivate->mpPokemonBo->addHp(kHp);
+        });
 }
 void PokemonMode::setOppositingPokemon(std::shared_ptr<PokemonBo> pOppositingPokemon) {
     mpPrivate->mpOppositingPokemonBo = pOppositingPokemon;

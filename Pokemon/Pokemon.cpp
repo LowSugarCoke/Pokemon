@@ -11,6 +11,7 @@
 #include "pokemonBo.h"
 #include "playerMode.h"
 #include "pokemonMode.h"
+#include "potionMode.h"
 #include "fileReader.h"
 #include "moveDataParser.h"
 #include "gameDataParser.h"
@@ -64,7 +65,8 @@ void Pokemon::init() {
 
     auto pDamageMode = std::make_shared<DamageMode>();
     auto pAdditionalEffectMode = std::make_shared<AdditionalEffectMode>();
-    auto pPokemonMode = std::make_shared<PokemonMode>(pDamageMode, pAdditionalEffectMode);
+    auto pPotionMode = std::make_shared<PotionMode>();
+    auto pPokemonMode = std::make_shared<PokemonMode>(pDamageMode, pAdditionalEffectMode, pPotionMode);
 
     auto pPlayerMode = std::make_shared<PlayerMode>(pPokemonMode);
 
