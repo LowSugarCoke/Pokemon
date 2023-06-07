@@ -148,3 +148,7 @@ std::vector<std::string>  PokemonService::getOppositingPokemonsName() const {
 int  PokemonService::getCurrentOppositingPokemonIndex() const {
     return mpPrivate->mpPlayerMode->getOppositingPokemonIndex();
 }
+
+std::vector<std::string> PokemonService::getCurrentPokemonMoves()const {
+    return mpPrivate->mpPlayerMode->getCurrentPokemonMoves();
+}

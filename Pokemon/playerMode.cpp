@@ -166,3 +166,13 @@ int PlayerMode::getCurrentPokemonIndex() const {
 int PlayerMode::getOppositingPokemonIndex() const {
     return mpPrivate->mOppositingPokemonIndex;
 }
+
+
+std::vector<std::string> PlayerMode::getCurrentPokemonMoves() const {
+    std::vector<std::string > moves;
+    auto moveBo = mpPrivate->mpPokemonBoVec[mpPrivate->mPokemonIndex]->getMoveBos();
+    for (int i = 0; i < moveBo.size(); i++) {
+        moves.push_back(moveBo[i].name);
+    }
+    return moves;
+}

@@ -32,4 +32,9 @@ private slots:
     void onPBBattleMove2Clicked();
     void onPBBattleMove3Clicked();
     void onPBBattleMove4Clicked();
+
+    void onTBBattleSelectPokemon1Clicked();
+    void onTBBattleSelectPokemon2Clicked();
+    void onTBBattleSelectPokemon3Clicked();
+
 };

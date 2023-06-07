@@ -32,6 +32,7 @@ public:
     void swapPokemon(const int& kIndex);
     void battle(const int& kMoveIndex);
 
+    std::vector<std::string> getCurrentPokemonMoves()const;
 private:
     std::unique_ptr<PokemonServicePrivate> mpPrivate;
 };

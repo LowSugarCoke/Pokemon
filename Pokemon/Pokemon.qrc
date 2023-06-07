@@ -1,8 +1,10 @@
 <RCC>
   <qresource prefix="Pokemom">
+    <file>Resources/blastoise.png</file>
+    <file>Resources/charizard.png</file>
+    <file>Resources/venusaur.png</file>
     <file>Resources/potion-red.png</file>
     <file>Resources/ball.png</file>
-    <file>Resources/pikachu.png</file>
     <file>Resources/background.jpg</file>
     <file>Resources/pokemon-logo.png</file>
   </qresource>

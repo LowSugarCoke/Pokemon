@@ -40,7 +40,7 @@ public:
 
     std::vector<std::string> getOppositingPokemonsName() const;
 
-
+    std::vector<std::string> getCurrentPokemonMoves() const;
 
 private:
     std::unique_ptr<PlayerModePrivate> mpPrivate;
