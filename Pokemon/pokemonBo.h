@@ -51,6 +51,8 @@ public:
     std::set<ADDITIONAL_EFFECT_TYPE> getPokemonAdditionalEffectType() const;
 
     std::string getName() const;
+
+    void reduceHalfSpeed();
 private:
     std::unique_ptr<PokemonBoPrivate> mpPrivate;
 };

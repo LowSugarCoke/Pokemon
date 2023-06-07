@@ -4,14 +4,14 @@
 
 enum class ADDITIONAL_EFFECT_TYPE {
     NRM,
-    PRL,
+    PAR,
     BRN,
     PSN
 };
 
 static std::unordered_map<std::string, ADDITIONAL_EFFECT_TYPE> additionalEffectMap = {
     {"",    ADDITIONAL_EFFECT_TYPE::NRM},
-    {"PRL", ADDITIONAL_EFFECT_TYPE::PRL},
+    {"PAR", ADDITIONAL_EFFECT_TYPE::PAR},
     {"BRN", ADDITIONAL_EFFECT_TYPE::BRN},
     {"PSN", ADDITIONAL_EFFECT_TYPE::PSN}
 };

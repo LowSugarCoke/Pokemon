@@ -110,3 +110,7 @@ std::set<ADDITIONAL_EFFECT_TYPE> PokemonBo::getPokemonAdditionalEffectType() con
 std::string PokemonBo::getName() const {
     return mpPrivate->mPokemonName;
 }
+
+void PokemonBo::reduceHalfSpeed() {
+    mpPrivate->mPokemonStats.speed /= 2;
+}

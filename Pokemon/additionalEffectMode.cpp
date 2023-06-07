@@ -27,7 +27,7 @@ AdditionalEffectMode::~AdditionalEffectMode() {}
 
 bool AdditionalEffectMode::unableToMove(std::shared_ptr<PokemonBo> pPokemonBo)const {
 
-    if (pPokemonBo->getPokemonAdditionalEffectType().count(ADDITIONAL_EFFECT_TYPE::PRL)) {
+    if (pPokemonBo->getPokemonAdditionalEffectType().count(ADDITIONAL_EFFECT_TYPE::PAR)) {
         // create a random number generator
         std::default_random_engine generator;
         // create a distribution that will generate numbers between 1 and 4
@@ -56,7 +56,15 @@ void AdditionalEffectMode::additionalDamageAfterBattle(std::shared_ptr<PokemonBo
 
 
 void AdditionalEffectMode::addIfMoveHasAdditionalEffect(std::shared_ptr<PokemonBo> pPokemonBo, MoveBo moveBo) {
-    if (moveBo.additionalEffectType != ADDITIONAL_EFFECT_TYPE::NRM) {
-        pPokemonBo->setPokemonAdditionalEffectType(moveBo.additionalEffectType);
+    auto additionalEffectType = moveBo.additionalEffectType;
+    if (additionalEffectType != ADDITIONAL_EFFECT_TYPE::NRM) {
+        if (pPokemonBo->getPokemonAdditionalEffectType().count(additionalEffectType)) {
+            return;
+        }
+
+        pPokemonBo->setPokemonAdditionalEffectType(additionalEffectType);
+        if (additionalEffectType == ADDITIONAL_EFFECT_TYPE::PAR) {
+            pPokemonBo->reduceHalfSpeed();
+        }
     }
 }
