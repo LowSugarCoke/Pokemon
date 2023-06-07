@@ -1,5 +1,7 @@
 #include "Pokemon.h"
 
+#include <iostream>
+
 #include "moveEntity.h"
 #include "gameEntity.h"
 #include "pokemonEntity.h"
@@ -37,7 +39,8 @@ Pokemon::Pokemon(QWidget* parent)
 
     mpPokemonService->loadData(moveFilePath, pokemonFilePath, gameFilePath);
 
-
+    mpPokemonService->swapPokemon(1);
+    std::cout << mpPokemonService->getBattleDailog() << std::endl;
 
 }
 

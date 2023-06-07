@@ -2,22 +2,39 @@
 
 #include "pokemonBo.h"
 #include "pokemonMode.h"
+#include "pokemonLogger.h"
 
 class PlayerModePrivate {
 public:
 
     PlayerModePrivate(std::shared_ptr<PokemonMode> pPokemonMode);
 
+    void swapBeforeLog();
+    void swapAfterLog();
+
     std::vector<std::shared_ptr<PokemonBo>> mpPokemonBoVec;
     std::vector<std::shared_ptr<PokemonBo>> mpOppositingPokemonBoVec;
     std::shared_ptr<PokemonMode> mpPokemonMode;
+    PokemonLogger& mLogger;
     int mPokemonIndex;
 };
 
 PlayerModePrivate::PlayerModePrivate(std::shared_ptr<PokemonMode> pPokemonMode)
     :mpPokemonMode(pPokemonMode)
+    , mLogger(PokemonLogger::getInstance())
 {
+    mPokemonIndex = 0;
+}
 
+void PlayerModePrivate::swapBeforeLog() {
+    auto name = mpPokemonBoVec[mPokemonIndex]->getName();
+    mLogger.log(name + ", switch out!");
+}
+
+void PlayerModePrivate::swapAfterLog() {
+    auto name = mpPokemonBoVec[mPokemonIndex]->getName();
+    mLogger.log("Come back!");
+    mLogger.log("Go! " + name + "!");
 }
 
 PlayerMode::PlayerMode(std::shared_ptr<PokemonMode> pPokemonMode)
@@ -50,9 +67,13 @@ bool PlayerMode::swapPokemon(const int& kPokemonIndex) {
         return false;
     }
 
+    mpPrivate->swapBeforeLog();
     mpPrivate->mPokemonIndex = kPokemonIndex;
     mpPrivate->mpPokemonMode->setMyPokemon(mpPrivate->mpPokemonBoVec[mpPrivate->mPokemonIndex]);
-    mpPrivate->mpPokemonMode->nextRoundWithoutAttack();
+    mpPrivate->swapAfterLog();
+
+
+    // mpPrivate->mpPokemonMode->nextRoundWithoutAttack();
 }
 
 
