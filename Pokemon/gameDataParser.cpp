@@ -3,39 +3,55 @@
 #include <sstream>
 #include <vector>
 
+
 #include "GameEntity.h"
 
 
-std::vector<GameEntity> GameDataParser::parser(const std::string& kContent) const {
-    std::vector<GameEntity> gameEntities;
+std::pair<std::vector<GameEntity>, std::vector<GameEntity>> GameDataParser::parser(const std::string& kContent) const {
+
+    std::vector<GameEntity> myGameEntities;
+    std::vector<GameEntity> oppositingGameEntities;
+
 
     std::stringstream ss(kContent);
     std::string line;
-
-    // Parse number of entities
-    std::getline(ss, line);
-    int numEntities = std::stoi(line);
-
-    // Parse each entity
-    for (int i = 0; i < numEntities; i++) {
+    for (int i = 0; i < 2; i++) {
+        // Parse number of entities
         std::getline(ss, line);
-        std::stringstream entityStream(line);
-        std::string name;
-        int numMoves;
-        entityStream >> name >> numMoves;
+        int numEntities = std::stoi(line);
 
-        std::getline(ss, line);
-        std::stringstream movesStream(line);
-        std::vector<std::string> moves;
-        for (int j = 0; j < numMoves; j++) {
-            std::string move;
-            movesStream >> move;
-            moves.push_back(move);
+        // Parse each entity
+        for (int j = 0; j < numEntities; j++) {
+            GameEntity entity;
+            std::getline(ss, line);
+            std::stringstream entityStream(line);
+            std::string name;
+            int numMoves;
+            entityStream >> name >> numMoves;
+            entity.setName(name);
+
+            std::getline(ss, line);
+            std::stringstream movesStream(line);
+            std::vector<std::string> moves;
+            for (int k = 0; k < numMoves; k++) {
+                std::string move;
+                movesStream >> move;
+                entity.addMove(move);
+            }
+
+            if (i == 0) {
+                // Create GameEntity and add to list
+                myGameEntities.emplace_back(entity);
+            }
+            else {
+                oppositingGameEntities.emplace_back(entity);
+            }
         }
-
-        // Create GameEntity and add to list
-        gameEntities.emplace_back(name, moves);
     }
 
-    return gameEntities;
+
+
+
+
+    return { myGameEntities ,oppositingGameEntities };
 }

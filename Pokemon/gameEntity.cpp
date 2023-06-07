@@ -28,7 +28,7 @@ GameEntity::~GameEntity() {
 }
 
 void GameEntity::setName(const std::string& kName) {
-    mpPrivate->mName;
+    mpPrivate->mName = kName;
 }
 std::string GameEntity::getName() const {
     return mpPrivate->mName;

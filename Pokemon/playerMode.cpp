@@ -9,6 +9,7 @@ public:
     PlayerModePrivate(std::shared_ptr<PokemonMode> pPokemonMode);
 
     std::vector<std::shared_ptr<PokemonBo>> mpPokemonBoVec;
+    std::vector<std::shared_ptr<PokemonBo>> mpOppositingPokemonBoVec;
     std::shared_ptr<PokemonMode> mpPokemonMode;
     int mPokemonIndex;
 };
@@ -35,9 +36,13 @@ PlayerMode::~PlayerMode() {
 
 }
 
-void PlayerMode::setPokemonBo(std::vector<std::shared_ptr<PokemonBo>> pokemonBoVec) {
-    mpPrivate->mpPokemonBoVec = pokemonBoVec;
+void PlayerMode::setPokemonBo(std::vector<std::shared_ptr<PokemonBo>> pPokemonBoVec) {
+    mpPrivate->mpPokemonBoVec = pPokemonBoVec;
     mpPrivate->mpPokemonMode->setMyPokemon(mpPrivate->mpPokemonBoVec[0]);
+}
+
+void PlayerMode::setOppositingPokemonBo(std::vector<std::shared_ptr<PokemonBo>> pOppositingPokemonBoVec) {
+    mpPrivate->mpOppositingPokemonBoVec = pOppositingPokemonBoVec;
 }
 
 bool PlayerMode::swapPokemon(const int& kPokemonIndex) {

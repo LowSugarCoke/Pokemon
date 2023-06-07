@@ -12,7 +12,7 @@ class GameDao {
 public:
     GameDao(const std::shared_ptr<FileReader>& kFileReader, const std::shared_ptr<GameDataParser>& kGameDataParser);
     ~GameDao();
-    std::vector<GameEntity> getData(const std::string& kFilePath);
+    std::pair<std::vector<GameEntity>, std::vector<GameEntity>> getData(const std::string& kFilePath);
 private:
     std::unique_ptr<GameDaoPrivate> mpPrivate;
 };

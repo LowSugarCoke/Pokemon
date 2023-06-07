@@ -15,7 +15,8 @@ public:
     PlayerMode(const PlayerMode& kPlayerMode);
     ~PlayerMode();
 
-    void setPokemonBo(std::vector<std::shared_ptr<PokemonBo>> pokemonBoVec);
+    void setPokemonBo(std::vector<std::shared_ptr<PokemonBo>> pPokemonBoVec);
+    void setOppositingPokemonBo(std::vector<std::shared_ptr<PokemonBo>> pOppositingPokemonBoVec);
 
     bool swapPokemon(const int& kPokemonIndex);
 
