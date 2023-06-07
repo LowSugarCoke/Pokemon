@@ -152,3 +152,12 @@ int  PokemonService::getCurrentOppositingPokemonIndex() const {
 std::vector<std::string> PokemonService::getCurrentPokemonMoves()const {
     return mpPrivate->mpPlayerMode->getCurrentPokemonMoves();
 }
+
+void PokemonService::usePotion(const int& kPotionIndex) {
+    mpPrivate->mpPlayerMode->usePotion(kPotionIndex);
+}
+
+
+std::vector<std::string> PokemonService::getPotionsName() const {
+    return mpPrivate->mpPlayerMode->getPotionsName();
+}

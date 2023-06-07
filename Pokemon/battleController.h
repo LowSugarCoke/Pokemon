@@ -37,4 +37,11 @@ private slots:
     void onTBBattleSelectPokemon2Clicked();
     void onTBBattleSelectPokemon3Clicked();
 
+    void onTBBattleSelectBag1Clicked();
+    void onTBBattleSelectBag2Clicked();
+    void onTBBattleSelectBag3Clicked();
+    void onTBBattleSelectBag4Clicked();
+
+
+
 };

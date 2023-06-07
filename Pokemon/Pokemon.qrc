@@ -3,8 +3,11 @@
     <file>Resources/blastoise.png</file>
     <file>Resources/charizard.png</file>
     <file>Resources/venusaur.png</file>
-    <file>Resources/potion-red.png</file>
     <file>Resources/ball.png</file>
+    <file>Resources/hyper-potion.png</file>
+    <file>Resources/max-potion.png</file>
+    <file>Resources/potion.png</file>
+    <file>Resources/super-potion.png</file>
     <file>Resources/background.jpg</file>
     <file>Resources/pokemon-logo.png</file>
   </qresource>

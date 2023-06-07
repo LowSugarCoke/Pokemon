@@ -176,3 +176,13 @@ std::vector<std::string> PlayerMode::getCurrentPokemonMoves() const {
     }
     return moves;
 }
+
+
+void PlayerMode::usePotion(const int& kPotionIndex) {
+    mpPrivate->mpPokemonMode->usePotion(kPotionIndex);
+    mpPrivate->mpPokemonMode->nextRoundWithoutAttack();
+}
+
+std::vector<std::string> PlayerMode::getPotionsName() const {
+    return mpPrivate->mpPokemonMode->getPotionsName();
+}

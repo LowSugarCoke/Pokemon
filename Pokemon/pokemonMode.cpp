@@ -150,3 +150,11 @@ void PokemonMode::nextRoundWithoutAttack() {
     mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpPokemonBo);
     mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpOppositingPokemonBo);
 }
+
+void PokemonMode::usePotion(const int& kPotionIndex) {
+    mpPrivate->mpPotionMode->usePotion(kPotionIndex);
+}
+
+std::vector<std::string> PokemonMode::getPotionsName() const {
+    return mpPrivate->mpPotionMode->getPotionsName();
+}
