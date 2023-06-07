@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 
+
 class PokemonLoggerPrivate {
 public:
     std::vector<std::string> mRecord;
@@ -28,7 +29,7 @@ PokemonLogger::~PokemonLogger() {
 
 
 void PokemonLogger::log(std::string logMessage) {
-    mpPrivate->mRecord.push_back(logMessage);
+    mpPrivate->mRecord.push_back("[Turn" + std::to_string(mpPrivate->mTurn) + "] " + logMessage);
 }
 std::string PokemonLogger::getLog() const {
     std::string logger;

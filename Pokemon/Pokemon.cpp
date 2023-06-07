@@ -39,9 +39,10 @@ Pokemon::Pokemon(QWidget* parent)
 
     mpPokemonService->loadData(moveFilePath, pokemonFilePath, gameFilePath);
 
-    mpPokemonService->swapPokemon(1);
-    std::cout << mpPokemonService->getBattleDailog() << std::endl;
+    //mpPokemonService->swapPokemon(1);
 
+    mpPokemonService->battle(0);
+    std::cout << mpPokemonService->getBattleDailog() << std::endl;
 }
 
 

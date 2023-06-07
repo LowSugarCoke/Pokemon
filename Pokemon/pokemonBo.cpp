@@ -17,6 +17,7 @@ public:
     PokemonStats mPokemonStats;
     std::set<ADDITIONAL_EFFECT_TYPE> mPokemonAdditionEffectTypeSet;
     int mMaxHp;
+    bool mIsMyPokemon;
 };
 
 PokemonBo::PokemonBo()
@@ -86,6 +87,11 @@ MoveBo PokemonBo::findMoveBoByName(const std::string kMoveName) {
     return {};
 }
 
+MoveBo PokemonBo::findMoveBoByIndex(const int& kMonitorIndex) {
+    return mpPrivate->mMoveBoVec[kMonitorIndex];
+}
+
+
 std::vector<TYPE> PokemonBo::getPokemonTypes() const {
     return mpPrivate->mPokemonTypeVec;
 }
@@ -113,4 +119,11 @@ std::string PokemonBo::getName() const {
 
 void PokemonBo::reduceHalfSpeed() {
     mpPrivate->mPokemonStats.speed /= 2;
+}
+
+void PokemonBo::checkToMyPokemon(const bool& kMyPokemon) {
+    mpPrivate->mIsMyPokemon = kMyPokemon;
+}
+bool PokemonBo::isMyPokemon() const {
+    return mpPrivate->mIsMyPokemon;
 }

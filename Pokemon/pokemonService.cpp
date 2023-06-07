@@ -76,6 +76,7 @@ bool PokemonService::loadData(const std::string& kMoveFilePath, const std::strin
                 }
             }
         }
+        pPokemonBo->checkToMyPokemon(true);
         pPokemonBoVec.push_back(pPokemonBo);
     }
 
@@ -99,8 +100,10 @@ bool PokemonService::loadData(const std::string& kMoveFilePath, const std::strin
                 }
             }
         }
+        pPokemonBo->checkToMyPokemon(false);
         pOppositingPokemonBoVec.push_back(pPokemonBo);
     }
+
 
     mpPrivate->mpPlayerMode->setPokemonBo(pPokemonBoVec);
     mpPrivate->mpPlayerMode->setOppositingPokemonBo(pOppositingPokemonBoVec);
@@ -125,4 +128,9 @@ std::string PokemonService::getBattleDailog() const {
 
 void PokemonService::swapPokemon(const int& kIndex) {
     mpPrivate->mpPlayerMode->swapPokemon(kIndex);
+}
+
+void PokemonService::battle(const int& kMoveIndex) {
+    mpPrivate->mpPlayerMode->battle(kMoveIndex);
+    mpPrivate->mLogger.addTurn();
 }
