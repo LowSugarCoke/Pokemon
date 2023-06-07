@@ -22,7 +22,11 @@ public:
 
     bool loadData(const std::string& kMoveFilePath, const std::string& kPokemonFilePath, const std::string& kGameFilePath);
     std::vector<std::string> getPokemonsName() const;
+    int getCurrentPokemonIndex() const;
+    std::vector<std::string> getOppositingPokemonsName() const;
+    int getCurrentOppositingPokemonIndex() const;
     std::vector<std::pair<int, int>> getPokemonsHp() const;
+    std::vector<std::pair<int, int>> getOppositingPokemonsHp() const;
     std::set<std::string> getCurrentPokemonAdditionalEffect() const;
     std::string getBattleDailog() const;
     void swapPokemon(const int& kIndex);

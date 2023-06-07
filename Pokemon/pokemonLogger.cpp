@@ -16,7 +16,6 @@ PokemonLogger::PokemonLogger()
     mpPrivate->mTurn = 1;
 }
 
-
 PokemonLogger& PokemonLogger::getInstance()
 {
     static PokemonLogger instance; // Guaranteed to be destroyed, instantiated on first use.
@@ -27,18 +26,20 @@ PokemonLogger::~PokemonLogger() {
 
 }
 
-
 void PokemonLogger::log(std::string logMessage) {
     mpPrivate->mRecord.push_back("[Turn" + std::to_string(mpPrivate->mTurn) + "] " + logMessage);
 }
+
 std::string PokemonLogger::getLog() const {
     std::string logger;
     auto record = mpPrivate->mRecord;
     for (int i = 0; i < record.size(); i++) {
         logger += record[i] + "\n";
     }
+    mpPrivate->mRecord.clear();
     return logger;
 }
+
 void PokemonLogger::debug(std::string debugMessage) {
     std::cout << "[DEBUG] " << debugMessage << std::endl;
 }

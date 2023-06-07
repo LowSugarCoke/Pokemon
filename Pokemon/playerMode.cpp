@@ -17,6 +17,7 @@ public:
     std::shared_ptr<PokemonMode> mpPokemonMode;
     PokemonLogger& mLogger;
     int mPokemonIndex;
+    int mOppositingPokemonIndex;
 };
 
 PlayerModePrivate::PlayerModePrivate(std::shared_ptr<PokemonMode> pPokemonMode)
@@ -24,6 +25,7 @@ PlayerModePrivate::PlayerModePrivate(std::shared_ptr<PokemonMode> pPokemonMode)
     , mLogger(PokemonLogger::getInstance())
 {
     mPokemonIndex = 0;
+    mOppositingPokemonIndex = 0;
 }
 
 void PlayerModePrivate::swapBeforeLog() {
@@ -102,6 +104,17 @@ std::vector<std::string> PlayerMode::getPokemonsName() const {
     return data;
 }
 
+std::vector<std::string> PlayerMode::getOppositingPokemonsName() const {
+    std::vector<std::string> data;
+    auto pokemons = mpPrivate->mpOppositingPokemonBoVec;
+    for (int i = 0; i < pokemons.size(); i++) {
+        data.push_back(pokemons[i]->getName());
+    }
+    return data;
+}
+
+
+
 std::vector<std::pair<int, int>> PlayerMode::getPokemonsHp() const {
     std::vector<std::pair<int, int>> data;
     auto pokemons = mpPrivate->mpPokemonBoVec;
@@ -116,6 +129,21 @@ std::vector<std::pair<int, int>> PlayerMode::getPokemonsHp() const {
     return data;
 }
 
+std::vector<std::pair<int, int>> PlayerMode::getOppositingPokemonsHp() const {
+    std::vector<std::pair<int, int>> data;
+    auto pokemons = mpPrivate->mpOppositingPokemonBoVec;
+    for (int i = 0; i < pokemons.size(); i++) {
+        auto currentHp = pokemons[i]->getPokemonStats().hp;
+        auto maxHp = pokemons[i]->getMaxHp();
+        std::pair<int, int> hpPair{ currentHp, maxHp };
+
+        data.push_back(hpPair);
+
+    }
+    return data;
+}
+
+
 
 std::set<std::string> PlayerMode::getCurrentPokemonAdditionalEffect() const {
     std::set<std::string> data;
@@ -128,4 +156,13 @@ std::set<std::string> PlayerMode::getCurrentPokemonAdditionalEffect() const {
 
 void PlayerMode::battle(const int& kMoveIndex) {
     mpPrivate->mpPokemonMode->nextRound(kMoveIndex);
+}
+
+
+int PlayerMode::getCurrentPokemonIndex() const {
+    return mpPrivate->mPokemonIndex;
+}
+
+int PlayerMode::getOppositingPokemonIndex() const {
+    return mpPrivate->mOppositingPokemonIndex;
 }

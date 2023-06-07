@@ -22,5 +22,5 @@ private:
     Ui::PokemonClass ui;
     std::unique_ptr<MainController> mpMainController;
     std::unique_ptr<BattleController> mpBattleController;
-    std::unique_ptr<PokemonService> mpPokemonService;
+    std::shared_ptr<PokemonService> mpPokemonService;
 };

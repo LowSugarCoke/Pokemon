@@ -143,7 +143,7 @@ bool DamageMode::isMissing(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_
     auto accuracy = kMoveBo.stats.accuracy;
     auto targetSpeed = pTargetPokemonBo->getPokemonStats().speed;
 
-    static const double totalStatPoints = 200.0; // Please adjust this constant based on your game setting.
+    static const double totalStatPoints = 300.0; // Please adjust this constant based on your game setting.
     double dodgeChance = static_cast<double>(targetSpeed - accuracy) / totalStatPoints;
     dodgeChance = std::max(0.0, std::min(1.0, dodgeChance)); // Ensure dodgeChance falls in range [0,1]
 

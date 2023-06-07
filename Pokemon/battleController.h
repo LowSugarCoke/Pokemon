@@ -6,13 +6,15 @@
 
 #include "ui_Pokemon.h"
 
+class PokemonService;
 class BattleControllerPrivate;
 class BattleController : public QObject
 {
     Q_OBJECT
 
 public:
-    BattleController(Ui::PokemonClass* ui, QObject* parent = nullptr);
+    BattleController(Ui::PokemonClass* ui, std::shared_ptr<PokemonService> pPokemonService, QObject* parent = nullptr);
+    void refresh();
 
 private:
     Ui::PokemonClass* ui;
@@ -21,9 +23,13 @@ private:
 
 
 private slots:
-    void on_pb_battle_battle_clicked();
-    void on_pb_battle_back_clicked();
-    void on_pb_battle_pokemon_clicked();
-    void on_pb_battle_bag_clicked();
+    void onPBBattleBattleClicked();
+    void onPBBattleBackClicked();
+    void onPBBattlePokemonClicked();
+    void onPBBattleBagClicked();
 
+    void onPBBattleMove1Clicked();
+    void onPBBattleMove2Clicked();
+    void onPBBattleMove3Clicked();
+    void onPBBattleMove4Clicked();
 };

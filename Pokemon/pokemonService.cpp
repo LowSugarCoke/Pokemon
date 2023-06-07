@@ -114,6 +114,10 @@ std::vector<std::string> PokemonService::getPokemonsName() const {
     return mpPrivate->mpPlayerMode->getPokemonsName();
 }
 
+std::vector<std::pair<int, int>> PokemonService::getOppositingPokemonsHp() const {
+    return mpPrivate->mpPlayerMode->getOppositingPokemonsHp();
+}
+
 std::vector<std::pair<int, int>> PokemonService::getPokemonsHp() const {
     return mpPrivate->mpPlayerMode->getPokemonsHp();
 }
@@ -133,4 +137,14 @@ void PokemonService::swapPokemon(const int& kIndex) {
 void PokemonService::battle(const int& kMoveIndex) {
     mpPrivate->mpPlayerMode->battle(kMoveIndex);
     mpPrivate->mLogger.addTurn();
+}
+
+int PokemonService::getCurrentPokemonIndex() const {
+    return mpPrivate->mpPlayerMode->getCurrentPokemonIndex();
+}
+std::vector<std::string>  PokemonService::getOppositingPokemonsName() const {
+    return mpPrivate->mpPlayerMode->getOppositingPokemonsName();
+}
+int  PokemonService::getCurrentOppositingPokemonIndex() const {
+    return mpPrivate->mpPlayerMode->getOppositingPokemonIndex();
 }
