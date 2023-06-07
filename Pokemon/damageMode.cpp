@@ -1,4 +1,4 @@
-#include "damageSystem.h"
+#include "damageMode.h"
 
 #include <random>
 #include <algorithm> 
@@ -8,17 +8,17 @@
 
 const int kLevel = 50;
 
-class DamageSystemPrivate {
+class DamageModePrivate {
 public:
     float getCriticalRandom();
     float getSameTypeAttackBonus(const MoveBo& kMoveBo, std::shared_ptr<PokemonBo> pPokemonBo);
     float getType(const MoveBo& kMoveBo, std::shared_ptr<PokemonBo> pTargetPokemonBo);
     float getAttack(const MoveBo& kMoveBo, std::shared_ptr<PokemonBo> pPokemonBo);
     float getDefense(const MoveBo& kMoveBo, std::shared_ptr<PokemonBo> pPokemonBo);
-    float getStatusHurt(std::shared_ptr<PokemonBo> pTargetPokemonBo);
+
 };
 
-float DamageSystemPrivate::getCriticalRandom() {
+float DamageModePrivate::getCriticalRandom() {
     std::random_device rd;  // Will be used to obtain a seed for the random number engine
     std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
     std::uniform_int_distribution<> distrib(1, 10);
@@ -33,7 +33,7 @@ float DamageSystemPrivate::getCriticalRandom() {
     }
 }
 
-float DamageSystemPrivate::getSameTypeAttackBonus(const MoveBo& kMoveBo, std::shared_ptr<PokemonBo> pPokemonBo) {
+float DamageModePrivate::getSameTypeAttackBonus(const MoveBo& kMoveBo, std::shared_ptr<PokemonBo> pPokemonBo) {
     auto types = pPokemonBo->getPokemonTypes();
     for (int i = 0; i < types.size(); i++) {
         if (kMoveBo.type == types[i]) {
@@ -43,7 +43,7 @@ float DamageSystemPrivate::getSameTypeAttackBonus(const MoveBo& kMoveBo, std::sh
     return 1;
 }
 
-float DamageSystemPrivate::getType(const MoveBo& kMoveBo, std::shared_ptr<PokemonBo> pTargetPokemonBo) {
+float DamageModePrivate::getType(const MoveBo& kMoveBo, std::shared_ptr<PokemonBo> pTargetPokemonBo) {
     float cnt = 0.0;
     auto types = pTargetPokemonBo->getPokemonTypes();
     for (int i = 0; i < types.size(); i++) {
@@ -52,7 +52,7 @@ float DamageSystemPrivate::getType(const MoveBo& kMoveBo, std::shared_ptr<Pokemo
     return cnt;
 }
 
-float DamageSystemPrivate::getAttack(const MoveBo& kMoveBo, std::shared_ptr<PokemonBo> pPokemonBo) {
+float DamageModePrivate::getAttack(const MoveBo& kMoveBo, std::shared_ptr<PokemonBo> pPokemonBo) {
     if (kMoveBo.damageType == DAMAGE_TYPE::PHYSICAL) {
         return pPokemonBo->getPokemonStats().attack;
     }
@@ -64,7 +64,7 @@ float DamageSystemPrivate::getAttack(const MoveBo& kMoveBo, std::shared_ptr<Poke
     }
 }
 
-float DamageSystemPrivate::getDefense(const MoveBo& kMoveBo, std::shared_ptr<PokemonBo> pPokemonBo) {
+float DamageModePrivate::getDefense(const MoveBo& kMoveBo, std::shared_ptr<PokemonBo> pPokemonBo) {
     if (kMoveBo.damageType == DAMAGE_TYPE::PHYSICAL) {
         return pPokemonBo->getPokemonStats().defense;
     }
@@ -76,25 +76,23 @@ float DamageSystemPrivate::getDefense(const MoveBo& kMoveBo, std::shared_ptr<Pok
     }
 }
 
-float DamageSystemPrivate::getStatusHurt(std::shared_ptr<PokemonBo> pTargetPokemonBo) {
-    return pTargetPokemonBo->getMaxHp() / 16;
-}
 
-DamageSystem::DamageSystem()
-    :mpPrivate(std::make_unique<DamageSystemPrivate>())
+
+DamageMode::DamageMode()
+    :mpPrivate(std::make_unique<DamageModePrivate>())
 {
 
 }
-DamageSystem::DamageSystem(const DamageSystem& kDamageSystem)
-    : mpPrivate(std::make_unique<DamageSystemPrivate>(*kDamageSystem.mpPrivate))
+DamageMode::DamageMode(const DamageMode& kDamageMode)
+    : mpPrivate(std::make_unique<DamageModePrivate>(*kDamageMode.mpPrivate))
 {
 
 }
-DamageSystem::~DamageSystem() {
+DamageMode::~DamageMode() {
 
 }
 
-int DamageSystem::damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const std::string& kMoveName) {
+int DamageMode::damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const std::string& kMoveName) {
 
     // Ref: https://bulbapedia.bulbagarden.net/wiki/Damage
 
@@ -118,7 +116,7 @@ int DamageSystem::damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::
 }
 
 
-bool DamageSystem::isMissing(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const std::string& kMoveName) {
+bool DamageMode::isMissing(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const std::string& kMoveName) {
     auto accuracy = pMyPokemonBo->findMoveBoByName(kMoveName).stats.accuracy;
     auto targetSpeed = pTargetPokemonBo->getPokemonStats().speed;
 

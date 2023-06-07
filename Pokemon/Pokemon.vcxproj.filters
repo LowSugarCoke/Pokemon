@@ -127,7 +127,7 @@
     <ClCompile Include="pokemonMode.cpp">
       <Filter>Source Files\mode</Filter>
     </ClCompile>
-    <ClCompile Include="damageSystem.cpp">
+    <ClCompile Include="damageMode.cpp">
       <Filter>Source Files\mode</Filter>
     </ClCompile>
     <ClCompile Include="playerMode.cpp">
@@ -213,7 +213,7 @@
     <ClInclude Include="pokemonMode.h">
       <Filter>Header Files\mode</Filter>
     </ClInclude>
-    <ClInclude Include="damageSystem.h">
+    <ClInclude Include="damageMode.h">
       <Filter>Header Files\mode</Filter>
     </ClInclude>
     <ClInclude Include="pokemonTypeChart.h">

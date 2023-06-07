@@ -35,6 +35,9 @@ PokemonService::PokemonService(const std::shared_ptr<MoveDao>& kMoveDao, const s
     : mpPrivate(std::make_unique<PokemonServicePrivate>(kMoveDao, kGameDao, kPokemonDao, kPlayerMode))
 {}
 
+PokemonService::~PokemonService() {}
+
+
 bool PokemonService::loadData(const std::string& kMoveFilePath, const std::string& kPokemonFilePath, const std::string& kGameFilePath) {
     std::vector<std::shared_ptr<PokemonBo>> pokemonBoVec;
 

@@ -83,7 +83,7 @@
   <ItemGroup>
     <ClCompile Include="additionalEffectMode.cpp" />
     <ClCompile Include="battleController.cpp" />
-    <ClCompile Include="damageSystem.cpp" />
+    <ClCompile Include="damageMode.cpp" />
     <ClCompile Include="playerMode.cpp" />
     <ClCompile Include="pokemonMode.cpp" />
     <ClCompile Include="pokemonService.cpp" />
@@ -120,7 +120,7 @@
   <ItemGroup>
     <ClInclude Include="additionalEffectMode.h" />
     <ClInclude Include="additionalEffectType.h" />
-    <ClInclude Include="damageSystem.h" />
+    <ClInclude Include="damageMode.h" />
     <ClInclude Include="damageType.h" />
     <ClInclude Include="playerMode.h" />
     <ClInclude Include="pokemonMode.h" />
