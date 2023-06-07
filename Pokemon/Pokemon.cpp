@@ -16,6 +16,7 @@
 #include "pokemonService.h"
 #include "damageMode.h"
 #include "additionalEffectMode.h"
+#include "pokemonLogger.h"
 
 Pokemon::Pokemon(QWidget* parent)
     : QMainWindow(parent)
@@ -26,6 +27,9 @@ Pokemon::Pokemon(QWidget* parent)
     mpBattleController = std::make_unique<BattleController>(&ui, this);
 
     init();
+
+    PokemonLogger& logger = PokemonLogger::getInstance();
+    logger.debug("Hello world");
 }
 
 

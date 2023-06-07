@@ -62,7 +62,7 @@
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
@@ -85,6 +85,7 @@
     <ClCompile Include="battleController.cpp" />
     <ClCompile Include="damageMode.cpp" />
     <ClCompile Include="playerMode.cpp" />
+    <ClCompile Include="pokemonLogger.cpp" />
     <ClCompile Include="pokemonMode.cpp" />
     <ClCompile Include="pokemonService.cpp" />
     <ClCompile Include="fileReader.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="damageMode.h" />
     <ClInclude Include="damageType.h" />
     <ClInclude Include="playerMode.h" />
+    <ClInclude Include="pokemonLogger.h" />
     <ClInclude Include="pokemonMode.h" />
     <ClInclude Include="pokemonService.h" />
     <ClInclude Include="fileReader.h" />
