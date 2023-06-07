@@ -4,16 +4,16 @@
 #include <string>
 
 class PokemonBo;
-class DamageSystemPrivate;
-class DamageSystem {
+class DamageModePrivate;
+class DamageMode {
 public:
-    DamageSystem();
-    DamageSystem(const DamageSystem& kDamageSystem);
-    ~DamageSystem();
+    DamageMode();
+    DamageMode(const DamageMode& kDamageMode);
+    ~DamageMode();
 
     bool isMissing(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const std::string& kMoveName);
     int damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const std::string& kMoveName);
 
 private:
-    std::unique_ptr<DamageSystemPrivate> mpPrivate;
+    std::unique_ptr<DamageModePrivate> mpPrivate;
 };
