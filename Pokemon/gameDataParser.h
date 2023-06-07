@@ -6,5 +6,7 @@
 class GameEntity;
 class GameDataParser {
 public:
-    std::vector<GameEntity> parser(const std::string& kContent) const;
+    std::pair<std::vector<GameEntity>, std::vector<GameEntity>> parser(const std::string& kContent) const;
+
+
 };

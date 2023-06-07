@@ -39,27 +39,31 @@ PokemonService::~PokemonService() {}
 
 
 bool PokemonService::loadData(const std::string& kMoveFilePath, const std::string& kPokemonFilePath, const std::string& kGameFilePath) {
-    std::vector<std::shared_ptr<PokemonBo>> pokemonBoVec;
+    std::vector<std::shared_ptr<PokemonBo>> pPokemonBoVec;
+    std::vector<std::shared_ptr<PokemonBo>> pOppositingPokemonBoVec;
 
     auto moveEntityVec = mpPrivate->mpMoveDao->getData(kMoveFilePath);
     auto pokemonEntityVec = mpPrivate->mpPokemonDao->getData(kPokemonFilePath);
     auto gameEntityVec = mpPrivate->mpGameDao->getData(kGameFilePath);
 
-    if (moveEntityVec.empty() || pokemonEntityVec.empty() || gameEntityVec.empty()) {
+    auto myGameEntityVec = gameEntityVec.first;
+    auto oppositingGameEntityVec = gameEntityVec.second;
+
+    if (moveEntityVec.empty() || pokemonEntityVec.empty() || myGameEntityVec.empty() || oppositingGameEntityVec.empty()) {
         return false;
     }
 
-    for (int i = 0; i < gameEntityVec.size(); i++) {
+    for (int i = 0; i < myGameEntityVec.size(); i++) {
         std::shared_ptr<PokemonBo> pPokemonBo = std::make_shared<PokemonBo>();
         for (int j = 0; j < pokemonEntityVec.size(); j++) {
-            if (gameEntityVec[i].getName() == pokemonEntityVec[j].getName()) {
+            if (myGameEntityVec[i].getName() == pokemonEntityVec[j].getName()) {
                 auto pokemonEntity = pokemonEntityVec[j];
                 pPokemonBo->setPokemonElements(pokemonEntity.getName(), pokemonEntity.getStats(), pokemonEntity.getTypes());
                 break;
             }
         }
 
-        auto gameMoves = gameEntityVec[i].getMoves();
+        auto gameMoves = myGameEntityVec[i].getMoves();
         for (int j = 0; j < gameMoves.size(); j++) {
             for (int k = 0; k < moveEntityVec.size(); k++) {
                 if (gameMoves[j] == moveEntityVec[k].getName()) {
@@ -69,10 +73,34 @@ bool PokemonService::loadData(const std::string& kMoveFilePath, const std::strin
                 }
             }
         }
-        pokemonBoVec.push_back(pPokemonBo);
+        pPokemonBoVec.push_back(pPokemonBo);
     }
 
-    mpPrivate->mpPlayerMode->setPokemonBo(pokemonBoVec);
+    for (int i = 0; i < oppositingGameEntityVec.size(); i++) {
+        std::shared_ptr<PokemonBo> pPokemonBo = std::make_shared<PokemonBo>();
+        for (int j = 0; j < pokemonEntityVec.size(); j++) {
+            if (oppositingGameEntityVec[i].getName() == pokemonEntityVec[j].getName()) {
+                auto pokemonEntity = pokemonEntityVec[j];
+                pPokemonBo->setPokemonElements(pokemonEntity.getName(), pokemonEntity.getStats(), pokemonEntity.getTypes());
+                break;
+            }
+        }
+
+        auto gameMoves = oppositingGameEntityVec[i].getMoves();
+        for (int j = 0; j < gameMoves.size(); j++) {
+            for (int k = 0; k < moveEntityVec.size(); k++) {
+                if (gameMoves[j] == moveEntityVec[k].getName()) {
+                    auto moveEntity = moveEntityVec[k];
+                    pPokemonBo->addMoveElements(moveEntity.getName(), moveEntity.getMoveStats(), moveEntity.getType(),
+                        moveEntity.getDamageType(), moveEntity.getAdditionalEffectType());
+                }
+            }
+        }
+        pOppositingPokemonBoVec.push_back(pPokemonBo);
+    }
+
+    mpPrivate->mpPlayerMode->setPokemonBo(pPokemonBoVec);
+    mpPrivate->mpPlayerMode->setOppositingPokemonBo(pOppositingPokemonBoVec);
     return true;
 }
 

@@ -26,7 +26,7 @@ GameDao::GameDao(const std::shared_ptr<FileReader>& kFileReader, const std::shar
 
 GameDao::~GameDao() {}
 
-std::vector<GameEntity>  GameDao::getData(const std::string& kFilePath) {
+std::pair<std::vector<GameEntity>, std::vector<GameEntity>>  GameDao::getData(const std::string& kFilePath) {
     auto content = mpPrivate->mpFilerReader->readFile(kFilePath);
     return mpPrivate->mpGameDataParser->parser(content);
 }

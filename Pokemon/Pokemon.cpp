@@ -30,6 +30,15 @@ Pokemon::Pokemon(QWidget* parent)
 
     PokemonLogger& logger = PokemonLogger::getInstance();
     logger.debug("Hello world");
+
+    std::string moveFilePath = "MoveLib.txt";
+    std::string pokemonFilePath = "PokemonLib.txt";
+    std::string gameFilePath = "GameData.txt";
+
+    mpPokemonService->loadData(moveFilePath, pokemonFilePath, gameFilePath);
+
+
+
 }
 
 
