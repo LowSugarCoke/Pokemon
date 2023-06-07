@@ -363,7 +363,7 @@ background-color:white;</string>
      <widget class="QLabel" name="lbl_battle_opposite_pokemon">
       <property name="geometry">
        <rect>
-        <x>690</x>
+        <x>730</x>
         <y>260</y>
         <width>91</width>
         <height>16</height>
@@ -389,7 +389,7 @@ background-color:white;</string>
      <widget class="QLabel" name="lbl_battle_opposite_pokemon_blood">
       <property name="geometry">
        <rect>
-        <x>750</x>
+        <x>780</x>
         <y>280</y>
         <width>91</width>
         <height>16</height>
@@ -415,7 +415,7 @@ background-color:white;</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="Pokemon.qrc">:/Pokemom/Resources/pikachu.png</pixmap>
+       <pixmap>:/Pokemom/Resources/pikachu.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -437,7 +437,7 @@ background-color:white;</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="Pokemon.qrc">:/Pokemom/Resources/pikachu.png</pixmap>
+       <pixmap>:/Pokemom/Resources/pikachu.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -691,6 +691,78 @@ QToolButton:hover { background-color : gray; }
        <string>...</string>
       </property>
      </widget>
+     <widget class="QToolButton" name="tb_battle_select_pokemon_2">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>150</y>
+        <width>251</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QToolButton { background-color : white; }
+QToolButton:hover { background-color : gray; }
+</string>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tb_battle_select_pokemon_3">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>220</y>
+        <width>251</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QToolButton { background-color : white; }
+QToolButton:hover { background-color : gray; }
+</string>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tb_battle_select_bag_2">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>150</y>
+        <width>251</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QToolButton { background-color : white; }
+QToolButton:hover { background-color : gray; }
+</string>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="tb_battle_select_bag_3">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>220</y>
+        <width>251</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QToolButton { background-color : white; }
+QToolButton:hover { background-color : gray; }
+</string>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+     </widget>
      <zorder>text_edit_battle_content</zorder>
      <zorder>pb_battle_back</zorder>
      <zorder>lbl_battle_player_pokemon</zorder>
@@ -715,6 +787,10 @@ QToolButton:hover { background-color : gray; }
      <zorder>pb_battle_run</zorder>
      <zorder>tb_battle_select_pokemon_1</zorder>
      <zorder>tb_battle_select_bag_1</zorder>
+     <zorder>tb_battle_select_pokemon_2</zorder>
+     <zorder>tb_battle_select_pokemon_3</zorder>
+     <zorder>tb_battle_select_bag_2</zorder>
+     <zorder>tb_battle_select_bag_3</zorder>
     </widget>
    </widget>
   </widget>

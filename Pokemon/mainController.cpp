@@ -3,6 +3,8 @@
 
 #include <QMessageBox>
 
+
+
 class MainControllerPrivate :QObject {
 public:
     MainControllerPrivate(Ui::PokemonClass* ui, std::shared_ptr<PokemonService> pPokemonService);
