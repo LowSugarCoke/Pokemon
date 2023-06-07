@@ -9,6 +9,7 @@
 #include "pokemonBo.h"
 #include "playerMode.h"
 #include "pokemonMode.h"
+#include "pokemonLogger.h"
 
 class PokemonServicePrivate {
 public:
@@ -19,6 +20,7 @@ public:
     std::shared_ptr<GameDao> mpGameDao;
     std::shared_ptr<PokemonDao> mpPokemonDao;
     std::shared_ptr<PlayerMode> mpPlayerMode;
+    PokemonLogger& mLogger;
 };
 
 PokemonServicePrivate::PokemonServicePrivate(const std::shared_ptr<MoveDao>& kMoveDao, const std::shared_ptr<GameDao>& kGameDao
@@ -27,6 +29,7 @@ PokemonServicePrivate::PokemonServicePrivate(const std::shared_ptr<MoveDao>& kMo
     , mpGameDao(kGameDao)
     , mpPokemonDao(kPokemonDao)
     , mpPlayerMode(kPlayerMode)
+    , mLogger(PokemonLogger::getInstance())
 {}
 
 
@@ -117,5 +120,9 @@ std::set<std::string> PokemonService::getCurrentPokemonAdditionalEffect() const 
 }
 
 std::string PokemonService::getBattleDailog() const {
-    return "";
+    return mpPrivate->mLogger.getLog();
+}
+
+void PokemonService::swapPokemon(const int& kIndex) {
+    mpPrivate->mpPlayerMode->swapPokemon(kIndex);
 }

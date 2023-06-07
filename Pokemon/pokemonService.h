@@ -25,6 +25,7 @@ public:
     std::vector<std::pair<int, int>> getPokemonsHp() const;
     std::set<std::string> getCurrentPokemonAdditionalEffect() const;
     std::string getBattleDailog() const;
+    void swapPokemon(const int& kIndex);
 
 private:
     std::unique_ptr<PokemonServicePrivate> mpPrivate;
