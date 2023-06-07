@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 class PokemonBo;
 class AdditionalEffectMode;
@@ -20,6 +21,10 @@ public:
     void nextRound(const int& kMoveIndex);
 
     void nextRoundWithoutAttack();
+
+    void usePotion(const int& kPotionIndex);
+
+    std::vector<std::string> getPotionsName() const;
 
 private:
     std::unique_ptr<PokemonModePrivate> mpPrivate;

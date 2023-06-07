@@ -33,6 +33,8 @@ public:
     void battle(const int& kMoveIndex);
 
     std::vector<std::string> getCurrentPokemonMoves()const;
+    void usePotion(const int& kPotionIndex);
+    std::vector<std::string> getPotionsName() const;
 private:
     std::unique_ptr<PokemonServicePrivate> mpPrivate;
 };
