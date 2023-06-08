@@ -5,7 +5,7 @@
  * Editor : ´å¶Ç´¼ B11130034
  * Update Date: 2023-06-08
  * Description: This file contains the declaration of the BattleController class, which is responsible for
- *              controlling the battle logic and user interface interactions in a Pokemon game.
+ * controlling the battle logic and user interface interactions in a Pokemon game.
  *************************************************************/
 
 #pragma once

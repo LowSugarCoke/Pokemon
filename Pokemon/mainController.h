@@ -5,11 +5,11 @@
  * Editor : ´å¶Ç´¼ B11130034
  * Update Date: 2023-06-08
  * Description: This header file defines the MainController class which is responsible for handling main
- *              user interactions in the Pokemon game. It interfaces with the game's UI and the PokemonService.
- *              The class contains methods for setting up various callback functions for battle refresh,
- *              test cases, music play etc. It also contains methods to handle button click events for test case,
- *              Pokemon, move, game and battle case operations. The 'connection' method establishes connections
- *              between UI signals and MainController slots.
+ * user interactions in the Pokemon game. It interfaces with the game's UI and the PokemonService.
+ * The class contains methods for setting up various callback functions for battle refresh,
+ * test cases, music play etc. It also contains methods to handle button click events for test case,
+ * Pokemon, move, game and battle case operations. The 'connection' method establishes connections
+ * between UI signals and MainController slots.
  *************************************************************/
 
 #pragma once
