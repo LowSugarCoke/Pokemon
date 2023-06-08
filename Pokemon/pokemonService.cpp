@@ -177,7 +177,7 @@ bool PokemonService::faintingSwapPokemon(const int& kPokemonIndex) {
 }
 
 bool PokemonService::swapOppositingPokemon() {
-    auto oppositingPokemonIndex = mpPrivate->mpPlayerMode->getCurrentPokemonIndex();
+    auto oppositingPokemonIndex = mpPrivate->mpPlayerMode->getOppositingPokemonIndex();
     return mpPrivate->mpPlayerMode->swapOppositingPokemon(oppositingPokemonIndex + 1);
 }
 
