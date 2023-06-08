@@ -11,10 +11,11 @@
 class PokemonBoPrivate {
 public:
     std::vector<MoveBo> mMoveBoVec;
-
+    std::vector<int> mMaxPowerPoints;
     std::string mPokemonName;
     std::vector<TYPE> mPokemonTypeVec;
     PokemonStats mPokemonStats;
+
     std::set<ADDITIONAL_EFFECT_TYPE> mPokemonAdditionEffectTypeSet;
     int mMaxHp;
     bool mIsMyPokemon;
@@ -52,6 +53,7 @@ void PokemonBo::addMoveElements(const std::string& kName, const MoveStats& kMove
     moveBo.additionalEffectType = kAdditionalEffectType;
 
     mpPrivate->mMoveBoVec.push_back(moveBo);
+    mpPrivate->mMaxPowerPoints.push_back(moveBo.stats.powerPoint);
 }
 
 void PokemonBo::addHp(const int& kHp) {
@@ -130,4 +132,19 @@ void PokemonBo::checkToMyPokemon(const bool& kMyPokemon) {
 }
 bool PokemonBo::isMyPokemon() const {
     return mpPrivate->mIsMyPokemon;
+}
+
+
+void PokemonBo::minusMovePowerPoint(const MoveBo& kMoveBo) {
+
+    for (int i = 0; i < mpPrivate->mMoveBoVec.size(); i++) {
+        if (mpPrivate->mMoveBoVec[i].name == kMoveBo.name) {
+            mpPrivate->mMoveBoVec[i].stats.powerPoint--;
+        }
+    }
+}
+
+
+std::vector<int> PokemonBo::getMaxPowerPoint() const {
+    return mpPrivate->mMaxPowerPoints;
 }

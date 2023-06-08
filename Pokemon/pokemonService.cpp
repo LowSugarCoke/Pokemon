@@ -193,3 +193,12 @@ int PokemonService::getOppositingPokemonHp() const {
 std::vector<std::string> PokemonService::getCurrentPokemonMoveTypes() const {
     return mpPrivate->mpPlayerMode->getCurrentPokemonMoveTypes();
 }
+
+
+std::vector<int> PokemonService::getCurrentPokemonPowerPoints() const {
+    return mpPrivate->mpPlayerMode->getCurrentPokemonPowerPoints();
+}
+
+std::vector<int> PokemonService::getCurrentPokemonMaxPowerPoints() const {
+    return mpPrivate->mpPlayerMode->getCurrentPokemonMaxPowerPoints();
+}

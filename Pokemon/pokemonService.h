@@ -45,6 +45,8 @@ public:
 
     std::vector<std::string> getCurrentPokemonMoveTypes() const;
 
+    std::vector<int> getCurrentPokemonPowerPoints() const;
+    std::vector<int> getCurrentPokemonMaxPowerPoints() const;
 private:
     std::unique_ptr<PokemonServicePrivate> mpPrivate;
 };

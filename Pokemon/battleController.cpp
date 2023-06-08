@@ -9,7 +9,7 @@
 #include "pokemonService.h"
 
 const static std::string PSN = "PSN";
-const static std::string BAR = "BAR";
+const static std::string BRN = "BRN";
 const static std::string PAR = "PAR";
 
 std::unordered_map<std::string, std::string> pokemonPicMap{
@@ -63,12 +63,15 @@ public:
     void showSelectPokemonBtn();
     void hideSelectBagBtn();
     void showSelectBagBtn();
+    void showType();
+    void hideType();
+    void showPP();
+    void hidePP();
     void updateLog();
     void myPokemonFaint();
     void oppositingPokemonFaint();
     void winOrLose();
-    void showType();
-    void hideType();
+    void unablePP();
 
     Ui::PokemonClass* ui;
     std::shared_ptr<PokemonService> mpPokemonService;
@@ -95,6 +98,25 @@ void BattleControllerPrivate::winOrLose() {
     }
     else {
         // The battle is still ongoing. You can choose to do nothing here.
+    }
+}
+
+void BattleControllerPrivate::unablePP() {
+    auto currentPP = mpPokemonService->getCurrentPokemonPowerPoints();
+    if (!currentPP[0]) {
+        ui->pb_battle_move_1->setEnabled(false);
+    }
+    else if (!currentPP[1]) {
+        ui->pb_battle_move_2->setEnabled(false);
+    }
+    else if (!currentPP[2]) {
+        ui->pb_battle_move_3->setEnabled(false);
+    }
+    else if (!currentPP[3]) {
+        ui->pb_battle_move_4->setEnabled(false);
+    }
+    else {
+
     }
 }
 
@@ -270,6 +292,29 @@ void BattleControllerPrivate::hideType() {
     ui->lbl_battle_type_4->hide();
 }
 
+void BattleControllerPrivate::showPP() {
+    auto currentPP = mpPokemonService->getCurrentPokemonPowerPoints();
+    auto maxPP = mpPokemonService->getCurrentPokemonMaxPowerPoints();
+
+    ui->lbl_battle_pp_1->setText(QString::number(currentPP[0]) + "/" + QString::number(maxPP[0]));
+    ui->lbl_battle_pp_2->setText(QString::number(currentPP[1]) + "/" + QString::number(maxPP[1]));
+    ui->lbl_battle_pp_3->setText(QString::number(currentPP[2]) + "/" + QString::number(maxPP[2]));
+    ui->lbl_battle_pp_4->setText(QString::number(currentPP[3]) + "/" + QString::number(maxPP[3]));
+
+    ui->lbl_battle_pp_1->show();
+    ui->lbl_battle_pp_2->show();
+    ui->lbl_battle_pp_3->show();
+    ui->lbl_battle_pp_4->show();
+}
+void BattleControllerPrivate::hidePP() {
+
+    ui->lbl_battle_pp_1->hide();
+    ui->lbl_battle_pp_2->hide();
+    ui->lbl_battle_pp_3->hide();
+    ui->lbl_battle_pp_4->hide();
+}
+
+
 BattleController::BattleController(Ui::PokemonClass* ui, std::shared_ptr<PokemonService> pPokemonService, QObject* parent)
     : QObject(parent)
     , ui(ui)
@@ -291,12 +336,12 @@ BattleController::BattleController(Ui::PokemonClass* ui, std::shared_ptr<Pokemon
     ui->tb_battle_select_bag_4->hide();
 
     ui->lbl_battle_opposite_PSN->hide();
-    ui->lbl_battle_opposite_BAR->hide();
+    ui->lbl_battle_opposite_BRN->hide();
     ui->lbl_battle_opposite_PAR->hide();
 
-    ui->lbl_battle_pokemon_PAR->hide();
-    ui->lbl_battle_pokemon_BAR->hide();
-    ui->lbl_battle_pokemon_PSN->hide();
+
+    mpPrivate->hideType();
+    mpPrivate->hidePP();
 }
 
 void BattleController::connection() {
@@ -326,6 +371,8 @@ void BattleController::onPBBattleBattleClicked() {
     mpPrivate->hideSceneBtn();
 
     mpPrivate->showType();
+    mpPrivate->unablePP();
+    mpPrivate->showPP();
     mpPrivate->showMoveBtn();
     ui->pb_battle_back->show();
 }
@@ -339,6 +386,7 @@ void BattleController::onPBBattleBackClicked() {
     ui->pb_battle_back->hide();
 
     mpPrivate->hideType();
+    mpPrivate->hidePP();
     mpPrivate->showSceneBtn();
 }
 
@@ -403,6 +451,7 @@ void BattleController::onPBBattleBagClicked() {
 void BattleController::onPBBattleMove1Clicked() {
     mpPrivate->hideMoveBtn();
     mpPrivate->hideType();
+    mpPrivate->hidePP();
     ui->pb_battle_back->hide();
     mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(0);
@@ -419,6 +468,7 @@ void BattleController::onPBBattleMove1Clicked() {
 void BattleController::onPBBattleMove2Clicked() {
     mpPrivate->hideMoveBtn();
     mpPrivate->hideType();
+    mpPrivate->hidePP();
     ui->pb_battle_back->hide();
     mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(1);
@@ -434,6 +484,7 @@ void BattleController::onPBBattleMove2Clicked() {
 void BattleController::onPBBattleMove3Clicked() {
     mpPrivate->hideMoveBtn();
     mpPrivate->hideType();
+    mpPrivate->hidePP();
     ui->pb_battle_back->hide();
     mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(2);
@@ -449,6 +500,7 @@ void BattleController::onPBBattleMove3Clicked() {
 void BattleController::onPBBattleMove4Clicked() {
     mpPrivate->hideMoveBtn();
     mpPrivate->hideType();
+    mpPrivate->hidePP();
     ui->pb_battle_back->hide();
     mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(3);
@@ -589,15 +641,15 @@ void BattleController::refresh() {
     ui->pb_battle_move_4->setText(QString::fromStdString(myPokemonMoves[3]));
 
     ui->lbl_battle_pokemon_PSN->hide();
-    ui->lbl_battle_pokemon_BAR->hide();
+    ui->lbl_battle_pokemon_BRN->hide();
     ui->lbl_battle_pokemon_PAR->hide();
     auto additionalEffect = mpPrivate->mpPokemonService->getCurrentPokemonAdditionalEffect();
     for (auto& effect : additionalEffect) {
         if (effect == PSN) {
             ui->lbl_battle_pokemon_PSN->show();
         }
-        else if (effect == BAR) {
-            ui->lbl_battle_pokemon_BAR->show();
+        else if (effect == BRN) {
+            ui->lbl_battle_pokemon_BRN->show();
         }
         else if (effect == PAR) {
             ui->lbl_battle_pokemon_PAR->show();
@@ -605,20 +657,22 @@ void BattleController::refresh() {
     }
 
     ui->lbl_battle_opposite_PSN->hide();
-    ui->lbl_battle_opposite_BAR->hide();
+    ui->lbl_battle_opposite_BRN->hide();
     ui->lbl_battle_opposite_PAR->hide();
     auto oppositingAdditionalEffect = mpPrivate->mpPokemonService->getOppositingPokemonAdditionalEffect();
     for (auto& effect : oppositingAdditionalEffect) {
         if (effect == PSN) {
             ui->lbl_battle_opposite_PSN->show();
         }
-        else if (effect == BAR) {
-            ui->lbl_battle_opposite_BAR->show();
+        else if (effect == BRN) {
+            ui->lbl_battle_opposite_BRN->show();
         }
         else if (effect == PAR) {
             ui->lbl_battle_opposite_PAR->show();
         }
     }
+
+
 
 
 }

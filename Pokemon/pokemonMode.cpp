@@ -73,11 +73,14 @@ void PokemonModePrivate::damage(std::shared_ptr<PokemonBo> pAPokemonBo, std::sha
     }
 
     if (pAPokemonBo->isMyPokemon()) {
+        pAPokemonBo->minusMovePowerPoint(kMoveBo);
         myAttackLog(kMoveBo);
+
     }
     else {
         oppositingAttackLog(kMoveBo);
     }
+
 
     int damage = mpDamageMode->damageCalculate(pAPokemonBo, pBPokemonBo, kMoveBo);
     pBPokemonBo->minusHp(damage);
