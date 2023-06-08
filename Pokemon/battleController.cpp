@@ -2,6 +2,9 @@
 
 #include <string>
 #include <unordered_map>
+#include <iostream>
+
+#include <QMessageBox>
 
 #include "pokemonService.h"
 
@@ -27,7 +30,8 @@ enum class GameState {
     Normal,
     Battle,
     Pokemon,
-    Bag
+    Bag,
+    Fainting
 };
 
 class BattleControllerPrivate :QObject {
@@ -42,6 +46,11 @@ public:
     void hideSelectBagBtn();
     void showSelectBagBtn();
     void updateLog();
+    void myPokemonFaint();
+    void oppositingPokemonFaint();
+    void winOrLose();
+
+
     Ui::PokemonClass* ui;
     std::shared_ptr<PokemonService> mpPokemonService;
     GameState mGameState;
@@ -53,6 +62,57 @@ BattleControllerPrivate::BattleControllerPrivate(Ui::PokemonClass* ui, std::shar
     , mpPokemonService(pPokemonService)
 {
     mPotionSelectNum = 0;
+}
+
+void BattleControllerPrivate::winOrLose() {
+    auto nowStatus = mpPokemonService->isWinOrLose(); // 0 is not yet, 1 is win, 2 is lose
+    if (nowStatus == 1) {
+        QMessageBox::information(nullptr /*parent widget*/, "Battle Result", "Congratulations, you won the battle!");
+        ui->stackedWidget->setCurrentWidget(ui->page_main);
+    }
+    else if (nowStatus == 2) {
+        QMessageBox::information(nullptr /*parent widget*/, "Battle Result", "Unfortunately, you lost the battle. Better luck next time!");
+        ui->stackedWidget->setCurrentWidget(ui->page_main);
+    }
+    else {
+        // The battle is still ongoing. You can choose to do nothing here.
+    }
+}
+
+void BattleControllerPrivate::oppositingPokemonFaint() {
+    if (mpPokemonService->getOppositingPokemonHp() == 0) {
+        mpPokemonService->swapOppositingPokemon();
+    }
+}
+
+void BattleControllerPrivate::myPokemonFaint() {
+    auto pokemonsFaintStatus = mpPokemonService->getPokemonsFaintStatus();
+    auto myPokemonIndex = mpPokemonService->getCurrentPokemonIndex();
+
+    if (pokemonsFaintStatus[0]) {
+        ui->tb_battle_select_pokemon_1->setEnabled(false);
+        if (myPokemonIndex == 0) {
+            showSelectPokemonBtn();
+            hideSceneBtn();
+            mGameState = GameState::Fainting;
+        }
+    }
+    if (pokemonsFaintStatus[1]) {
+        ui->tb_battle_select_pokemon_2->setEnabled(false);
+        if (myPokemonIndex == 1) {
+            showSelectPokemonBtn();
+            hideSceneBtn();
+            mGameState = GameState::Fainting;
+        }
+    }
+    if (pokemonsFaintStatus[2]) {
+        ui->tb_battle_select_pokemon_3->setEnabled(false);
+        if (myPokemonIndex == 2) {
+            showSelectPokemonBtn();
+            hideSceneBtn();
+            mGameState = GameState::Fainting;
+        }
+    }
 }
 
 void BattleControllerPrivate::updateLog() {
@@ -255,8 +315,14 @@ void BattleController::onPBBattleMove1Clicked() {
     mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(0);
     mpPrivate->updateLog();
-    refresh();
     mpPrivate->mGameState = GameState::Normal;
+
+    refresh();
+    mpPrivate->winOrLose();
+    mpPrivate->oppositingPokemonFaint();
+    mpPrivate->myPokemonFaint();
+    refresh();
+
 }
 void BattleController::onPBBattleMove2Clicked() {
     mpPrivate->hideMoveBtn();
@@ -264,8 +330,13 @@ void BattleController::onPBBattleMove2Clicked() {
     mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(1);
     mpPrivate->updateLog();
-    refresh();
     mpPrivate->mGameState = GameState::Normal;
+
+    refresh();
+    mpPrivate->winOrLose();
+    mpPrivate->oppositingPokemonFaint();
+    mpPrivate->myPokemonFaint();
+    refresh();
 }
 void BattleController::onPBBattleMove3Clicked() {
     mpPrivate->hideMoveBtn();
@@ -273,8 +344,13 @@ void BattleController::onPBBattleMove3Clicked() {
     mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(2);
     mpPrivate->updateLog();
-    refresh();
     mpPrivate->mGameState = GameState::Normal;
+
+    refresh();
+    mpPrivate->winOrLose();
+    mpPrivate->oppositingPokemonFaint();
+    mpPrivate->myPokemonFaint();
+    refresh();
 }
 void BattleController::onPBBattleMove4Clicked() {
     mpPrivate->hideMoveBtn();
@@ -282,8 +358,13 @@ void BattleController::onPBBattleMove4Clicked() {
     mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(3);
     mpPrivate->updateLog();
-    refresh();
     mpPrivate->mGameState = GameState::Normal;
+
+    refresh();
+    mpPrivate->winOrLose();
+    mpPrivate->oppositingPokemonFaint();
+    mpPrivate->myPokemonFaint();
+    refresh();
 }
 
 void BattleController::onTBBattleSelectPokemon1Clicked() {
@@ -299,9 +380,19 @@ void BattleController::onTBBattleSelectPokemon1Clicked() {
     else if (mpPrivate->mGameState == GameState::Bag) {
         mpPrivate->mpPokemonService->usePotion(0, mpPrivate->mPotionSelectNum);
     }
-    mpPrivate->updateLog();
-    refresh();
+    else if (mpPrivate->mGameState == GameState::Fainting) {
+        mpPrivate->mpPokemonService->faintingSwapPokemon(0);
+    }
     mpPrivate->mGameState = GameState::Normal;
+
+    refresh();
+    mpPrivate->winOrLose();
+    mpPrivate->oppositingPokemonFaint();
+    mpPrivate->myPokemonFaint();
+    refresh();
+
+    mpPrivate->updateLog();
+
 }
 void BattleController::onTBBattleSelectPokemon2Clicked() {
     ui->pb_battle_back->hide();
@@ -315,9 +406,18 @@ void BattleController::onTBBattleSelectPokemon2Clicked() {
     else if (mpPrivate->mGameState == GameState::Bag) {
         mpPrivate->mpPokemonService->usePotion(1, mpPrivate->mPotionSelectNum);
     }
-    mpPrivate->updateLog();
-    refresh();
+    else if (mpPrivate->mGameState == GameState::Fainting) {
+        mpPrivate->mpPokemonService->faintingSwapPokemon(1);
+    }
     mpPrivate->mGameState = GameState::Normal;
+
+    refresh();
+    mpPrivate->winOrLose();
+    mpPrivate->oppositingPokemonFaint();
+    mpPrivate->myPokemonFaint();
+    refresh();
+
+    mpPrivate->updateLog();
 }
 void BattleController::onTBBattleSelectPokemon3Clicked() {
     ui->pb_battle_back->hide();
@@ -331,9 +431,18 @@ void BattleController::onTBBattleSelectPokemon3Clicked() {
     else if (mpPrivate->mGameState == GameState::Bag) {
         mpPrivate->mpPokemonService->usePotion(2, mpPrivate->mPotionSelectNum);
     }
-    mpPrivate->updateLog();
-    refresh();
+    else if (mpPrivate->mGameState == GameState::Fainting) {
+        mpPrivate->mpPokemonService->faintingSwapPokemon(2);
+    }
     mpPrivate->mGameState = GameState::Normal;
+
+    refresh();
+    mpPrivate->winOrLose();
+    mpPrivate->oppositingPokemonFaint();
+    mpPrivate->myPokemonFaint();
+    refresh();
+
+    mpPrivate->updateLog();
 }
 
 

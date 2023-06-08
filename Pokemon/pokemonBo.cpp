@@ -106,6 +106,10 @@ int PokemonBo::getMaxHp() const {
     return mpPrivate->mMaxHp;
 }
 
+int PokemonBo::getHp() const {
+    return mpPrivate->mPokemonStats.hp;
+}
+
 void PokemonBo::setPokemonAdditionalEffectType(const ADDITIONAL_EFFECT_TYPE& kAdditionalEffectType) {
     mpPrivate->mPokemonAdditionEffectTypeSet.insert(kAdditionalEffectType);
 }

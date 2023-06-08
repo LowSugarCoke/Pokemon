@@ -3,6 +3,7 @@
 #include <random>
 #include <set>
 #include <unordered_map>
+#include <chrono>
 
 #include "pokemonBo.h"
 #include "additionalEffectType.h"
@@ -90,8 +91,8 @@ AdditionalEffectMode::~AdditionalEffectMode() {}
 bool AdditionalEffectMode::unableToMove(std::shared_ptr<PokemonBo> pPokemonBo)const {
 
     if (pPokemonBo->getPokemonAdditionalEffectType().count(ADDITIONAL_EFFECT_TYPE::PAR)) {
-        // create a random number generator
-        std::default_random_engine generator;
+        // create a random number generator with a seed based on the current time
+        std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
         // create a distribution that will generate numbers between 1 and 4
         std::uniform_int_distribution<int> distribution(1, 4);
         // generate a random number
@@ -103,6 +104,7 @@ bool AdditionalEffectMode::unableToMove(std::shared_ptr<PokemonBo> pPokemonBo)co
     }
     return false;
 }
+
 
 void AdditionalEffectMode::additionalDamageAfterBattle(std::shared_ptr<PokemonBo> pPokemonBo) {
     if (pPokemonBo->getPokemonAdditionalEffectType().count(ADDITIONAL_EFFECT_TYPE::BRN)) {

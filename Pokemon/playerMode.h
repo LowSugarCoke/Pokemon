@@ -18,6 +18,9 @@ public:
     void setPokemonBo(std::vector<std::shared_ptr<PokemonBo>> pPokemonBoVec);
     void setOppositingPokemonBo(std::vector<std::shared_ptr<PokemonBo>> pOppositingPokemonBoVec);
 
+    bool faintingSwapPokemon(const int& kPokemonIndex);
+
+    bool swapOppositingPokemon(const int& kPokemonIndex);
     bool swapPokemon(const int& kPokemonIndex);
 
     bool isWin();
@@ -45,6 +48,12 @@ public:
     void usePotion(const int& kPokemonIndex, const int& kPotionIndex);
 
     std::vector<std::string> getPotionsName() const;
+
+    std::vector<bool> getPokemonsFaintStatus() const;
+
+    int isWinOrLose() const;
+
+    int getOppositingPokemonHp() const;
 
 private:
     std::unique_ptr<PlayerModePrivate> mpPrivate;
