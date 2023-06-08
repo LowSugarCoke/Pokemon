@@ -171,7 +171,14 @@ std::vector<std::pair<int, int>> PlayerMode::getOppositingPokemonsHp() const {
     return data;
 }
 
-
+std::set<std::string> PlayerMode::getOppositingPokemonAdditionalEffect() const {
+    std::set<std::string> data;
+    auto currentPokemon = mpPrivate->mpOppositingPokemonBoVec[mpPrivate->mOppositingPokemonIndex];
+    for (auto additionalEffect : currentPokemon->getPokemonAdditionalEffectType()) {
+        data.insert(effectTypeToString(additionalEffect));
+    }
+    return data;
+}
 
 std::set<std::string> PlayerMode::getCurrentPokemonAdditionalEffect() const {
     std::set<std::string> data;

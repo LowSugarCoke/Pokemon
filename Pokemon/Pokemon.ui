@@ -350,7 +350,7 @@ background-color:white;</string>
      <widget class="QLabel" name="lbl_battle_player_pokemon">
       <property name="geometry">
        <rect>
-        <x>370</x>
+        <x>390</x>
         <y>390</y>
         <width>141</width>
         <height>16</height>
@@ -382,7 +382,7 @@ background-color:white;</string>
      <widget class="QLabel" name="lbl_battle_player_pokemon_blood">
       <property name="geometry">
        <rect>
-        <x>440</x>
+        <x>460</x>
         <y>420</y>
         <width>91</width>
         <height>16</height>
@@ -790,6 +790,108 @@ QToolButton:hover { background-color : gray; }
        <string>...</string>
       </property>
      </widget>
+     <widget class="QLabel" name="lbl_battle_opposite_PSN">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>320</y>
+        <width>41</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size:18px;
+color: purple;</string>
+      </property>
+      <property name="text">
+       <string>PSN</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl_battle_pokemon_PSN">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>440</y>
+        <width>41</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size:18px;
+color: purple;</string>
+      </property>
+      <property name="text">
+       <string>PSN</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl_battle_opposite_BAR">
+      <property name="geometry">
+       <rect>
+        <x>630</x>
+        <y>320</y>
+        <width>41</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size:18px;
+color: red;</string>
+      </property>
+      <property name="text">
+       <string>BAR</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl_battle_pokemon_BAR">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>440</y>
+        <width>41</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size:18px;
+color: red;</string>
+      </property>
+      <property name="text">
+       <string>BAR</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl_battle_opposite_PAR">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>320</y>
+        <width>41</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size:18px;
+color: yellow;</string>
+      </property>
+      <property name="text">
+       <string>PAR</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl_battle_pokemon_PAR">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>440</y>
+        <width>41</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size:18px;
+color: yellow;</string>
+      </property>
+      <property name="text">
+       <string>PAR</string>
+      </property>
+     </widget>
      <zorder>text_edit_battle_content</zorder>
      <zorder>pb_battle_back</zorder>
      <zorder>lbl_battle_player_pokemon</zorder>
@@ -819,6 +921,12 @@ QToolButton:hover { background-color : gray; }
      <zorder>tb_battle_select_bag_2</zorder>
      <zorder>tb_battle_select_bag_3</zorder>
      <zorder>tb_battle_select_bag_4</zorder>
+     <zorder>lbl_battle_opposite_PSN</zorder>
+     <zorder>lbl_battle_pokemon_PSN</zorder>
+     <zorder>lbl_battle_opposite_BAR</zorder>
+     <zorder>lbl_battle_pokemon_BAR</zorder>
+     <zorder>lbl_battle_opposite_PAR</zorder>
+     <zorder>lbl_battle_pokemon_PAR</zorder>
     </widget>
    </widget>
   </widget>

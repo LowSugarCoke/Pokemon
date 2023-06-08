@@ -30,6 +30,7 @@ public:
     std::vector<std::pair<int, int>> getOppositingPokemonsHp() const;
     int getOppositingPokemonHp() const;
     std::set<std::string> getCurrentPokemonAdditionalEffect() const;
+    std::set<std::string> getOppositingPokemonAdditionalEffect() const;
     std::string getBattleDailog() const;
     void swapPokemon(const int& kIndex);
     bool faintingSwapPokemon(const int& kPokemonIndex);

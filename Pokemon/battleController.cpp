@@ -8,6 +8,10 @@
 
 #include "pokemonService.h"
 
+const static std::string PSN = "PSN";
+const static std::string BAR = "BAR";
+const static std::string PAR = "PAR";
+
 std::unordered_map<std::string, std::string> pokemonPicMap{
     {"Venusaur",":/Pokemom/Resources/venusaur.png"},
     {"Charizard", ":/Pokemom/Resources/charizard.png"},
@@ -209,6 +213,14 @@ BattleController::BattleController(Ui::PokemonClass* ui, std::shared_ptr<Pokemon
     ui->tb_battle_select_bag_2->hide();
     ui->tb_battle_select_bag_3->hide();
     ui->tb_battle_select_bag_4->hide();
+
+    ui->lbl_battle_opposite_PSN->hide();
+    ui->lbl_battle_opposite_BAR->hide();
+    ui->lbl_battle_opposite_PAR->hide();
+
+    ui->lbl_battle_pokemon_PAR->hide();
+    ui->lbl_battle_pokemon_BAR->hide();
+    ui->lbl_battle_pokemon_PSN->hide();
 }
 
 void BattleController::connection() {
@@ -493,7 +505,37 @@ void BattleController::refresh() {
     ui->pb_battle_move_3->setText(QString::fromStdString(myPokemonMoves[2]));
     ui->pb_battle_move_4->setText(QString::fromStdString(myPokemonMoves[3]));
 
+    ui->lbl_battle_pokemon_PSN->hide();
+    ui->lbl_battle_pokemon_BAR->hide();
+    ui->lbl_battle_pokemon_PAR->hide();
+    auto additionalEffect = mpPrivate->mpPokemonService->getCurrentPokemonAdditionalEffect();
+    for (auto& effect : additionalEffect) {
+        if (effect == PSN) {
+            ui->lbl_battle_pokemon_PSN->show();
+        }
+        else if (effect == BAR) {
+            ui->lbl_battle_pokemon_BAR->show();
+        }
+        else if (effect == PAR) {
+            ui->lbl_battle_pokemon_PAR->show();
+        }
+    }
 
+    ui->lbl_battle_opposite_PSN->hide();
+    ui->lbl_battle_opposite_BAR->hide();
+    ui->lbl_battle_opposite_PAR->hide();
+    auto oppositingAdditionalEffect = mpPrivate->mpPokemonService->getOppositingPokemonAdditionalEffect();
+    for (auto& effect : oppositingAdditionalEffect) {
+        if (effect == PSN) {
+            ui->lbl_battle_opposite_PSN->show();
+        }
+        else if (effect == BAR) {
+            ui->lbl_battle_opposite_BAR->show();
+        }
+        else if (effect == PAR) {
+            ui->lbl_battle_opposite_PAR->show();
+        }
+    }
 
 }
 
