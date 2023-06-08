@@ -126,6 +126,10 @@ std::set<std::string> PokemonService::getCurrentPokemonAdditionalEffect() const 
     return mpPrivate->mpPlayerMode->getCurrentPokemonAdditionalEffect();
 }
 
+std::set<std::string> PokemonService::getOppositingPokemonAdditionalEffect() const {
+    return mpPrivate->mpPlayerMode->getOppositingPokemonAdditionalEffect();
+}
+
 std::string PokemonService::getBattleDailog() const {
     return mpPrivate->mLogger.getLog();
 }

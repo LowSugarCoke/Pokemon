@@ -37,6 +37,7 @@ public:
 
 
     std::set<std::string> getCurrentPokemonAdditionalEffect() const;
+    std::set<std::string> getOppositingPokemonAdditionalEffect() const;
 
     int getCurrentPokemonIndex() const;
     int getOppositingPokemonIndex() const;
