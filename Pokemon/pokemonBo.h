@@ -56,6 +56,8 @@ public:
     void reduceHalfSpeed();
     void checkToMyPokemon(const bool& kMyPokemon);
     bool isMyPokemon() const;
+    void minusMovePowerPoint(const MoveBo& kMoveBo);
+    std::vector<int> getMaxPowerPoint() const;
 private:
     std::unique_ptr<PokemonBoPrivate> mpPrivate;
 };

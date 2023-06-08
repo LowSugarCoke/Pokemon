@@ -276,3 +276,18 @@ std::vector<std::string> PlayerMode::getCurrentPokemonMoveTypes() const {
     }
     return data;
 }
+
+
+std::vector<int> PlayerMode::getCurrentPokemonPowerPoints() const {
+    std::vector<int> data;
+    auto pokemon = mpPrivate->mpPokemonBoVec[mpPrivate->mPokemonIndex];
+    auto moveBos = pokemon->getMoveBos();
+    for (auto move : moveBos) {
+        data.push_back(move.stats.powerPoint);
+    }
+    return data;
+}
+
+std::vector<int> PlayerMode::getCurrentPokemonMaxPowerPoints() const {
+    return   mpPrivate->mpPokemonBoVec[mpPrivate->mPokemonIndex]->getMaxPowerPoint();
+}
