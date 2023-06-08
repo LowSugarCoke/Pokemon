@@ -7,7 +7,7 @@
 #include "pokemonTypeChart.h"
 #include "pokemonLogger.h"
 
-const int kLevel = 50;
+const float kLevel = 50.0;
 
 class DamageModePrivate {
 public:
@@ -131,7 +131,7 @@ int DamageMode::damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::sh
     float STAB = mpPrivate->getSameTypeAttackBonus(kMoveBo, pMyPokemonBo);
     float type = mpPrivate->getType(kMoveBo, pTargetPokemonBo);
 
-    damage = (((2 * kLevel + 10) / 250) * power * (atack / defence) + 2) * critical * STAB * type * 10;
+    damage = (((2.0 * kLevel + 10.0) / 250.0) * power * (atack / defence) + 2) * critical * STAB * type;
 
     mpPrivate->typeLog(type);
 
