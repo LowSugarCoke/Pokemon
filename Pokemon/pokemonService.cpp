@@ -188,3 +188,8 @@ bool PokemonService::swapOppositingPokemon() {
 int PokemonService::getOppositingPokemonHp() const {
     return mpPrivate->mpPlayerMode->getOppositingPokemonHp();
 }
+
+
+std::vector<std::string> PokemonService::getCurrentPokemonMoveTypes() const {
+    return mpPrivate->mpPlayerMode->getCurrentPokemonMoveTypes();
+}
