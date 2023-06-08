@@ -18,7 +18,7 @@ public:
 
     void additionalDamageAfterBattle(std::shared_ptr<PokemonBo> pPokemonBo);
 
-
+    void setTest();
 private:
     std::unique_ptr<AdditionalEffectModePrivate> mpPrivate;
 };

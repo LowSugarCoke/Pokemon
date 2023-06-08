@@ -103,6 +103,8 @@
     <ClCompile Include="pokemonDataParser.cpp" />
     <ClCompile Include="pokemonBo.cpp" />
     <ClCompile Include="potionMode.cpp" />
+    <ClCompile Include="testDataDao.cpp" />
+    <ClCompile Include="testDataParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Pokemon.h" />
@@ -143,6 +145,8 @@
     <ClInclude Include="pokemonStats.h" />
     <ClInclude Include="pokemonTypeChart.h" />
     <ClInclude Include="potionMode.h" />
+    <ClInclude Include="testDataDao.h" />
+    <ClInclude Include="testDataParser.h" />
     <ClInclude Include="type.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

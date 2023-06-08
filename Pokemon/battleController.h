@@ -16,11 +16,11 @@ public:
     BattleController(Ui::PokemonClass* ui, std::shared_ptr<PokemonService> pPokemonService, QObject* parent = nullptr);
     void refresh();
 
+
 private:
     Ui::PokemonClass* ui;
     std::unique_ptr< BattleControllerPrivate> mpPrivate;
     void connection();
-
 
 private slots:
     void onPBBattleBattleClicked();

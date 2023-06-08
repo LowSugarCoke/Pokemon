@@ -148,3 +148,13 @@ void PokemonBo::minusMovePowerPoint(const MoveBo& kMoveBo) {
 std::vector<int> PokemonBo::getMaxPowerPoint() const {
     return mpPrivate->mMaxPowerPoints;
 }
+
+
+int PokemonBo::findMoveIndexByName(const std::string& kMoveName) const {
+    auto moveBos = mpPrivate->mMoveBoVec;
+    for (int i = 0; i < moveBos.size(); i++) {
+        if (moveBos[i].name == kMoveName) {
+            return i;
+        }
+    }
+}

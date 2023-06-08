@@ -58,6 +58,7 @@ public:
     bool isMyPokemon() const;
     void minusMovePowerPoint(const MoveBo& kMoveBo);
     std::vector<int> getMaxPowerPoint() const;
+    int findMoveIndexByName(const std::string& kMoveName) const;
 private:
     std::unique_ptr<PokemonBoPrivate> mpPrivate;
 };

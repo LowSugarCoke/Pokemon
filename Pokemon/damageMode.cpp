@@ -19,11 +19,14 @@ public:
     float getDefense(const MoveBo& kMoveBo, std::shared_ptr<PokemonBo> pPokemonBo);
     void typeLog(const float& kType);
     PokemonLogger& mLogger;
-
+    bool mIsTest;
 };
 DamageModePrivate::DamageModePrivate()
     : mLogger(PokemonLogger::getInstance())
-{}
+    , mIsTest(false)
+{
+
+}
 
 void DamageModePrivate::typeLog(const float& kType) {
     static const float epsilon = 0.001; // Set this to a suitable value
@@ -39,6 +42,9 @@ void DamageModePrivate::typeLog(const float& kType) {
 }
 
 float DamageModePrivate::getCriticalRandom() {
+    if (mIsTest) {
+        return 1.0;
+    }
     std::random_device rd;  // Will be used to obtain a seed for the random number engine
     std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
     std::uniform_int_distribution<> distrib(1, 10);
@@ -46,6 +52,7 @@ float DamageModePrivate::getCriticalRandom() {
     int randomNumber = distrib(gen);
 
     if (randomNumber == 1) {
+        mLogger.log("A critical hit!");
         return 1.5;
     }
     else {
@@ -131,15 +138,18 @@ int DamageMode::damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::sh
     float STAB = mpPrivate->getSameTypeAttackBonus(kMoveBo, pMyPokemonBo);
     float type = mpPrivate->getType(kMoveBo, pTargetPokemonBo);
 
-    damage = (((2.0 * kLevel + 10.0) / 250.0) * power * (atack / defence) + 2) * critical * STAB * type;
+    damage = (((2.0 * kLevel + 10.0) / 250.0) * power * (atack / defence) + 2.0) * critical * STAB * type;
 
     mpPrivate->typeLog(type);
 
-    return static_cast<int>(damage);
+    return std::round(damage);
 }
 
 
 bool DamageMode::isMissing(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const MoveBo& kMoveBo) {
+    if (mpPrivate->mIsTest) {
+        return false;
+    }
     auto accuracy = kMoveBo.stats.accuracy;
     auto targetSpeed = pTargetPokemonBo->getPokemonStats().speed;
 
@@ -153,4 +163,9 @@ bool DamageMode::isMissing(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_
 
     // Generate a random number and check if it is less than dodgeChance
     return dist(rng) < dodgeChance;
+}
+
+
+void DamageMode::setTest() {
+    mpPrivate->mIsTest = true;
 }

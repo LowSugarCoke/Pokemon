@@ -8,6 +8,7 @@
 #include "moveDao.h"
 #include "gameDao.h"
 #include "pokemonDao.h"
+#include "testDataDao.h"
 #include "pokemonBo.h"
 #include "playerMode.h"
 #include "pokemonMode.h"
@@ -16,6 +17,7 @@
 #include "moveDataParser.h"
 #include "gameDataParser.h"
 #include "pokemonDataParser.h"
+#include "testDataParser.h"
 #include "pokemonService.h"
 #include "damageMode.h"
 #include "additionalEffectMode.h"
@@ -33,22 +35,13 @@ Pokemon::Pokemon(QWidget* parent)
     mpMainController->setBattleRefreshCallback([&]() {mpBattleController->refresh(); });
     mpBattleController = std::make_unique<BattleController>(&ui, mpPokemonService, this);
 
-    mpMainController->test();
+
+
+    //mpMainController->test();
 
 
     PokemonLogger& logger = PokemonLogger::getInstance();
-    /*logger.debug("Hello world");*/
 
-    /*    std::string moveFilePath = "MoveLib.txt";
-        std::string pokemonFilePath = "PokemonLib.txt";
-        std::string gameFilePath = "GameData.txt";
-
-        mpPokemonService->loadData(moveFilePath, pokemonFilePath, gameFilePath);
-
-        //mpPokemonService->swapPokemon(1);
-
-        mpPokemonService->battle(0);
-        std::cout << mpPokemonService->getBattleDailog() << std::endl;*/
 }
 
 
@@ -63,6 +56,9 @@ void Pokemon::init() {
     auto pPokemonDataParser = std::make_shared<PokemonDataParser>();
     auto pPokemonDao = std::make_shared <PokemonDao>(pFileReader, pPokemonDataParser);
 
+    auto pTestDataParser = std::make_shared<TestDataParser>();
+    auto pTestDataDao = std::make_shared<TestDataDao>(pFileReader, pTestDataParser);
+
     auto pDamageMode = std::make_shared<DamageMode>();
     auto pAdditionalEffectMode = std::make_shared<AdditionalEffectMode>();
     auto pPotionMode = std::make_shared<PotionMode>();
@@ -70,5 +66,5 @@ void Pokemon::init() {
 
     auto pPlayerMode = std::make_shared<PlayerMode>(pPokemonMode);
 
-    mpPokemonService = std::make_shared<PokemonService>(pMoveDao, pGameDao, pPokemonDao, pPlayerMode);
+    mpPokemonService = std::make_shared<PokemonService>(pMoveDao, pGameDao, pPokemonDao, pTestDataDao, pPlayerMode);
 }

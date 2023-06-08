@@ -21,12 +21,17 @@ public:
     void missingLog(std::shared_ptr<PokemonBo> mpOppositingPokemonBo);
     void paralyzedLog(std::shared_ptr<PokemonBo> pPokemonBo);
 
+
+
     std::shared_ptr<PokemonBo> mpPokemonBo;
     std::shared_ptr<PokemonBo> mpOppositingPokemonBo;
     std::shared_ptr<DamageMode> mpDamageMode;
     std::shared_ptr<AdditionalEffectMode> mpAdditionalEffectMode;
     std::shared_ptr<PotionMode> mpPotionMode;
     PokemonLogger& mLogger;
+
+    bool mIsTest;
+    bool mIsLastOppositePokemon;
 };
 
 PokemonModePrivate::PokemonModePrivate(std::shared_ptr<DamageMode> pDamageMode,
@@ -35,16 +40,18 @@ PokemonModePrivate::PokemonModePrivate(std::shared_ptr<DamageMode> pDamageMode,
     :mpDamageMode(pDamageMode)
     , mpAdditionalEffectMode(pAdditionalEffectMode)
     , mpPotionMode(pPotionMode)
+    , mIsTest(false)
+    , mIsLastOppositePokemon(false)
     , mLogger(PokemonLogger::getInstance())
 {
 
 }
 
-
 void PokemonModePrivate::myAttackLog(const MoveBo& kMoveBo) {
     auto name = mpPokemonBo->getName();
     mLogger.log(name + " used " + kMoveBo.name + "!");
 }
+
 void PokemonModePrivate::oppositingAttackLog(const MoveBo& kMoveBo) {
     auto name = mpOppositingPokemonBo->getName();
     mLogger.log("The opposing " + name + " used " + kMoveBo.name + "!");
@@ -63,19 +70,19 @@ void PokemonModePrivate::paralyzedLog(std::shared_ptr<PokemonBo> pPokemonBo) {
 
 
 void PokemonModePrivate::damage(std::shared_ptr<PokemonBo> pAPokemonBo, std::shared_ptr<PokemonBo> pBPokemonBo, const MoveBo& kMoveBo) {
+
     if (mpDamageMode->isMissing(pAPokemonBo, pBPokemonBo, kMoveBo)) {
         missingLog(pBPokemonBo);
         return;
     }
 
     if (mpAdditionalEffectMode->unableToMove(pAPokemonBo)) {
+        paralyzedLog(pAPokemonBo);
         return;
     }
 
     if (pAPokemonBo->isMyPokemon()) {
-        pAPokemonBo->minusMovePowerPoint(kMoveBo);
         myAttackLog(kMoveBo);
-
     }
     else {
         oppositingAttackLog(kMoveBo);
@@ -127,16 +134,40 @@ void PokemonMode::setOppositingPokemon(std::shared_ptr<PokemonBo> pOppositingPok
     mpPrivate->mpOppositingPokemonBo = pOppositingPokemon;
 }
 
-void PokemonMode::nextRound(const int& kMoveIndex) {
-    auto oppositingMove = mpPrivate->getRandomMoveBo(mpPrivate->mpOppositingPokemonBo);
+void PokemonMode::nextRound(const int& kMoveIndex, const int& kOppositeIndex) {
+
+    MoveBo oppositingMove;
+    if (!mpPrivate->mIsTest) {
+        oppositingMove = mpPrivate->getRandomMoveBo(mpPrivate->mpOppositingPokemonBo);
+    }
+    else {
+        oppositingMove = mpPrivate->mpOppositingPokemonBo->findMoveBoByIndex(kOppositeIndex);
+    }
+
     auto moveBo = mpPrivate->mpPokemonBo->findMoveBoByIndex(kMoveIndex);
 
-    if (mpPrivate->mpPokemonBo->getPokemonStats().speed > mpPrivate->mpOppositingPokemonBo->getPokemonStats().speed) {
+    mpPrivate->mpPokemonBo->minusMovePowerPoint(moveBo);
+
+    if (mpPrivate->mpPokemonBo->getPokemonStats().speed >= mpPrivate->mpOppositingPokemonBo->getPokemonStats().speed) {
         mpPrivate->damage(mpPrivate->mpPokemonBo, mpPrivate->mpOppositingPokemonBo, moveBo);
+        if (mpPrivate->mpOppositingPokemonBo->isFainting()) {
+            mpPrivate->mLogger.log("The opposing " + mpPrivate->mpOppositingPokemonBo->getName() + " fainted!");
+            if (!mpPrivate->mIsLastOppositePokemon) {
+                mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpPokemonBo);
+                mpPrivate->mLogger.addTurn();
+            }
+
+            return;
+        }
         mpPrivate->damage(mpPrivate->mpOppositingPokemonBo, mpPrivate->mpPokemonBo, oppositingMove);
     }
     else {
         mpPrivate->damage(mpPrivate->mpOppositingPokemonBo, mpPrivate->mpPokemonBo, oppositingMove);
+        if (mpPrivate->mpPokemonBo->isFainting()) {
+            mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpOppositingPokemonBo);
+            mpPrivate->mLogger.addTurn();
+            return;
+        }
         mpPrivate->damage(mpPrivate->mpPokemonBo, mpPrivate->mpOppositingPokemonBo, moveBo);
     }
     mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpPokemonBo);
@@ -145,9 +176,16 @@ void PokemonMode::nextRound(const int& kMoveIndex) {
     mpPrivate->mLogger.addTurn();
 }
 
+void PokemonMode::nextRoundWithoutAttack(const int& kOppositingIndex) {
 
-void PokemonMode::nextRoundWithoutAttack() {
-    auto oppositingMove = mpPrivate->getRandomMoveBo(mpPrivate->mpOppositingPokemonBo);
+    MoveBo oppositingMove;
+    if (!mpPrivate->mIsTest) {
+        oppositingMove = mpPrivate->getRandomMoveBo(mpPrivate->mpOppositingPokemonBo);
+    }
+    else {
+        oppositingMove = mpPrivate->mpOppositingPokemonBo->findMoveBoByIndex(kOppositingIndex);
+    }
+
     mpPrivate->damage(mpPrivate->mpOppositingPokemonBo, mpPrivate->mpPokemonBo, oppositingMove);
     mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpPokemonBo);
     mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpOppositingPokemonBo);
@@ -162,4 +200,14 @@ void PokemonMode::usePotion(std::shared_ptr<PokemonBo> pPokemonBo, const int& kP
 
 std::vector<std::string> PokemonMode::getPotionsName() const {
     return mpPrivate->mpPotionMode->getPotionsName();
+}
+
+void PokemonMode::setTest() {
+    mpPrivate->mpDamageMode->setTest();
+    mpPrivate->mpAdditionalEffectMode->setTest();
+    mpPrivate->mIsTest = true;
+}
+
+void PokemonMode::setLastOppositePokemon() {
+    mpPrivate->mIsLastOppositePokemon = true;
 }

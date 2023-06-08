@@ -1,8 +1,21 @@
 #include "playerMode.h"
 
+#include <unordered_map>
+#include <QString>
+
 #include "pokemonBo.h"
 #include "pokemonMode.h"
 #include "pokemonLogger.h"
+#include "additionalEffectType.h"
+
+
+
+static  std::unordered_map<std::string, int> convertPotionToIndexMap{
+    {"Potion", 0},
+    {"SuperPotion", 1},
+    {"HyperPotion", 2},
+    {"MaxPotion", 3},
+};
 
 class PlayerModePrivate {
 public:
@@ -18,7 +31,18 @@ public:
     PokemonLogger& mLogger;
     int mPokemonIndex;
     int mOppositingPokemonIndex;
+    bool mIsTest;
+    int findPokemonIndexByName(const std::string& kPokemonName) const;
+    std::shared_ptr<PokemonBo> findPokemonBoByName(const std::string& kPokemonName) const;
 };
+
+int PlayerModePrivate::findPokemonIndexByName(const std::string& kPokemonName) const {
+    for (int i = 0; i < mpPokemonBoVec.size(); i++) {
+        if (mpPokemonBoVec[i]->getName() == kPokemonName) {
+            return i;
+        }
+    }
+}
 
 PlayerModePrivate::PlayerModePrivate(std::shared_ptr<PokemonMode> pPokemonMode)
     :mpPokemonMode(pPokemonMode)
@@ -39,6 +63,15 @@ void PlayerModePrivate::swapAfterLog() {
     mLogger.log("Go! " + name + "!");
 }
 
+
+std::shared_ptr<PokemonBo> PlayerModePrivate::findPokemonBoByName(const std::string& kPokemonName) const {
+    for (int i = 0; i < mpPokemonBoVec.size(); i++) {
+        if (mpPokemonBoVec[i]->getName() == kPokemonName) {
+            return mpPokemonBoVec[i];
+        }
+    }
+
+}
 
 
 PlayerMode::PlayerMode(std::shared_ptr<PokemonMode> pPokemonMode)
@@ -107,20 +140,13 @@ bool PlayerMode::swapOppositingPokemon(const int& kPokemonIndex) {
 
     mpPrivate->mOppositingPokemonIndex = kPokemonIndex;
     mpPrivate->mpPokemonMode->setOppositingPokemon(mpPrivate->mpOppositingPokemonBoVec[mpPrivate->mOppositingPokemonIndex]);
-}
-
-
-bool PlayerMode::isWin() {
-    auto pokemonBoVec = mpPrivate->mpPokemonBoVec;
-    int num = 0;
-    for (int i = 0; i < pokemonBoVec.size(); i++) {
-        if (pokemonBoVec[i]->isFainting()) {
-            num++;
-        }
+    if (kPokemonIndex == 2) {
+        mpPrivate->mpPokemonMode->setLastOppositePokemon();
     }
-
-    return num == pokemonBoVec.size();
 }
+
+
+
 
 
 std::vector<std::string> PlayerMode::getPokemonsName() const {
@@ -189,8 +215,23 @@ std::set<std::string> PlayerMode::getCurrentPokemonAdditionalEffect() const {
     return data;
 }
 
-void PlayerMode::battle(const int& kMoveIndex) {
-    mpPrivate->mpPokemonMode->nextRound(kMoveIndex);
+void PlayerMode::battle(const int& kMoveIndex, const int& kOppositeIndex) {
+    if (!mpPrivate->mIsTest) {
+        mpPrivate->mpPokemonMode->nextRound(kMoveIndex);
+    }
+    else {
+        mpPrivate->mpPokemonMode->nextRound(kMoveIndex, kOppositeIndex);
+    }
+    if (mpPrivate->mpOppositingPokemonBoVec[mpPrivate->mOppositingPokemonIndex]->isFainting()) {
+        swapOppositingPokemon(mpPrivate->mOppositingPokemonIndex + 1);
+    }
+    if (isWinOrLose() == 1) {
+        mpPrivate->mLogger.log("You win");
+    }
+    else if (isWinOrLose() == 2) {
+        mpPrivate->mLogger.log("You lose");
+    }
+
 }
 
 
@@ -289,5 +330,95 @@ std::vector<int> PlayerMode::getCurrentPokemonPowerPoints() const {
 }
 
 std::vector<int> PlayerMode::getCurrentPokemonMaxPowerPoints() const {
-    return   mpPrivate->mpPokemonBoVec[mpPrivate->mPokemonIndex]->getMaxPowerPoint();
+    return mpPrivate->mpPokemonBoVec[mpPrivate->mPokemonIndex]->getMaxPowerPoint();
+}
+
+
+void PlayerMode::setTest() {
+    mpPrivate->mpPokemonMode->setTest();
+    mpPrivate->mIsTest = true;
+}
+
+void PlayerMode::runTest(const std::vector<std::string>& kTestData) {
+    for (int i = 0; i < kTestData.size(); i++) {
+        if (mpPrivate->mpOppositingPokemonBoVec[mpPrivate->mOppositingPokemonIndex]->isFainting()) {
+            swapOppositingPokemon(mpPrivate->mOppositingPokemonIndex + 1);
+        }
+
+        if (kTestData[i] == "Battle") {
+            i++;
+            auto myMoveIndex = mpPrivate->mpPokemonBoVec[mpPrivate->mPokemonIndex]->findMoveIndexByName(kTestData[i]);
+            i++;
+            auto oppositeMoveIndex = mpPrivate->mpOppositingPokemonBoVec[mpPrivate->mOppositingPokemonIndex]->findMoveIndexByName(kTestData[i]);
+            mpPrivate->mpPokemonMode->nextRound(myMoveIndex, oppositeMoveIndex);
+        }
+        else if (kTestData[i] == "Bag") {
+            i++;
+            auto potionIndex = convertPotionToIndexMap[kTestData[i]];
+            i++;
+            auto pokemonBo = mpPrivate->findPokemonBoByName(kTestData[i]);
+            mpPrivate->mpPokemonMode->usePotion(pokemonBo, potionIndex);
+            i++;
+            auto oppositeMoveIndex = mpPrivate->mpOppositingPokemonBoVec[mpPrivate->mOppositingPokemonIndex]->findMoveIndexByName(kTestData[i]);
+            mpPrivate->mpPokemonMode->nextRoundWithoutAttack(oppositeMoveIndex);
+        }
+        else if (kTestData[i] == "Pokemon") {
+            i++;
+            auto pokemonIndex = mpPrivate->findPokemonIndexByName(kTestData[i]);
+
+            if (mpPrivate->mpPokemonBoVec[pokemonIndex]->isFainting()) {
+                continue;
+            }
+
+            mpPrivate->swapBeforeLog();
+            mpPrivate->mPokemonIndex = pokemonIndex;
+            mpPrivate->mpPokemonMode->setMyPokemon(mpPrivate->mpPokemonBoVec[mpPrivate->mPokemonIndex]);
+            mpPrivate->swapAfterLog();
+
+            i++;
+            auto oppositeMoveIndex = mpPrivate->mpOppositingPokemonBoVec[mpPrivate->mOppositingPokemonIndex]->findMoveIndexByName(kTestData[i]);
+            mpPrivate->mpPokemonMode->nextRoundWithoutAttack(oppositeMoveIndex);
+
+        }
+        else if (kTestData[i] == "Status") {
+            auto myPokemon = mpPrivate->mpPokemonBoVec[mpPrivate->mPokemonIndex];
+            auto name = myPokemon->getName();
+            auto myHp = myPokemon->getHp();
+            auto effect = myPokemon->getPokemonAdditionalEffectType();
+            std::string effectStr = "";
+            for (auto& e : effect) {
+                effectStr += effectTypeToString(e);
+            }
+
+            auto oppositePokemon = mpPrivate->mpOppositingPokemonBoVec[mpPrivate->mOppositingPokemonIndex];
+            auto oppositeName = oppositePokemon->getName();
+            auto oppositeHp = oppositePokemon->getHp();
+            auto oppositeEffect = oppositePokemon->getPokemonAdditionalEffectType();
+            std::string oppositeEffectStr = "";
+            for (auto& e : oppositeEffect) {
+                oppositeEffectStr += effectTypeToString(e);
+            }
+            std::string mes = name + " " + std::to_string(myHp) + " " + effectStr + " " + oppositeName + " " + std::to_string(oppositeHp) + " " + oppositeEffectStr;
+            mpPrivate->mLogger.log(mes);
+
+
+        }
+        else if (kTestData[i] == "Check") {
+            auto myPokemon = mpPrivate->mpPokemonBoVec[mpPrivate->mPokemonIndex];
+            auto moveBos = myPokemon->getMoveBos();
+            std::string meg = "";
+            for (int i = 0; i < moveBos.size(); i++) {
+                meg += moveBos[i].name + " " + std::to_string(moveBos[i].stats.powerPoint) + " ";
+            }
+            mpPrivate->mLogger.log(meg);
+        }
+
+    }
+
+    if (isWinOrLose() == 1) {
+        mpPrivate->mLogger.log("You win");
+    }
+    else if (isWinOrLose() == 2) {
+        mpPrivate->mLogger.log("You lose");
+    }
 }
