@@ -78,7 +78,7 @@ bool PlayerMode::swapPokemon(const int& kPokemonIndex) {
     mpPrivate->swapAfterLog();
 
 
-    // mpPrivate->mpPokemonMode->nextRoundWithoutAttack();
+    mpPrivate->mpPokemonMode->nextRoundWithoutAttack();
 }
 
 
@@ -178,8 +178,8 @@ std::vector<std::string> PlayerMode::getCurrentPokemonMoves() const {
 }
 
 
-void PlayerMode::usePotion(const int& kPotionIndex) {
-    mpPrivate->mpPokemonMode->usePotion(kPotionIndex);
+void PlayerMode::usePotion(const int& kPokemonIndex, const int& kPotionIndex) {
+    mpPrivate->mpPokemonMode->usePotion(mpPrivate->mpPokemonBoVec[kPokemonIndex], kPotionIndex);
     mpPrivate->mpPokemonMode->nextRoundWithoutAttack();
 }
 

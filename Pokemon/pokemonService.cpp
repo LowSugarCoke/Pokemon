@@ -136,7 +136,6 @@ void PokemonService::swapPokemon(const int& kIndex) {
 
 void PokemonService::battle(const int& kMoveIndex) {
     mpPrivate->mpPlayerMode->battle(kMoveIndex);
-    mpPrivate->mLogger.addTurn();
 }
 
 int PokemonService::getCurrentPokemonIndex() const {
@@ -153,8 +152,8 @@ std::vector<std::string> PokemonService::getCurrentPokemonMoves()const {
     return mpPrivate->mpPlayerMode->getCurrentPokemonMoves();
 }
 
-void PokemonService::usePotion(const int& kPotionIndex) {
-    mpPrivate->mpPlayerMode->usePotion(kPotionIndex);
+void PokemonService::usePotion(const int& kPokemonIndex, const int& kPotionIndex) {
+    mpPrivate->mpPlayerMode->usePotion(kPokemonIndex, kPotionIndex);
 }
 
 

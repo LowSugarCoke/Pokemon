@@ -119,9 +119,6 @@ PokemonMode::~PokemonMode() {
 
 void PokemonMode::setMyPokemon(std::shared_ptr<PokemonBo> pMyPokemon) {
     mpPrivate->mpPokemonBo = pMyPokemon;
-    mpPrivate->mpPotionMode->setAddHPCallBack([&](const int& kHp) {
-        mpPrivate->mpPokemonBo->addHp(kHp);
-        });
 }
 void PokemonMode::setOppositingPokemon(std::shared_ptr<PokemonBo> pOppositingPokemon) {
     mpPrivate->mpOppositingPokemonBo = pOppositingPokemon;
@@ -141,6 +138,8 @@ void PokemonMode::nextRound(const int& kMoveIndex) {
     }
     mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpPokemonBo);
     mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpOppositingPokemonBo);
+
+    mpPrivate->mLogger.addTurn();
 }
 
 
@@ -149,10 +148,13 @@ void PokemonMode::nextRoundWithoutAttack() {
     mpPrivate->damage(mpPrivate->mpOppositingPokemonBo, mpPrivate->mpPokemonBo, oppositingMove);
     mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpPokemonBo);
     mpPrivate->mpAdditionalEffectMode->additionalDamageAfterBattle(mpPrivate->mpOppositingPokemonBo);
+
+    mpPrivate->mLogger.addTurn();
 }
 
-void PokemonMode::usePotion(const int& kPotionIndex) {
-    mpPrivate->mpPotionMode->usePotion(kPotionIndex);
+void PokemonMode::usePotion(std::shared_ptr<PokemonBo> pPokemonBo, const int& kPotionIndex) {
+    mpPrivate->mpPotionMode->addHp(pPokemonBo, kPotionIndex);
+
 }
 
 std::vector<std::string> PokemonMode::getPotionsName() const {
