@@ -265,3 +265,14 @@ int PlayerMode::isWinOrLose() const {
 int PlayerMode::getOppositingPokemonHp() const {
     return mpPrivate->mpOppositingPokemonBoVec[mpPrivate->mOppositingPokemonIndex]->getHp();
 }
+
+
+std::vector<std::string> PlayerMode::getCurrentPokemonMoveTypes() const {
+    std::vector<std::string> data;
+    auto pokemon = mpPrivate->mpPokemonBoVec[mpPrivate->mPokemonIndex];
+    auto moveBo = pokemon->getMoveBos();
+    for (auto move : moveBo) {
+        data.push_back(reverseTypeMap[move.type]);
+    }
+    return data;
+}

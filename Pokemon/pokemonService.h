@@ -43,6 +43,7 @@ public:
     std::vector<bool> getPokemonsFaintStatus() const;
     int isWinOrLose() const; // 0 is not yet, 1 is win, 2 is lose
 
+    std::vector<std::string> getCurrentPokemonMoveTypes() const;
 
 private:
     std::unique_ptr<PokemonServicePrivate> mpPrivate;

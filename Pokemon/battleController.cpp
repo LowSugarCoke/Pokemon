@@ -30,6 +30,20 @@ std::unordered_map<std::string, std::string> potionPicMap{
     {"Max Potion", ":/Pokemom/Resources/max-potion.png"}
 };
 
+std::unordered_map<std::string, std::string> typePicMap{
+    {"Fire", ":/Pokemom/Resources/type-fire.png"},
+    {"Water", ":/Pokemom/Resources/type-water.png"},
+    {"Grass", ":/Pokemom/Resources/type-grass.png"},
+    {"Poison", ":/Pokemom/Resources/type-poison.png"},
+    {"Flying", ":/Pokemom/Resources/type-flying.png"},
+    {"Dragon", ":/Pokemom/Resources/type-dragon.png"},
+    {"Steel", ":/Pokemom/Resources/type-steel.png"},
+};
+
+std::string pokemonBallLive = ":/Pokemom/Resources/ball.png";
+std::string pokemonBallFaint = ":/Pokemom/Resources/ball-gray.png";
+
+
 enum class GameState {
     Normal,
     Battle,
@@ -53,7 +67,8 @@ public:
     void myPokemonFaint();
     void oppositingPokemonFaint();
     void winOrLose();
-
+    void showType();
+    void hideType();
 
     Ui::PokemonClass* ui;
     std::shared_ptr<PokemonService> mpPokemonService;
@@ -85,7 +100,24 @@ void BattleControllerPrivate::winOrLose() {
 
 void BattleControllerPrivate::oppositingPokemonFaint() {
     if (mpPokemonService->getOppositingPokemonHp() == 0) {
+
+        auto oppositingPokemonIndex = mpPokemonService->getCurrentOppositingPokemonIndex();
+
+        QPixmap pixmap1(QString::fromStdString(pokemonBallFaint));
+        pixmap1 = pixmap1.scaled(ui->lbl_battle_ball_opposite_1->size(), Qt::KeepAspectRatio);
+        if (oppositingPokemonIndex == 0) {
+            ui->lbl_battle_ball_opposite_1->setPixmap(pixmap1);
+        }
+        else if (oppositingPokemonIndex == 1) {
+            ui->lbl_battle_ball_opposite_2->setPixmap(pixmap1);
+        }
+        else {
+            ui->lbl_battle_ball_opposite_3->setPixmap(pixmap1);
+        }
+
         mpPokemonService->swapOppositingPokemon();
+
+
     }
 }
 
@@ -99,6 +131,10 @@ void BattleControllerPrivate::myPokemonFaint() {
             showSelectPokemonBtn();
             hideSceneBtn();
             mGameState = GameState::Fainting;
+
+            QPixmap pixmap1(QString::fromStdString(pokemonBallFaint));
+            pixmap1 = pixmap1.scaled(ui->lbl_battle_ball_pokemon_1->size(), Qt::KeepAspectRatio);
+            ui->lbl_battle_ball_pokemon_1->setPixmap(pixmap1);
         }
     }
     if (pokemonsFaintStatus[1]) {
@@ -107,6 +143,10 @@ void BattleControllerPrivate::myPokemonFaint() {
             showSelectPokemonBtn();
             hideSceneBtn();
             mGameState = GameState::Fainting;
+
+            QPixmap pixmap1(QString::fromStdString(pokemonBallFaint));
+            pixmap1 = pixmap1.scaled(ui->lbl_battle_ball_pokemon_2->size(), Qt::KeepAspectRatio);
+            ui->lbl_battle_ball_pokemon_2->setPixmap(pixmap1);
         }
     }
     if (pokemonsFaintStatus[2]) {
@@ -115,6 +155,10 @@ void BattleControllerPrivate::myPokemonFaint() {
             showSelectPokemonBtn();
             hideSceneBtn();
             mGameState = GameState::Fainting;
+
+            QPixmap pixmap1(QString::fromStdString(pokemonBallFaint));
+            pixmap1 = pixmap1.scaled(ui->lbl_battle_ball_pokemon_3->size(), Qt::KeepAspectRatio);
+            ui->lbl_battle_ball_pokemon_3->setPixmap(pixmap1);
         }
     }
 }
@@ -192,6 +236,40 @@ void BattleControllerPrivate::showSelectPokemonBtn() {
     ui->tb_battle_select_pokemon_3->show();
 }
 
+void BattleControllerPrivate::showType() {
+    auto pokemonTypes = mpPokemonService->getCurrentPokemonMoveTypes();
+
+
+    QPixmap pixmapType1(QString::fromStdString(typePicMap[pokemonTypes[0]]));
+    pixmapType1 = pixmapType1.scaled(ui->lbl_battle_type_1->size(), Qt::KeepAspectRatio);
+    ui->lbl_battle_type_1->setPixmap(pixmapType1);
+
+    QPixmap pixmapType2(QString::fromStdString(typePicMap[pokemonTypes[1]]));
+    pixmapType2 = pixmapType2.scaled(ui->lbl_battle_type_2->size(), Qt::KeepAspectRatio);
+    ui->lbl_battle_type_2->setPixmap(pixmapType2);
+
+    QPixmap pixmapType3(QString::fromStdString(typePicMap[pokemonTypes[2]]));
+    pixmapType3 = pixmapType3.scaled(ui->lbl_battle_type_3->size(), Qt::KeepAspectRatio);
+    ui->lbl_battle_type_3->setPixmap(pixmapType3);
+
+    QPixmap pixmapType4(QString::fromStdString(typePicMap[pokemonTypes[3]]));
+    pixmapType4 = pixmapType4.scaled(ui->lbl_battle_type_4->size(), Qt::KeepAspectRatio);
+    ui->lbl_battle_type_4->setPixmap(pixmapType4);
+
+    ui->lbl_battle_type_1->show();
+    ui->lbl_battle_type_2->show();
+    ui->lbl_battle_type_3->show();
+    ui->lbl_battle_type_4->show();
+
+}
+void BattleControllerPrivate::hideType() {
+
+    ui->lbl_battle_type_1->hide();
+    ui->lbl_battle_type_2->hide();
+    ui->lbl_battle_type_3->hide();
+    ui->lbl_battle_type_4->hide();
+}
+
 BattleController::BattleController(Ui::PokemonClass* ui, std::shared_ptr<PokemonService> pPokemonService, QObject* parent)
     : QObject(parent)
     , ui(ui)
@@ -206,9 +284,7 @@ BattleController::BattleController(Ui::PokemonClass* ui, std::shared_ptr<Pokemon
     ui->tb_battle_select_pokemon_2->hide();
     ui->tb_battle_select_pokemon_3->hide();
 
-    ui->tb_battle_select_bag_1->setIcon(QIcon(":/Pokemom/Resources/potion-red.png"));
-    ui->tb_battle_select_bag_1->setText("HP plus");
-    ui->tb_battle_select_bag_1->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
     ui->tb_battle_select_bag_1->hide();
     ui->tb_battle_select_bag_2->hide();
     ui->tb_battle_select_bag_3->hide();
@@ -249,6 +325,7 @@ void BattleController::onPBBattleBattleClicked() {
 
     mpPrivate->hideSceneBtn();
 
+    mpPrivate->showType();
     mpPrivate->showMoveBtn();
     ui->pb_battle_back->show();
 }
@@ -261,10 +338,12 @@ void BattleController::onPBBattleBackClicked() {
     mpPrivate->hideSelectBagBtn();
     ui->pb_battle_back->hide();
 
+    mpPrivate->hideType();
     mpPrivate->showSceneBtn();
 }
 
 void BattleController::onPBBattlePokemonClicked() {
+
     mpPrivate->mGameState = GameState::Pokemon;
 
     mpPrivate->hideSceneBtn();
@@ -323,6 +402,7 @@ void BattleController::onPBBattleBagClicked() {
 
 void BattleController::onPBBattleMove1Clicked() {
     mpPrivate->hideMoveBtn();
+    mpPrivate->hideType();
     ui->pb_battle_back->hide();
     mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(0);
@@ -338,6 +418,7 @@ void BattleController::onPBBattleMove1Clicked() {
 }
 void BattleController::onPBBattleMove2Clicked() {
     mpPrivate->hideMoveBtn();
+    mpPrivate->hideType();
     ui->pb_battle_back->hide();
     mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(1);
@@ -352,6 +433,7 @@ void BattleController::onPBBattleMove2Clicked() {
 }
 void BattleController::onPBBattleMove3Clicked() {
     mpPrivate->hideMoveBtn();
+    mpPrivate->hideType();
     ui->pb_battle_back->hide();
     mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(2);
@@ -366,6 +448,7 @@ void BattleController::onPBBattleMove3Clicked() {
 }
 void BattleController::onPBBattleMove4Clicked() {
     mpPrivate->hideMoveBtn();
+    mpPrivate->hideType();
     ui->pb_battle_back->hide();
     mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(3);
@@ -536,6 +619,7 @@ void BattleController::refresh() {
             ui->lbl_battle_opposite_PAR->show();
         }
     }
+
 
 }
 

@@ -43,3 +43,24 @@ static std::unordered_map<std::string, TYPE> typeMap = {
         {"Steel", TYPE::STEEL},
         {"Fairy", TYPE::FAIRY}
 };
+
+static std::unordered_map<TYPE, std::string> reverseTypeMap = {
+        {TYPE::NORMAL, "Normal"},
+        {TYPE::FIRE, "Fire"},
+        {TYPE::WATER, "Water"},
+        {TYPE::ELECTRIC, "Electric"},
+        {TYPE::GRASS, "Grass"},
+        {TYPE::ICE, "Ice"},
+        {TYPE::FIGHTING, "Fighting"},
+        {TYPE::POISON, "Poison"},
+        {TYPE::GROUND, "Ground"},
+        {TYPE::FLYING, "Flying"},
+        {TYPE::PSYCHIC, "Psychic"},
+        {TYPE::BUG, "Bug"},
+        {TYPE::ROCK, "Rock"},
+        {TYPE::GHOST, "Ghost"},
+        {TYPE::DRAGON, "Dragon"},
+        {TYPE::DARK, "Dark"},
+        {TYPE::STEEL, "Steel"},
+        {TYPE::FAIRY, "Fairy"}
+};

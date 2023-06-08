@@ -56,6 +56,7 @@ public:
 
     int getOppositingPokemonHp() const;
 
+    std::vector<std::string> getCurrentPokemonMoveTypes() const;
 private:
     std::unique_ptr<PlayerModePrivate> mpPrivate;
 };

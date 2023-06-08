@@ -52,7 +52,7 @@ background-image: none;
 font-size:18px;</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page_main">
      <widget class="QLabel" name="lbl_game">
@@ -240,7 +240,7 @@ background-attachment: fixed;
        <rect>
         <x>811</x>
         <y>341</y>
-        <width>101</width>
+        <width>150</width>
         <height>23</height>
        </rect>
       </property>
@@ -260,7 +260,7 @@ background-color:white;</string>
        <rect>
         <x>811</x>
         <y>374</y>
-        <width>101</width>
+        <width>150</width>
         <height>23</height>
        </rect>
       </property>
@@ -280,7 +280,7 @@ background-color:white;</string>
        <rect>
         <x>811</x>
         <y>407</y>
-        <width>101</width>
+        <width>150</width>
         <height>23</height>
        </rect>
       </property>
@@ -300,7 +300,7 @@ background-color:white;</string>
        <rect>
         <x>811</x>
         <y>440</y>
-        <width>101</width>
+        <width>150</width>
         <height>23</height>
        </rect>
       </property>
@@ -333,9 +333,9 @@ color:white;</string>
       </property>
       <property name="geometry">
        <rect>
-        <x>700</x>
+        <x>640</x>
         <y>440</y>
-        <width>75</width>
+        <width>130</width>
         <height>23</height>
        </rect>
       </property>
@@ -452,13 +452,57 @@ background-color:white;</string>
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="lbl_battle_ball">
+     <widget class="QLabel" name="lbl_battle_ball_pokemon_2">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>350</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="Pokemon.qrc">:/Pokemom/Resources/ball.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl_battle_ball_pokemon_3">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>390</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="Pokemon.qrc">:/Pokemom/Resources/ball.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl_battle_ball_pokemon_1">
       <property name="geometry">
        <rect>
         <x>110</x>
         <y>310</y>
-        <width>41</width>
-        <height>41</height>
+        <width>30</width>
+        <height>30</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -474,57 +518,13 @@ background-color:white;</string>
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="lbl_battle_ball_2">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>360</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="pixmap">
-       <pixmap resource="Pokemon.qrc">:/Pokemom/Resources/ball.png</pixmap>
-      </property>
-      <property name="scaledContents">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lbl_battle_ball_3">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>260</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="pixmap">
-       <pixmap resource="Pokemon.qrc">:/Pokemom/Resources/ball.png</pixmap>
-      </property>
-      <property name="scaledContents">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lbl_battle_ball_4">
+     <widget class="QLabel" name="lbl_battle_ball_opposite_2">
       <property name="geometry">
        <rect>
         <x>800</x>
-        <y>100</y>
-        <width>41</width>
-        <height>41</height>
+        <y>90</y>
+        <width>30</width>
+        <height>30</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -540,13 +540,13 @@ background-color:white;</string>
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="lbl_battle_ball_5">
+     <widget class="QLabel" name="lbl_battle_ball_opposite_3">
       <property name="geometry">
        <rect>
         <x>800</x>
-        <y>150</y>
-        <width>41</width>
-        <height>41</height>
+        <y>130</y>
+        <width>30</width>
+        <height>30</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -562,13 +562,13 @@ background-color:white;</string>
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="lbl_battle_ball_6">
+     <widget class="QLabel" name="lbl_battle_ball_opposite_1">
       <property name="geometry">
        <rect>
         <x>800</x>
         <y>50</y>
-        <width>41</width>
-        <height>41</height>
+        <width>30</width>
+        <height>30</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -592,7 +592,7 @@ background-color:white;</string>
        <rect>
         <x>811</x>
         <y>341</y>
-        <width>101</width>
+        <width>150</width>
         <height>23</height>
        </rect>
       </property>
@@ -612,7 +612,7 @@ background-color:white;</string>
        <rect>
         <x>811</x>
         <y>374</y>
-        <width>101</width>
+        <width>150</width>
         <height>23</height>
        </rect>
       </property>
@@ -632,7 +632,7 @@ background-color:white;</string>
        <rect>
         <x>810</x>
         <y>440</y>
-        <width>101</width>
+        <width>150</width>
         <height>23</height>
        </rect>
       </property>
@@ -652,7 +652,7 @@ background-color:white;</string>
        <rect>
         <x>811</x>
         <y>407</y>
-        <width>101</width>
+        <width>150</width>
         <height>23</height>
        </rect>
       </property>
@@ -892,6 +892,82 @@ color: yellow;</string>
        <string>PAR</string>
       </property>
      </widget>
+     <widget class="QLabel" name="lbl_battle_type_1">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>345</y>
+        <width>15</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl_battle_type_2">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>378</y>
+        <width>15</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl_battle_type_3">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>410</y>
+        <width>15</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl_battle_type_4">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>443</y>
+        <width>15</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
      <zorder>text_edit_battle_content</zorder>
      <zorder>pb_battle_back</zorder>
      <zorder>lbl_battle_player_pokemon</zorder>
@@ -900,12 +976,12 @@ color: yellow;</string>
      <zorder>lbl_battle_opposite_pokemon_blood</zorder>
      <zorder>lbl_battle_player_pokemon_name</zorder>
      <zorder>lbl_battle_opposite_pokemon_name</zorder>
-     <zorder>lbl_battle_ball</zorder>
-     <zorder>lbl_battle_ball_2</zorder>
-     <zorder>lbl_battle_ball_3</zorder>
-     <zorder>lbl_battle_ball_4</zorder>
-     <zorder>lbl_battle_ball_5</zorder>
-     <zorder>lbl_battle_ball_6</zorder>
+     <zorder>lbl_battle_ball_pokemon_2</zorder>
+     <zorder>lbl_battle_ball_pokemon_3</zorder>
+     <zorder>lbl_battle_ball_pokemon_1</zorder>
+     <zorder>lbl_battle_ball_opposite_2</zorder>
+     <zorder>lbl_battle_ball_opposite_3</zorder>
+     <zorder>lbl_battle_ball_opposite_1</zorder>
      <zorder>pb_battle_move_1</zorder>
      <zorder>pb_battle_move_2</zorder>
      <zorder>pb_battle_move_4</zorder>
@@ -927,6 +1003,10 @@ color: yellow;</string>
      <zorder>lbl_battle_pokemon_BAR</zorder>
      <zorder>lbl_battle_opposite_PAR</zorder>
      <zorder>lbl_battle_pokemon_PAR</zorder>
+     <zorder>lbl_battle_type_1</zorder>
+     <zorder>lbl_battle_type_2</zorder>
+     <zorder>lbl_battle_type_3</zorder>
+     <zorder>lbl_battle_type_4</zorder>
     </widget>
    </widget>
   </widget>
