@@ -20,6 +20,7 @@ public:
     void setBattleRefreshCallback(const std::function<void()>& kpFunction);
     void myTest();
     void setBattleSetTestCallback(const std::function<void()>& kpFunction);
+    void setMusicPlayCallback(const std::function<void()>& kpFunction);
 
 private:
     Ui::PokemonClass* ui;

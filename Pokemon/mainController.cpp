@@ -22,7 +22,7 @@ public:
     std::string mPokemonFile;
     std::string mMoveFile;
     std::function<void()> mBattleRefresh;
-    std::function<void()> mSetTest;
+    std::function<void()> mMusicPlay;
     Ui::PokemonClass* ui;
 };
 
@@ -115,6 +115,8 @@ void MainController::onPBGameClicked() {
     mpPrivate->updateBattleButtonState();
 }
 void MainController::onPBBattleCaseClicked() {
+    mpPrivate->mMusicPlay();
+
     if (mpPrivate->mTestFile != "") {
         ui->stackedWidget->setCurrentWidget(ui->page_battle);
         mpPrivate->mBattleRefresh();
@@ -140,6 +142,6 @@ void MainController::myTest() {
     onPBBattleCaseClicked();
 }
 
-void MainController::setBattleSetTestCallback(const std::function<void()>& kpFunction) {
-    mpPrivate->mSetTest = kpFunction;
+void MainController::setMusicPlayCallback(const std::function<void()>& kpFunction) {
+    mpPrivate->mMusicPlay = kpFunction;
 }

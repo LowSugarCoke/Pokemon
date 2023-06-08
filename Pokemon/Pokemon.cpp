@@ -22,6 +22,7 @@
 #include "damageMode.h"
 #include "additionalEffectMode.h"
 #include "pokemonLogger.h"
+#include "musicMode.h"
 
 Pokemon::Pokemon(QWidget* parent)
     : QMainWindow(parent)
@@ -33,14 +34,13 @@ Pokemon::Pokemon(QWidget* parent)
 
     mpMainController = std::make_unique<MainController>(&ui, mpPokemonService, this);
     mpMainController->setBattleRefreshCallback([&]() {mpBattleController->refresh(); });
+    mpMainController->setMusicPlayCallback([&]() {    mpMusicService->playMusic("./Resources/battle.mp3"); });
     mpBattleController = std::make_unique<BattleController>(&ui, mpPokemonService, this);
 
 
 
-    //mpMainController->test();
-
-
     PokemonLogger& logger = PokemonLogger::getInstance();
+
 
 }
 
@@ -67,4 +67,7 @@ void Pokemon::init() {
     auto pPlayerMode = std::make_shared<PlayerMode>(pPokemonMode);
 
     mpPokemonService = std::make_shared<PokemonService>(pMoveDao, pGameDao, pPokemonDao, pTestDataDao, pPlayerMode);
+
+    auto pMusicMode = std::make_shared<MusicMode>();
+    mpMusicService = std::make_shared<MusicService>(pMusicMode);
 }
