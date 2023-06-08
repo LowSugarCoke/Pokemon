@@ -6,6 +6,7 @@
 #include "moveDao.h"
 #include "gameDao.h"
 #include "pokemonDao.h"
+#include "testDataDao.h"
 #include "pokemonBo.h"
 #include "playerMode.h"
 #include "pokemonMode.h"
@@ -14,28 +15,32 @@
 class PokemonServicePrivate {
 public:
     PokemonServicePrivate(const std::shared_ptr<MoveDao>& kMoveDao, const std::shared_ptr<GameDao>& kGameDao
-        , const std::shared_ptr<PokemonDao>& kPokemonDao, const std::shared_ptr<PlayerMode>& kPlayerMode);
+        , const std::shared_ptr<PokemonDao>& kPokemonDao, const std::shared_ptr< TestDataDao>& kTestDataDao, const std::shared_ptr<PlayerMode>& kPlayerMode);
 
     std::shared_ptr<MoveDao> mpMoveDao;
     std::shared_ptr<GameDao> mpGameDao;
     std::shared_ptr<PokemonDao> mpPokemonDao;
+    std::shared_ptr<TestDataDao> mpTestDataDao;
     std::shared_ptr<PlayerMode> mpPlayerMode;
     PokemonLogger& mLogger;
+
 };
 
 PokemonServicePrivate::PokemonServicePrivate(const std::shared_ptr<MoveDao>& kMoveDao, const std::shared_ptr<GameDao>& kGameDao
-    , const std::shared_ptr<PokemonDao>& kPokemonDao, const std::shared_ptr<PlayerMode>& kPlayerMode)
+    , const std::shared_ptr<PokemonDao>& kPokemonDao, const std::shared_ptr< TestDataDao>& kTestDataDao, const std::shared_ptr<PlayerMode>& kPlayerMode)
     :mpMoveDao(kMoveDao)
     , mpGameDao(kGameDao)
     , mpPokemonDao(kPokemonDao)
+    , mpTestDataDao(kTestDataDao)
     , mpPlayerMode(kPlayerMode)
     , mLogger(PokemonLogger::getInstance())
+
 {}
 
 
 PokemonService::PokemonService(const std::shared_ptr<MoveDao>& kMoveDao, const std::shared_ptr<GameDao>& kGameDao
-    , const std::shared_ptr<PokemonDao>& kPokemonDao, const std::shared_ptr<PlayerMode>& kPlayerMode)
-    : mpPrivate(std::make_unique<PokemonServicePrivate>(kMoveDao, kGameDao, kPokemonDao, kPlayerMode))
+    , const std::shared_ptr<PokemonDao>& kPokemonDao, const std::shared_ptr< TestDataDao>& kTestDataDao, const std::shared_ptr<PlayerMode>& kPlayerMode)
+    : mpPrivate(std::make_unique<PokemonServicePrivate>(kMoveDao, kGameDao, kPokemonDao, kTestDataDao, kPlayerMode))
 {}
 
 PokemonService::~PokemonService() {}
@@ -138,7 +143,7 @@ void PokemonService::swapPokemon(const int& kIndex) {
     mpPrivate->mpPlayerMode->swapPokemon(kIndex);
 }
 
-void PokemonService::battle(const int& kMoveIndex) {
+void PokemonService::battle(const int& kMoveIndex, const int& kOppositeIndex) {
     mpPrivate->mpPlayerMode->battle(kMoveIndex);
 }
 
@@ -201,4 +206,25 @@ std::vector<int> PokemonService::getCurrentPokemonPowerPoints() const {
 
 std::vector<int> PokemonService::getCurrentPokemonMaxPowerPoints() const {
     return mpPrivate->mpPlayerMode->getCurrentPokemonMaxPowerPoints();
+}
+
+bool PokemonService::loadTestData(const std::string& kTestFilePath) {
+    auto data = mpPrivate->mpTestDataDao->getData(kTestFilePath);
+    auto pokemonFilePath = data[0];
+    auto moveFilePath = data[1];
+    auto gameFilePath = data[2];
+
+    bool isLoad = loadData(moveFilePath, pokemonFilePath, gameFilePath);
+    mpPrivate->mpPlayerMode->setTest();
+    if (!isLoad) {
+        return false;
+    }
+
+    std::vector<std::string> out;
+    for (int i = 4; i < data.size(); i++) {
+        out.push_back(data[i]);
+    }
+
+    mpPrivate->mpPlayerMode->runTest(out);
+    return true;
 }

@@ -1,7 +1,10 @@
 #include "mainController.h"
 #include "pokemonService.h"
 
+#include <map>
+
 #include <QMessageBox>
+
 
 
 
@@ -14,12 +17,13 @@ public:
     QString getOpenFileName();
     void updateBattleButtonState();
 
+    std::string mTestFile;
     std::string mGameFile;
     std::string mPokemonFile;
     std::string mMoveFile;
     std::function<void()> mBattleRefresh;
+    std::function<void()> mSetTest;
     Ui::PokemonClass* ui;
-
 };
 
 MainControllerPrivate::MainControllerPrivate(Ui::PokemonClass* ui, std::shared_ptr<PokemonService> pPokemonService)
@@ -28,6 +32,7 @@ MainControllerPrivate::MainControllerPrivate(Ui::PokemonClass* ui, std::shared_p
 {
 
 }
+
 
 
 QString MainControllerPrivate::getOpenFileName() {
@@ -73,7 +78,10 @@ void MainController::onPBTestCaseClicked()
     if (!fileName.isEmpty()) {
         QFileInfo fileInfo(fileName);
         ui->lbl_test_case->setText(fileInfo.fileName());
+        mpPrivate->mTestFile = fileName.toStdString();
     }
+    mpPrivate->mpPokemonService->loadTestData(mpPrivate->mTestFile);
+
 }
 
 void MainController::onPBPokemonClicked() {
@@ -82,7 +90,7 @@ void MainController::onPBPokemonClicked() {
     if (!fileName.isEmpty()) {
         QFileInfo fileInfo(fileName);
         ui->lbl_pokemon->setText(fileInfo.fileName());
-        mpPrivate->mPokemonFile = fileInfo.fileName().toStdString();
+        mpPrivate->mPokemonFile = fileName.toStdString();
     }
     mpPrivate->updateBattleButtonState();
 }
@@ -92,7 +100,7 @@ void MainController::onPBMoveClicked() {
     if (!fileName.isEmpty()) {
         QFileInfo fileInfo(fileName);
         ui->lbl_move->setText(fileInfo.fileName());
-        mpPrivate->mMoveFile = fileInfo.fileName().toStdString();
+        mpPrivate->mMoveFile = fileName.toStdString();
     }
     mpPrivate->updateBattleButtonState();
 }
@@ -102,11 +110,17 @@ void MainController::onPBGameClicked() {
     if (!fileName.isEmpty()) {
         QFileInfo fileInfo(fileName);
         ui->lbl_game->setText(fileInfo.fileName());
-        mpPrivate->mGameFile = fileInfo.fileName().toStdString();
+        mpPrivate->mGameFile = fileName.toStdString();
     }
     mpPrivate->updateBattleButtonState();
 }
 void MainController::onPBBattleCaseClicked() {
+    if (mpPrivate->mTestFile != "") {
+        ui->stackedWidget->setCurrentWidget(ui->page_battle);
+        mpPrivate->mBattleRefresh();
+        ui->stackedWidget->setCurrentWidget(ui->page_battle);
+        return;
+    }
     bool loadDataResult = mpPrivate->mpPokemonService->loadData(mpPrivate->mMoveFile, mpPrivate->mPokemonFile, mpPrivate->mGameFile);
     mpPrivate->mBattleRefresh();
 
@@ -122,6 +136,10 @@ void MainController::setBattleRefreshCallback(const std::function<void()>& kpFun
     mpPrivate->mBattleRefresh = kpFunction;
 }
 
-void MainController::test() {
+void MainController::myTest() {
     onPBBattleCaseClicked();
+}
+
+void MainController::setBattleSetTestCallback(const std::function<void()>& kpFunction) {
+    mpPrivate->mSetTest = kpFunction;
 }

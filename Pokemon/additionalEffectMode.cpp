@@ -30,10 +30,12 @@ public:
     int additionalDamageCount(std::shared_ptr<PokemonBo> pPokemonBo) const;
 
     PokemonLogger& mLogger;
+    bool mIsTest;
 };
 
 AdditionalEffectModePrivate::AdditionalEffectModePrivate()
     : mLogger(PokemonLogger::getInstance())
+    , mIsTest(false)
 {}
 
 int AdditionalEffectModePrivate::additionalDamageCount(std::shared_ptr<PokemonBo> pPokemonBo) const {
@@ -90,7 +92,13 @@ AdditionalEffectMode::~AdditionalEffectMode() {}
 
 bool AdditionalEffectMode::unableToMove(std::shared_ptr<PokemonBo> pPokemonBo)const {
 
+
+
     if (pPokemonBo->getPokemonAdditionalEffectType().count(ADDITIONAL_EFFECT_TYPE::PAR)) {
+
+        if (mpPrivate->mIsTest) {
+            return true;
+        }
         // create a random number generator with a seed based on the current time
         std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
         // create a distribution that will generate numbers between 1 and 4
@@ -124,13 +132,15 @@ void AdditionalEffectMode::additionalDamageAfterBattle(std::shared_ptr<PokemonBo
 void AdditionalEffectMode::addIfMoveHasAdditionalEffect(std::shared_ptr<PokemonBo> pPokemonBo, MoveBo moveBo) {
     auto additionalEffectType = moveBo.additionalEffectType;
     if (additionalEffectType != ADDITIONAL_EFFECT_TYPE::NRM) {
-        if (pPokemonBo->getPokemonAdditionalEffectType().count(additionalEffectType)) {
-            return;
-        }
+
         mpPrivate->additionalEffectLog(pPokemonBo, moveBo);
         pPokemonBo->setPokemonAdditionalEffectType(additionalEffectType);
         if (additionalEffectType == ADDITIONAL_EFFECT_TYPE::PAR) {
             pPokemonBo->reduceHalfSpeed();
         }
     }
+}
+
+void AdditionalEffectMode::setTest() {
+    mpPrivate->mIsTest = true;
 }

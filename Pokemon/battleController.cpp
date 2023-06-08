@@ -77,6 +77,7 @@ public:
     std::shared_ptr<PokemonService> mpPokemonService;
     GameState mGameState;
     int mPotionSelectNum;
+    bool mIsTest;
 };
 
 BattleControllerPrivate::BattleControllerPrivate(Ui::PokemonClass* ui, std::shared_ptr<PokemonService> pPokemonService)
@@ -121,26 +122,25 @@ void BattleControllerPrivate::unablePP() {
 }
 
 void BattleControllerPrivate::oppositingPokemonFaint() {
-    if (mpPokemonService->getOppositingPokemonHp() == 0) {
-
-        auto oppositingPokemonIndex = mpPokemonService->getCurrentOppositingPokemonIndex();
-
-        QPixmap pixmap1(QString::fromStdString(pokemonBallFaint));
-        pixmap1 = pixmap1.scaled(ui->lbl_battle_ball_opposite_1->size(), Qt::KeepAspectRatio);
-        if (oppositingPokemonIndex == 0) {
-            ui->lbl_battle_ball_opposite_1->setPixmap(pixmap1);
-        }
-        else if (oppositingPokemonIndex == 1) {
-            ui->lbl_battle_ball_opposite_2->setPixmap(pixmap1);
-        }
-        else {
-            ui->lbl_battle_ball_opposite_3->setPixmap(pixmap1);
-        }
-
-        mpPokemonService->swapOppositingPokemon();
 
 
+
+    auto oppositePokemonHp = mpPokemonService->getOppositingPokemonsHp();
+
+    QPixmap pixmap1(QString::fromStdString(pokemonBallFaint));
+    pixmap1 = pixmap1.scaled(ui->lbl_battle_ball_opposite_1->size(), Qt::KeepAspectRatio);
+    if (oppositePokemonHp[0].first == 0) {
+        ui->lbl_battle_ball_opposite_1->setPixmap(pixmap1);
     }
+    if (oppositePokemonHp[1].first == 0) {
+        ui->lbl_battle_ball_opposite_2->setPixmap(pixmap1);
+    }
+    if (oppositePokemonHp[2].first == 0) {
+        ui->lbl_battle_ball_opposite_3->setPixmap(pixmap1);
+    }
+
+
+
 }
 
 void BattleControllerPrivate::myPokemonFaint() {
@@ -454,14 +454,18 @@ void BattleController::onPBBattleMove1Clicked() {
     mpPrivate->hidePP();
     ui->pb_battle_back->hide();
     mpPrivate->showSceneBtn();
-    mpPrivate->mpPokemonService->battle(0);
+    if (mpPrivate->mIsTest) {
+
+        mpPrivate->mpPokemonService->battle(0);
+    }
+    else {
+        mpPrivate->mpPokemonService->battle(0);
+    }
+
     mpPrivate->updateLog();
     mpPrivate->mGameState = GameState::Normal;
 
-    refresh();
-    mpPrivate->winOrLose();
-    mpPrivate->oppositingPokemonFaint();
-    mpPrivate->myPokemonFaint();
+
     refresh();
 
 }
@@ -475,10 +479,7 @@ void BattleController::onPBBattleMove2Clicked() {
     mpPrivate->updateLog();
     mpPrivate->mGameState = GameState::Normal;
 
-    refresh();
-    mpPrivate->winOrLose();
-    mpPrivate->oppositingPokemonFaint();
-    mpPrivate->myPokemonFaint();
+
     refresh();
 }
 void BattleController::onPBBattleMove3Clicked() {
@@ -491,10 +492,7 @@ void BattleController::onPBBattleMove3Clicked() {
     mpPrivate->updateLog();
     mpPrivate->mGameState = GameState::Normal;
 
-    refresh();
-    mpPrivate->winOrLose();
-    mpPrivate->oppositingPokemonFaint();
-    mpPrivate->myPokemonFaint();
+
     refresh();
 }
 void BattleController::onPBBattleMove4Clicked() {
@@ -507,10 +505,7 @@ void BattleController::onPBBattleMove4Clicked() {
     mpPrivate->updateLog();
     mpPrivate->mGameState = GameState::Normal;
 
-    refresh();
-    mpPrivate->winOrLose();
-    mpPrivate->oppositingPokemonFaint();
-    mpPrivate->myPokemonFaint();
+
     refresh();
 }
 
@@ -672,7 +667,11 @@ void BattleController::refresh() {
         }
     }
 
+    mpPrivate->winOrLose();
+    mpPrivate->oppositingPokemonFaint();
+    mpPrivate->myPokemonFaint();
 
+    mpPrivate->updateLog();
 
 
 }

@@ -5,6 +5,7 @@
 
 #include <QObject>
 #include <QFileDialog>
+#include <vector>
 
 #include "ui_Pokemon.h"
 
@@ -17,7 +18,8 @@ class MainController : public QObject
 public:
     MainController(Ui::PokemonClass* ui, std::shared_ptr<PokemonService> pPokemonService, QObject* parent = nullptr);
     void setBattleRefreshCallback(const std::function<void()>& kpFunction);
-    void test();
+    void myTest();
+    void setBattleSetTestCallback(const std::function<void()>& kpFunction);
 
 private:
     Ui::PokemonClass* ui;

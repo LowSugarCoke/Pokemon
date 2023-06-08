@@ -23,9 +23,7 @@ public:
     bool swapOppositingPokemon(const int& kPokemonIndex);
     bool swapPokemon(const int& kPokemonIndex);
 
-    bool isWin();
-
-    void battle(const int& kMoveIndex);
+    void battle(const int& kMoveIndex, const int& kOppositeIndex = 0);
 
 
     std::vector<std::string> getPokemonsName() const;
@@ -61,6 +59,10 @@ public:
     std::vector<int> getCurrentPokemonPowerPoints() const;
 
     std::vector<int> getCurrentPokemonMaxPowerPoints() const;
+
+    void setTest();
+
+    void runTest(const std::vector<std::string>& kTestData);
 
 private:
     std::unique_ptr<PlayerModePrivate> mpPrivate;

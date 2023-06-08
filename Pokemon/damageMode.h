@@ -14,6 +14,7 @@ public:
 
     bool isMissing(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const MoveBo& kMoveBo);
     int damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const MoveBo& kMoveBo);
+    void setTest();
 
 private:
     std::unique_ptr<DamageModePrivate> mpPrivate;

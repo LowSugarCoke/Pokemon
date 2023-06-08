@@ -8,6 +8,7 @@
 class MoveDao;
 class PokemonDao;
 class GameDao;
+class TestDataDao;
 class PokemonBo;
 class PlayerMode;
 class PokemonMode;
@@ -16,11 +17,13 @@ class PokemonService {
 public:
 
     PokemonService(const std::shared_ptr<MoveDao>& kMoveDao, const std::shared_ptr<GameDao>& kGameDao,
-        const std::shared_ptr<PokemonDao>& kPokemonDao, const std::shared_ptr<PlayerMode>& kPlayerMode);
+        const std::shared_ptr<PokemonDao>& kPokemonDao, const std::shared_ptr< TestDataDao>& kTestDataDao, const std::shared_ptr<PlayerMode>& kPlayerMode);
 
     ~PokemonService();
 
     bool loadData(const std::string& kMoveFilePath, const std::string& kPokemonFilePath, const std::string& kGameFilePath);
+    bool loadTestData(const std::string& kTestFilePath);
+
     std::vector<std::string> getPokemonsName() const;
     int getCurrentPokemonIndex() const;
     std::vector<std::string> getOppositingPokemonsName() const;
@@ -34,7 +37,7 @@ public:
     std::string getBattleDailog() const;
     void swapPokemon(const int& kIndex);
     bool faintingSwapPokemon(const int& kPokemonIndex);
-    void battle(const int& kMoveIndex);
+    void battle(const int& kMoveIndex, const int& kOppositeIndex = 0);
 
     std::vector<std::string> getCurrentPokemonMoves()const;
     void usePotion(const int& kPokemonIndex, const int& kPotionIndex);
@@ -47,6 +50,9 @@ public:
 
     std::vector<int> getCurrentPokemonPowerPoints() const;
     std::vector<int> getCurrentPokemonMaxPowerPoints() const;
+
+    bool isTest() const;
+
 private:
     std::unique_ptr<PokemonServicePrivate> mpPrivate;
 };

@@ -18,13 +18,16 @@ public:
     void setMyPokemon(std::shared_ptr<PokemonBo> pMyPokemon);
     void setOppositingPokemon(std::shared_ptr<PokemonBo> pOppositingPokemon);
 
-    void nextRound(const int& kMoveIndex);
+    void nextRound(const int& kMoveIndex, const int& kOppositeIndex = 0);
 
-    void nextRoundWithoutAttack();
+    void nextRoundWithoutAttack(const int& kOppositeIndex = 0);
 
     void usePotion(std::shared_ptr<PokemonBo> pPokemonBo, const int& kPotionIndex);
 
     std::vector<std::string> getPotionsName() const;
+
+    void setTest();
+    void setLastOppositePokemon();
 
 private:
     std::unique_ptr<PokemonModePrivate> mpPrivate;
