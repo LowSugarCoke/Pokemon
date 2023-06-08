@@ -8,6 +8,7 @@
 #include "mainController.h"
 #include "battleController.h"
 #include "pokemonService.h"
+#include "musicService.h"
 
 
 class Pokemon : public QMainWindow
@@ -23,4 +24,5 @@ private:
     std::unique_ptr<MainController> mpMainController;
     std::unique_ptr<BattleController> mpBattleController;
     std::shared_ptr<PokemonService> mpPokemonService;
+    std::shared_ptr<MusicService> mpMusicService;
 };

@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="Pokemom">
+    <file>Resources/battle.mp3</file>
     <file>Resources/type-dragon.png</file>
     <file>Resources/type-fire.png</file>
     <file>Resources/type-flying.png</file>

@@ -44,11 +44,11 @@
   </ImportGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <QtInstall>Qt5.15.2</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;multimedia;multimediawidgets;widgets</QtModules>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <QtInstall>Qt5.15.2</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;multimedia;multimediawidgets;widgets</QtModules>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
     <Import Project="$(QtMsBuild)\qt.props" />
@@ -75,7 +75,7 @@
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
@@ -84,6 +84,8 @@
     <ClCompile Include="additionalEffectMode.cpp" />
     <ClCompile Include="battleController.cpp" />
     <ClCompile Include="damageMode.cpp" />
+    <ClCompile Include="musicMode.cpp" />
+    <ClCompile Include="musicService.cpp" />
     <ClCompile Include="playerMode.cpp" />
     <ClCompile Include="pokemonLogger.cpp" />
     <ClCompile Include="pokemonMode.cpp" />
@@ -126,6 +128,8 @@
     <ClInclude Include="additionalEffectType.h" />
     <ClInclude Include="damageMode.h" />
     <ClInclude Include="damageType.h" />
+    <ClInclude Include="musicMode.h" />
+    <ClInclude Include="musicService.h" />
     <ClInclude Include="playerMode.h" />
     <ClInclude Include="pokemonLogger.h" />
     <ClInclude Include="pokemonMode.h" />
