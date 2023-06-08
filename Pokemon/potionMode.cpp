@@ -4,6 +4,9 @@
 #include <string>
 #include <unordered_map>
 
+#include "pokemonBo.h"
+#include "pokemonLogger.h"
+
 static const std::string kPotion = "Potion";
 static const std::string kSuperPotion = "Super Potion";
 static const std::string kHyperPotion = "Hyper Potion";
@@ -20,13 +23,20 @@ static std::unordered_map<int, int> potionMap{
 
 class PotionModePrivate {
 public:
-
-    std::function<void(const int&)> mAddHP;
+    PotionModePrivate();
+    PokemonLogger& mLogger;
 
 };
 
+PotionModePrivate::PotionModePrivate()
+    : mLogger(PokemonLogger::getInstance())
+{
+
+}
+
 PotionMode::PotionMode()
-    :mpPrivate(std::make_unique<PotionModePrivate>())
+    : mpPrivate(std::make_unique<PotionModePrivate>())
+
 {
 
 }
@@ -39,16 +49,15 @@ PotionMode::PotionMode(const PotionMode& kPotionMode)
 PotionMode::~PotionMode() {
 }
 
-void PotionMode::setAddHPCallBack(const std::function<void(const int&)>& kpFunction) {
-    mpPrivate->mAddHP = kpFunction;
-}
 
 
 std::vector<std::string> PotionMode::getPotionsName() const {
     return kPotionVec;
 }
 
-void PotionMode::usePotion(const int& kMotionIndex) {
 
-    mpPrivate->mAddHP(potionMap[kMotionIndex]);
+void PotionMode::addHp(std::shared_ptr<PokemonBo> pPokemonBo, const int& kPotionIndex) {
+    mpPrivate->mLogger.log("You used a " + kPotionVec[kPotionIndex] + "!");
+    pPokemonBo->addHp(potionMap[kPotionIndex]);
+    mpPrivate->mLogger.log(pPokemonBo->getName() + " had its HP restored.");
 }

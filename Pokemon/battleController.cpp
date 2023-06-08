@@ -23,6 +23,13 @@ std::unordered_map<std::string, std::string> potionPicMap{
     {"Max Potion", ":/Pokemom/Resources/max-potion.png"}
 };
 
+enum class GameState {
+    Normal,
+    Battle,
+    Pokemon,
+    Bag
+};
+
 class BattleControllerPrivate :QObject {
 public:
     BattleControllerPrivate(Ui::PokemonClass* ui, std::shared_ptr<PokemonService> pPokemonService);
@@ -37,13 +44,15 @@ public:
     void updateLog();
     Ui::PokemonClass* ui;
     std::shared_ptr<PokemonService> mpPokemonService;
+    GameState mGameState;
+    int mPotionSelectNum;
 };
 
 BattleControllerPrivate::BattleControllerPrivate(Ui::PokemonClass* ui, std::shared_ptr<PokemonService> pPokemonService)
     :ui(ui)
     , mpPokemonService(pPokemonService)
 {
-
+    mPotionSelectNum = 0;
 }
 
 void BattleControllerPrivate::updateLog() {
@@ -51,10 +60,16 @@ void BattleControllerPrivate::updateLog() {
 
     QTextCursor cursor = ui->text_edit_battle_content->textCursor();
     cursor.movePosition(QTextCursor::End);
+
     ui->text_edit_battle_content->setTextCursor(cursor);
+
+    QFont font = ui->text_edit_battle_content->font();
+    font.setPointSize(18);
+    ui->text_edit_battle_content->setFont(font);
 
     ui->text_edit_battle_content->insertPlainText(QString::fromStdString(log));
     cursor.movePosition(QTextCursor::End);
+
     ui->text_edit_battle_content->setTextCursor(cursor);
 }
 
@@ -158,6 +173,7 @@ void BattleController::connection() {
 }
 
 void BattleController::onPBBattleBattleClicked() {
+    mpPrivate->mGameState = GameState::Battle;
 
     mpPrivate->hideSceneBtn();
 
@@ -166,6 +182,8 @@ void BattleController::onPBBattleBattleClicked() {
 }
 
 void BattleController::onPBBattleBackClicked() {
+    mpPrivate->mGameState = GameState::Normal;
+
     mpPrivate->hideMoveBtn();
     mpPrivate->hideSelectPokemonBtn();
     mpPrivate->hideSelectBagBtn();
@@ -175,6 +193,8 @@ void BattleController::onPBBattleBackClicked() {
 }
 
 void BattleController::onPBBattlePokemonClicked() {
+    mpPrivate->mGameState = GameState::Pokemon;
+
     mpPrivate->hideSceneBtn();
     mpPrivate->hideMoveBtn();
 
@@ -201,6 +221,8 @@ void BattleController::onPBBattlePokemonClicked() {
 }
 
 void BattleController::onPBBattleBagClicked() {
+    mpPrivate->mGameState = GameState::Bag;
+
     mpPrivate->hideSceneBtn();
     mpPrivate->hideMoveBtn();
 
@@ -228,46 +250,90 @@ void BattleController::onPBBattleBagClicked() {
 }
 
 void BattleController::onPBBattleMove1Clicked() {
+    mpPrivate->hideMoveBtn();
+    ui->pb_battle_back->hide();
+    mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(0);
     mpPrivate->updateLog();
     refresh();
+    mpPrivate->mGameState = GameState::Normal;
 }
 void BattleController::onPBBattleMove2Clicked() {
+    mpPrivate->hideMoveBtn();
+    ui->pb_battle_back->hide();
+    mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(1);
     mpPrivate->updateLog();
     refresh();
+    mpPrivate->mGameState = GameState::Normal;
 }
 void BattleController::onPBBattleMove3Clicked() {
+    mpPrivate->hideMoveBtn();
+    ui->pb_battle_back->hide();
+    mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(2);
     mpPrivate->updateLog();
     refresh();
+    mpPrivate->mGameState = GameState::Normal;
 }
 void BattleController::onPBBattleMove4Clicked() {
+    mpPrivate->hideMoveBtn();
+    ui->pb_battle_back->hide();
+    mpPrivate->showSceneBtn();
     mpPrivate->mpPokemonService->battle(3);
     mpPrivate->updateLog();
     refresh();
+    mpPrivate->mGameState = GameState::Normal;
 }
 
 void BattleController::onTBBattleSelectPokemon1Clicked() {
+
     ui->pb_battle_back->hide();
     mpPrivate->hideSelectPokemonBtn();
+    mpPrivate->hideSelectBagBtn();
     mpPrivate->showSceneBtn();
-    mpPrivate->mpPokemonService->swapPokemon(0);
+
+    if (mpPrivate->mGameState == GameState::Pokemon) {
+        mpPrivate->mpPokemonService->swapPokemon(0);
+    }
+    else if (mpPrivate->mGameState == GameState::Bag) {
+        mpPrivate->mpPokemonService->usePotion(0, mpPrivate->mPotionSelectNum);
+    }
+    mpPrivate->updateLog();
     refresh();
+    mpPrivate->mGameState = GameState::Normal;
 }
 void BattleController::onTBBattleSelectPokemon2Clicked() {
     ui->pb_battle_back->hide();
     mpPrivate->hideSelectPokemonBtn();
+    mpPrivate->hideSelectBagBtn();
     mpPrivate->showSceneBtn();
-    mpPrivate->mpPokemonService->swapPokemon(1);
+
+    if (mpPrivate->mGameState == GameState::Pokemon) {
+        mpPrivate->mpPokemonService->swapPokemon(1);
+    }
+    else if (mpPrivate->mGameState == GameState::Bag) {
+        mpPrivate->mpPokemonService->usePotion(1, mpPrivate->mPotionSelectNum);
+    }
+    mpPrivate->updateLog();
     refresh();
+    mpPrivate->mGameState = GameState::Normal;
 }
 void BattleController::onTBBattleSelectPokemon3Clicked() {
     ui->pb_battle_back->hide();
     mpPrivate->hideSelectPokemonBtn();
+    mpPrivate->hideSelectBagBtn();
     mpPrivate->showSceneBtn();
-    mpPrivate->mpPokemonService->swapPokemon(2);
+
+    if (mpPrivate->mGameState == GameState::Pokemon) {
+        mpPrivate->mpPokemonService->swapPokemon(2);
+    }
+    else if (mpPrivate->mGameState == GameState::Bag) {
+        mpPrivate->mpPokemonService->usePotion(2, mpPrivate->mPotionSelectNum);
+    }
+    mpPrivate->updateLog();
     refresh();
+    mpPrivate->mGameState = GameState::Normal;
 }
 
 
@@ -288,6 +354,20 @@ void BattleController::refresh() {
     ui->lbl_battle_opposite_pokemon_blood->setText(QString::number(oppositingHp[oppositingPokemonIndex].first) + "/"
         + QString::number(oppositingHp[oppositingPokemonIndex].second));
 
+    ui->tb_battle_select_pokemon_1->setIcon(QIcon(QString::fromStdString(pokemonPicMap[myPokemonName[0]])));
+    ui->tb_battle_select_pokemon_1->setText(QString::fromStdString(myPokemonName[0]) + QString::number(myHp[0].first) + "/" + QString::number(myHp[0].second));
+    ui->tb_battle_select_pokemon_1->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+
+
+    ui->tb_battle_select_pokemon_2->setIcon(QIcon(QString::fromStdString(pokemonPicMap[myPokemonName[1]])));
+    ui->tb_battle_select_pokemon_2->setText(QString::fromStdString(myPokemonName[1]) + QString::number(myHp[1].first) + "/" + QString::number(myHp[1].second));
+    ui->tb_battle_select_pokemon_2->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+
+    ui->tb_battle_select_pokemon_3->setIcon(QIcon(QString::fromStdString(pokemonPicMap[myPokemonName[2]])));
+    ui->tb_battle_select_pokemon_3->setText(QString::fromStdString(myPokemonName[2]) + QString::number(myHp[2].first) + "/" + QString::number(myHp[2].second));
+    ui->tb_battle_select_pokemon_3->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+
+
     QPixmap pixmap1(QString::fromStdString(pokemonPicMap[myPokemonName[myPokemonIndex]]));
     pixmap1 = pixmap1.scaled(ui->lbl_battle_player_pokemon_name->size(), Qt::KeepAspectRatio);
     ui->lbl_battle_player_pokemon_name->setPixmap(pixmap1);
@@ -303,33 +383,25 @@ void BattleController::refresh() {
     ui->pb_battle_move_2->setText(QString::fromStdString(myPokemonMoves[1]));
     ui->pb_battle_move_3->setText(QString::fromStdString(myPokemonMoves[2]));
     ui->pb_battle_move_4->setText(QString::fromStdString(myPokemonMoves[3]));
+
+
+
 }
 
 void BattleController::onTBBattleSelectBag1Clicked() {
-    ui->pb_battle_back->hide();
-    mpPrivate->hideSelectBagBtn();
-    mpPrivate->showSceneBtn();
-    mpPrivate->mpPokemonService->usePotion(0);
-    refresh();
+    mpPrivate->showSelectPokemonBtn();
+    mpPrivate->mPotionSelectNum = 0;
 }
 void BattleController::onTBBattleSelectBag2Clicked() {
-    ui->pb_battle_back->hide();
-    mpPrivate->hideSelectBagBtn();
-    mpPrivate->showSceneBtn();
-    mpPrivate->mpPokemonService->usePotion(1);
-    refresh();
+    mpPrivate->showSelectPokemonBtn();
+    mpPrivate->mPotionSelectNum = 1;
 }
 void BattleController::onTBBattleSelectBag3Clicked() {
-    ui->pb_battle_back->hide();
-    mpPrivate->hideSelectBagBtn();
-    mpPrivate->showSceneBtn();
-    mpPrivate->mpPokemonService->usePotion(2);
-    refresh();
+    mpPrivate->showSelectPokemonBtn();
+    mpPrivate->mPotionSelectNum = 2;
+
 }
 void BattleController::onTBBattleSelectBag4Clicked() {
-    ui->pb_battle_back->hide();
-    mpPrivate->hideSelectBagBtn();
-    mpPrivate->showSceneBtn();
-    mpPrivate->mpPokemonService->usePotion(3);
-    refresh();
+    mpPrivate->showSelectPokemonBtn();
+    mpPrivate->mPotionSelectNum = 3;
 }

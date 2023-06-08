@@ -22,7 +22,7 @@ public:
 
     void nextRoundWithoutAttack();
 
-    void usePotion(const int& kPotionIndex);
+    void usePotion(std::shared_ptr<PokemonBo> pPokemonBo, const int& kPotionIndex);
 
     std::vector<std::string> getPotionsName() const;
 

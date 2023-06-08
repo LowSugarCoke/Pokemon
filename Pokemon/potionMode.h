@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 
+class PokemonBo;
 class PotionModePrivate;
 class PotionMode {
 public:
@@ -13,10 +14,9 @@ public:
     ~PotionMode();
     PotionMode(const PotionMode& kPotionMode);
 
-    void setAddHPCallBack(const std::function<void(const int&)>& kpFunction);
-    std::vector<std::string> getPotionsName() const;
 
-    void usePotion(const int& kMotionIndex);
+    std::vector<std::string> getPotionsName() const;
+    void addHp(std::shared_ptr<PokemonBo> pPokemonBo, const int& kPotionIndex);
 
 private:
     std::unique_ptr<PotionModePrivate> mpPrivate;

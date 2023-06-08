@@ -42,7 +42,7 @@ public:
 
     std::vector<std::string> getCurrentPokemonMoves() const;
 
-    void usePotion(const int& kPotionIndex);
+    void usePotion(const int& kPokemonIndex, const int& kPotionIndex);
 
     std::vector<std::string> getPotionsName() const;
 

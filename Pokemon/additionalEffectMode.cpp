@@ -48,9 +48,8 @@ void AdditionalEffectModePrivate::additionalEffectLog(std::shared_ptr<PokemonBo>
         mLogger.log(name + postfix);
     }
     else {
-        if (kMoveBo.additionalEffectType == ADDITIONAL_EFFECT_TYPE::PSN) {
-            mLogger.log("The opposing " + name + postfix);
-        }
+        mLogger.log("The opposing " + name + postfix);
+
     }
 }
 
@@ -68,7 +67,13 @@ void AdditionalEffectModePrivate::additionalEffectDamageLog(std::shared_ptr<Poke
 
         postfix = effectDamageToPostfix[effect];
         auto name = pPokemonBo->getName();
-        mLogger.log(name + postfix);
+        if (pPokemonBo->isMyPokemon()) {
+            mLogger.log(name + postfix);
+        }
+        else {
+            mLogger.log("The opposing " + name + postfix);
+
+        }
     }
 }
 
