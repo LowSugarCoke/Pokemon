@@ -25,16 +25,24 @@ public:
     int getCurrentPokemonIndex() const;
     std::vector<std::string> getOppositingPokemonsName() const;
     int getCurrentOppositingPokemonIndex() const;
+    bool swapOppositingPokemon();
     std::vector<std::pair<int, int>> getPokemonsHp() const;
     std::vector<std::pair<int, int>> getOppositingPokemonsHp() const;
+    int getOppositingPokemonHp() const;
     std::set<std::string> getCurrentPokemonAdditionalEffect() const;
     std::string getBattleDailog() const;
     void swapPokemon(const int& kIndex);
+    bool faintingSwapPokemon(const int& kPokemonIndex);
     void battle(const int& kMoveIndex);
 
     std::vector<std::string> getCurrentPokemonMoves()const;
     void usePotion(const int& kPokemonIndex, const int& kPotionIndex);
     std::vector<std::string> getPotionsName() const;
+
+    std::vector<bool> getPokemonsFaintStatus() const;
+    int isWinOrLose() const; // 0 is not yet, 1 is win, 2 is lose
+
+
 private:
     std::unique_ptr<PokemonServicePrivate> mpPrivate;
 };

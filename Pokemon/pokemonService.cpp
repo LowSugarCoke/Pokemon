@@ -160,3 +160,27 @@ void PokemonService::usePotion(const int& kPokemonIndex, const int& kPotionIndex
 std::vector<std::string> PokemonService::getPotionsName() const {
     return mpPrivate->mpPlayerMode->getPotionsName();
 }
+
+
+std::vector<bool> PokemonService::getPokemonsFaintStatus() const {
+    return mpPrivate->mpPlayerMode->getPokemonsFaintStatus();
+}
+
+
+int PokemonService::isWinOrLose() const {
+    // 0 is not yet, 1 is win, 2 is lose
+    return mpPrivate->mpPlayerMode->isWinOrLose();
+}
+
+bool PokemonService::faintingSwapPokemon(const int& kPokemonIndex) {
+    return mpPrivate->mpPlayerMode->faintingSwapPokemon(kPokemonIndex);
+}
+
+bool PokemonService::swapOppositingPokemon() {
+    auto oppositingPokemonIndex = mpPrivate->mpPlayerMode->getCurrentPokemonIndex();
+    return mpPrivate->mpPlayerMode->swapOppositingPokemon(oppositingPokemonIndex + 1);
+}
+
+int PokemonService::getOppositingPokemonHp() const {
+    return mpPrivate->mpPlayerMode->getOppositingPokemonHp();
+}

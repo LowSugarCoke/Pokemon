@@ -62,9 +62,24 @@ void PlayerMode::setPokemonBo(std::vector<std::shared_ptr<PokemonBo>> pPokemonBo
     mpPrivate->mpPokemonMode->setMyPokemon(mpPrivate->mpPokemonBoVec[0]);
 }
 
+
+
 void PlayerMode::setOppositingPokemonBo(std::vector<std::shared_ptr<PokemonBo>> pOppositingPokemonBoVec) {
     mpPrivate->mpOppositingPokemonBoVec = pOppositingPokemonBoVec;
     mpPrivate->mpPokemonMode->setOppositingPokemon(mpPrivate->mpOppositingPokemonBoVec[0]);
+}
+
+bool PlayerMode::faintingSwapPokemon(const int& kPokemonIndex) {
+    if (mpPrivate->mpPokemonBoVec[kPokemonIndex]->isFainting()) {
+        return false;
+    }
+
+    mpPrivate->swapBeforeLog();
+    mpPrivate->mPokemonIndex = kPokemonIndex;
+    mpPrivate->mpPokemonMode->setMyPokemon(mpPrivate->mpPokemonBoVec[mpPrivate->mPokemonIndex]);
+    mpPrivate->swapAfterLog();
+
+    return true;
 }
 
 bool PlayerMode::swapPokemon(const int& kPokemonIndex) {
@@ -79,6 +94,19 @@ bool PlayerMode::swapPokemon(const int& kPokemonIndex) {
 
 
     mpPrivate->mpPokemonMode->nextRoundWithoutAttack();
+}
+
+bool PlayerMode::swapOppositingPokemon(const int& kPokemonIndex) {
+    if (kPokemonIndex >= mpPrivate->mpOppositingPokemonBoVec.size()) {
+        return false;
+    }
+
+    if (mpPrivate->mpOppositingPokemonBoVec[kPokemonIndex]->isFainting()) {
+        return false;
+    }
+
+    mpPrivate->mOppositingPokemonIndex = kPokemonIndex;
+    mpPrivate->mpPokemonMode->setOppositingPokemon(mpPrivate->mpOppositingPokemonBoVec[mpPrivate->mOppositingPokemonIndex]);
 }
 
 
@@ -185,4 +213,48 @@ void PlayerMode::usePotion(const int& kPokemonIndex, const int& kPotionIndex) {
 
 std::vector<std::string> PlayerMode::getPotionsName() const {
     return mpPrivate->mpPokemonMode->getPotionsName();
+}
+
+
+std::vector<bool> PlayerMode::getPokemonsFaintStatus() const {
+    std::vector<bool> paintVec;
+
+    auto pokemons = mpPrivate->mpPokemonBoVec;
+    for (int i = 0; i < pokemons.size(); i++) {
+        if (pokemons[i]->isFainting()) {
+            paintVec.push_back(true);
+        }
+        else {
+            paintVec.push_back(false);
+        }
+    }
+    return paintVec;
+}
+
+
+// 0 is not yet, 1 is win, 2 is lose
+int PlayerMode::isWinOrLose() const {
+    int oppositingFaintCnt = 0;
+    for (int i = 0; i < mpPrivate->mpOppositingPokemonBoVec.size(); i++) {
+        oppositingFaintCnt += mpPrivate->mpOppositingPokemonBoVec[i]->isFainting();
+    }
+
+    if (oppositingFaintCnt == mpPrivate->mpOppositingPokemonBoVec.size()) {
+        return 1;
+    }
+
+    int myFaintCnt = 0;
+    for (int i = 0; i < mpPrivate->mpPokemonBoVec.size(); i++) {
+        myFaintCnt += mpPrivate->mpPokemonBoVec[i]->isFainting();
+    }
+    if (myFaintCnt == mpPrivate->mpOppositingPokemonBoVec.size()) {
+        return 2;
+    }
+
+    return 0;
+
+}
+
+int PlayerMode::getOppositingPokemonHp() const {
+    return mpPrivate->mpOppositingPokemonBoVec[mpPrivate->mOppositingPokemonIndex]->getHp();
 }

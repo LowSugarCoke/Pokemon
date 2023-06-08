@@ -131,7 +131,7 @@ int DamageMode::damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::sh
     float STAB = mpPrivate->getSameTypeAttackBonus(kMoveBo, pMyPokemonBo);
     float type = mpPrivate->getType(kMoveBo, pTargetPokemonBo);
 
-    damage = (((2 * kLevel + 10) / 250) * power * (atack / defence) + 2) * critical * STAB * type;
+    damage = (((2 * kLevel + 10) / 250) * power * (atack / defence) + 2) * critical * STAB * type * 10;
 
     mpPrivate->typeLog(type);
 
