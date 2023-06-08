@@ -210,7 +210,6 @@ void MainController::onPBBattleCaseClicked()
     {
         ui->stackedWidget->setCurrentWidget(ui->page_battle);
         mpPrivate->mBattleRefresh();
-        ui->stackedWidget->setCurrentWidget(ui->page_battle);
         return;
     }
 

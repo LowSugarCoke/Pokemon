@@ -543,6 +543,8 @@ void BattleController::connection() {
     connect(ui->tb_battle_select_bag_2, &QPushButton::clicked, this, &BattleController::onTBBattleSelectBag2Clicked);
     connect(ui->tb_battle_select_bag_3, &QPushButton::clicked, this, &BattleController::onTBBattleSelectBag3Clicked);
     connect(ui->tb_battle_select_bag_4, &QPushButton::clicked, this, &BattleController::onTBBattleSelectBag4Clicked);
+
+    connect(ui->pb_battle_run, &QPushButton::clicked, this, &BattleController::onPBBattleRunClicked);
 }
 
 void BattleController::onPBBattleBattleClicked() {
@@ -870,4 +872,8 @@ void BattleController::onTBBattleSelectBag4Clicked() {
     // Select the fourth bag item and show the select Pokemon buttons
     mpPrivate->showSelectPokemonBtn();
     mpPrivate->mPotionSelectNum = 3;
+}
+
+void BattleController::onPBBattleRunClicked() {
+    ui->stackedWidget->setCurrentWidget(ui->page_main);
 }

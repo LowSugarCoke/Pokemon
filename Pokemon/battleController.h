@@ -136,12 +136,14 @@ private slots:
      * Post: The item is selected for use.
      */
     void onTBBattleSelectBag2Clicked();
+
     /**
      * Intent: Handles the event when the third item in the bag is selected.
      * Pre: None.
      * Post: The item is selected for use.
      */
     void onTBBattleSelectBag3Clicked();
+
     /**
      * Intent: Handles the event when the fourth item in the bag is selected.
      * Pre: None.
@@ -149,5 +151,10 @@ private slots:
      */
     void onTBBattleSelectBag4Clicked();
 
-
+    /**
+     * Intent: Handles the event when the "Run" button is clicked during a battle.
+     * Pre: None.
+     * Post: Attempt to escape or flee from the battle.
+     */
+    void onPBBattleRunClicked();
 };
