@@ -59,7 +59,6 @@ public:
      */
     ~MoveEntity();
 
-
     /**
      * Intent : Sets the name of the Move
      * Pre: A valid string for name is provided

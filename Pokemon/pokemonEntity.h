@@ -102,8 +102,14 @@ public:
      */
     PokemonStats getStats() const;
 
+    /**
+     * Intent: Assign the values of a PokemonEntity to another PokemonEntity
+     * Pre: A valid PokemonEntity object to assign from
+     * Post: The current PokemonEntity object is assigned the values of the provided PokemonEntity object
+     * \param kPokemonEntity The PokemonEntity object to assign from
+     * \return Reference to the modified PokemonEntity object
+     */
     PokemonEntity& operator=(const PokemonEntity& kPokemonEntity);
-
 
 private:
     std::unique_ptr<PokemonEntityPrivate> mpPrivate;
