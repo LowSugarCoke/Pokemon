@@ -5,7 +5,7 @@
  * Editor : ´å¶Ç´¼ B11130034
  * Update Date: 2023-06-08
  * Description: Header file for the MusicService class. This class
- * provides services to play music.
+ *              provides services to play music.
  *************************************************************/
 #pragma once
 

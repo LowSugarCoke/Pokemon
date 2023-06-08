@@ -5,10 +5,10 @@
  * Editor : ´å¶Ç´¼ B11130034
  * Update Date: 2023-06-08
  * Description: This file declares the PokemonService class.
- * The class provides services for loading and manipulating
- * data related to Pokemon game such as loading moves, Pokemon
- * data, game data and testing data, getting Pokemons' names,
- * swapping Pokemons, getting battle dialog, etc.
+ *              The class provides services for loading and manipulating
+ *              data related to Pokemon game such as loading moves, Pokemon
+ *              data, game data and testing data, getting Pokemons' names,
+ *              swapping Pokemons, getting battle dialog, etc.
  **************************************************************/
 #pragma once
 

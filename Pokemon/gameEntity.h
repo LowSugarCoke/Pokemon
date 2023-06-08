@@ -5,7 +5,7 @@
  * Editor : ´å¶Ç´¼ B11130034
  * Update Date: 2023-06-06
  * Description: The GameEntity class defines the data and behavior of an entity in the game. This includes
- * its name and the moves it can perform.
+ *              its name and the moves it can perform.
  *************************************************************/
 
 #pragma once

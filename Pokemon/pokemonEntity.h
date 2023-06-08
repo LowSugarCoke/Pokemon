@@ -4,8 +4,8 @@
  * Create Date: 2023-06-06
  * Editor : ´å¶Ç´¼ B11130034
  * Update Date: 2023-06-06
- * Description: The PokemonEntity class defines the data and behavior of a Pokemon entity in the game. This includes
- * its name, types, and stats.
+ *              Description: The PokemonEntity class defines the data and behavior of a Pokemon entity in the game. This includes
+ *              its name, types, and stats.
  *************************************************************/
 #pragma once
 

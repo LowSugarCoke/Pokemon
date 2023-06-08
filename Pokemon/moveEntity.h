@@ -5,8 +5,8 @@
  * Editor : ´å¶Ç´¼ B11130034
  * Update Date: 2023-06-06
  * Description: This file defines the MoveEntity class and MoveStats struct
- * used in a game, such as Pokemon. Each move has a name, type, damage type,
- * move stats (power, accuracy, powerPoint), and additional effects.
+ *              used in a game, such as Pokemon. Each move has a name, type, damage type,
+ *              move stats (power, accuracy, powerPoint), and additional effects.
  *************************************************************/
 #pragma once
 

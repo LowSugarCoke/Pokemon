@@ -5,7 +5,7 @@
  * Editor : ´å¶Ç´¼ B11130034
  * Update Date: 2023-06-08
  * Description: Header file defining the PokemonDao class, which is responsible for
- * data access operations related to Pokemon games.
+ *              data access operations related to Pokemon games.
  *************************************************************/
 #pragma once
 
