@@ -209,7 +209,7 @@ int DamageMode::damageCalculate(std::shared_ptr<PokemonBo> pMyPokemonBo, std::sh
 
     mpPrivate->typeLog(type);  // Log the type effectiveness
 
-    return std::round(damage);  // Return the rounded damage value
+    return static_cast<int>(damage);
 }
 
 bool DamageMode::isMissing(std::shared_ptr<PokemonBo> pMyPokemonBo, std::shared_ptr<PokemonBo> pTargetPokemonBo, const MoveBo& kMoveBo) {

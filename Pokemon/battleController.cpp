@@ -244,14 +244,12 @@ void BattleControllerPrivate::winOrLose() {
     auto nowStatus = mpPokemonService->isWinOrLose();
 
     if (nowStatus == 1) {
-        // If the player has won the battle, show a congratulations message and return to the main page
+        // If the player has won the battle, show a congratulations message
         QMessageBox::information(nullptr /*parent widget*/, "Battle Result", "Congratulations, you won the battle!");
-        ui->stackedWidget->setCurrentWidget(ui->page_main);
     }
     else if (nowStatus == 2) {
-        // If the player has lost the battle, show a message and return to the main page
+        // If the player has lost the battle, show a message
         QMessageBox::information(nullptr /*parent widget*/, "Battle Result", "Unfortunately, you lost the battle. Better luck next time!");
-        ui->stackedWidget->setCurrentWidget(ui->page_main);
     }
     else {
         // The battle is still ongoing. You can choose to do nothing here.
