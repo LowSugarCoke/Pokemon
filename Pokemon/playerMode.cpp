@@ -406,6 +406,8 @@ void PlayerMode::setTest() {
 }
 
 void PlayerMode::runTest(const std::vector<std::string>& kTestData) {
+    mpPrivate->mOppositingPokemonIndex = 0;
+    mpPrivate->mPokemonIndex = 0;
     for (int i = 0; i < kTestData.size(); i++) {
         // Check if the opposing Pokémon is fainting and swap if necessary
         if (mpPrivate->mpOppositingPokemonBoVec[mpPrivate->mOppositingPokemonIndex]->isFainting()) {
