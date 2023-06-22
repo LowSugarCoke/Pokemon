@@ -1,8 +1,8 @@
 /**************************************************************
  * File : mainController.h
- * Author: ´å¶Ç´¼ B11130034
+ * Author: Jack Lee
  * Create Date: 2023-06-08
- * Editor : ´å¶Ç´¼ B11130034
+ * Editor : Jack Lee
  * Update Date: 2023-06-08
  * Description: This header file defines the MainController class which is responsible for handling main
  *              user interactions in the Pokemon game. It interfaces with the game's UI and the PokemonService.
@@ -81,37 +81,11 @@ private:
 private slots:
 
     /**
-     * Intent : Handle the event when the test case button is clicked.
-     * Pre: The test case button has been clicked.
-     * Post: The test case is initiated.
-     */
-    void onPBTestCaseClicked();
-
-    /**
-     * Intent : Handle the event when the Pokemon button is clicked.
-     * Pre: The Pokemon button has been clicked.
-     * Post: The Pokemon selection screen is displayed.
-     */
-    void onPBPokemonClicked();
-
-    /**
-     * Intent : Handle the event when the move button is clicked.
-     * Pre: The move button has been clicked.
-     * Post: The move selection screen is displayed.
-     */
-    void onPBMoveClicked();
-
-    /**
-     * Intent : Handle the event when the game button is clicked.
-     * Pre: The game button has been clicked.
-     * Post: The game scene is displayed.
-     */
-    void onPBGameClicked();
-
-    /**
      * Intent : Handle the event when the battle case button is clicked.
      * Pre: The battle case button has been clicked.
      * Post: The battle case is initiated or displayed.
      */
     void onPBBattleCaseClicked();
+
+    void onPBQuitClicked();
 };

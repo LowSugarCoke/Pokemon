@@ -1,8 +1,8 @@
 /**************************************************************
  * File : potionMode.h
- * Author: ´å¶Ç´¼ B11130034
+ * Author: Jack Lee
  * Create Date: 2023-06-09
- * Editor : ´å¶Ç´¼ B11130034
+ * Editor : Jack Lee
  * Update Date: 2023-06-09
  * Description: Header file for the PotionMode class which represents the mode of a potion in the game.
  *              It provides functionality to add HP to a Pokemon using potions.

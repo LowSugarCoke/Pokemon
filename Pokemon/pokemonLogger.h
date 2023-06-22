@@ -1,8 +1,8 @@
 ﻿/**************************************************************
  * File : pokemonLogger.h
- * Author: 游傳智 B11130034
+ * Author: Jack Lee
  * Create Date: 2023-06-08
- * Editor : 游傳智 B11130034
+ * Editor : Jack Lee
  * Update Date: 2023-06-08
  * Description: Header file for the PokemonLogger class which provides logging functionality for the Pokemon game.
  *              It allows logging of messages, retrieving the log, debugging messages, and tracking the number of turns.

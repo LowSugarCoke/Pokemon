@@ -1,8 +1,8 @@
 /**************************************************************
  * File : fileReader.h
- * Author: ´å¶Ç´¼ B11130034
+ * Author: Jack Lee
  * Create Date: 2023-06-06
- * Editor : ´å¶Ç´¼ B11130034
+ * Editor : Jack Lee
  * Update Date: 2023-06-06
  * Description: This header file declares the FileReader class,
  *              which provides a method to read text files.
