@@ -1,8 +1,8 @@
 ﻿/**************************************************************
  * File : additionalEffectMode.h
- * Author: 游傳智 B11130034
+ * Author: Jack Lee
  * Create Date: 2023-06-08
- * Editor : 游傳智 B11130034
+ * Editor : Jack Lee
  * Update Date: 2023-06-08
  * Description: This file contains the declaration of the AdditionalEffectMode class, which represents a mode for handling additional effects in a game.
  *************************************************************/

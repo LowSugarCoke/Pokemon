@@ -1,8 +1,8 @@
 ﻿/**************************************************************
  * File : pokemonMode.h
- * Author: 游傳智 B11130034
+ * Author: Jack Lee
  * Create Date: 2023-06-08
- * Editor : 游傳智 B11130034
+ * Editor : Jack Lee
  * Update Date: 2023-06-08
  * Description: Header file for the PokemonMode class which represents the mode of a Pokemon in the game.
  *              It manages the behavior and attributes of a Pokemon, including damage calculation,

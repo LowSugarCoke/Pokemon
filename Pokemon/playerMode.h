@@ -1,8 +1,8 @@
 /**************************************************************
  * File : playerMode.h
- * Author: ´å¶Ç´¼ B11130034
+ * Author: Jack Lee
  * Create Date: 2023-06-08
- * Editor : ´å¶Ç´¼ B11130034
+ * Editor : Jack Lee
  * Update Date: 2023-06-08
  * Description: Header file for the PlayerMode class which defines the behavior and attributes
  *              of a player in a Pokemon-like game. Contains method definitions for actions

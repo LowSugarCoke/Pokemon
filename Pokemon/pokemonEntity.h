@@ -1,8 +1,8 @@
 /**************************************************************
  * File : pokemonEntity.h
- * Author: ´å¶Ç´¼ B11130034
+ * Author: Jack Lee
  * Create Date: 2023-06-06
- * Editor : ´å¶Ç´¼ B11130034
+ * Editor : Jack Lee
  * Update Date: 2023-06-06
  *              Description: The PokemonEntity class defines the data and behavior of a Pokemon entity in the game. This includes
  *              its name, types, and stats.

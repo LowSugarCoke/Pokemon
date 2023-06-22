@@ -81,7 +81,6 @@ void AdditionalEffectModePrivate::additionalEffectDamageLog(std::shared_ptr<Poke
 }
 
 // Public methods of AdditionalEffectMode
-
 AdditionalEffectMode::AdditionalEffectMode()
     :mpPrivate(std::make_unique<AdditionalEffectModePrivate>())
 {}

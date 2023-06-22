@@ -1,8 +1,8 @@
 /**************************************************************
  * File : testDataDao.h
- * Author: ´å¶Ç´¼ B11130034
+ * Author: Jack Lee
  * Create Date: 2023-06-08
- * Editor : ´å¶Ç´¼ B11130034
+ * Editor : Jack Lee
  * Update Date: 2023-06-08
  * Description: Header file defining the TestDataDao class, which is responsible for
  *              data access operations related to testing data.

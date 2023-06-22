@@ -1,8 +1,8 @@
 /**************************************************************
  * File : battleController.h
- * Author: ´å¶Ç´¼ B11130034
+ * Author: Jack Lee
  * Create Date: 2023-06-08
- * Editor : ´å¶Ç´¼ B11130034
+ * Editor : Jack Lee
  * Update Date: 2023-06-08
  * Description: This file contains the declaration of the BattleController class, which is responsible for
  *              controlling the battle logic and user interface interactions in a Pokemon game.

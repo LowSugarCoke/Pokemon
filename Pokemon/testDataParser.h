@@ -1,8 +1,8 @@
 /**************************************************************
  * File : testDataParser.h
- * Author: ´å¶Ç´¼ B11130034
+ * Author: Jack Lee
  * Create Date: 2023-06-08
- * Editor : ´å¶Ç´¼ B11130034
+ * Editor : Jack Lee
  * Update Date: 2023-06-08
  * Description: This header file contains the declaration of the TestDataParser class, which is responsible for parsing a given string of content and returning a vector of strings.
  *************************************************************/

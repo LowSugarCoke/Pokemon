@@ -1,8 +1,8 @@
 /**************************************************************
  * File : moveEntity.h
- * Author: ´å¶Ç´¼ B11130034
+ * Author: Jack Lee
  * Create Date: 2023-06-06
- * Editor : ´å¶Ç´¼ B11130034
+ * Editor : Jack Lee
  * Update Date: 2023-06-06
  * Description: This file defines the MoveEntity class and MoveStats struct
  *              used in a game, such as Pokemon. Each move has a name, type, damage type,
