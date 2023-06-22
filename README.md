@@ -2,7 +2,7 @@
 
 # Pokémon Qt Game
 
-This repository houses a Pokémon game developed using the Qt framework. The game is encapsulated in the class named 'Pokémon', which serves as the main window of the application.
+Simulate the battle scene in the Pokemon game.
 
 ## Download and Play
 
